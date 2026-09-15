@@ -186,40 +186,9 @@
      Headings: 20% threshold. Images: 15% threshold.
      ========================================================== */
 
+  // Section headers: no clip-path animation (editorial — content should just be there).
+  // Keep ink-reveal for individual elements with .ink-reveal class.
   if (!prefersReducedMotion) {
-    // Ink reveal for headings (section-header children)
-    var inkObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            // Stagger the section-header children with Ink Reveal
-            var children = entry.target.children;
-            for (var i = 0; i < children.length; i++) {
-              (function (child, delay) {
-                child.style.clipPath = 'inset(0 100% 0 0)';
-                child.style.transition = 'clip-path 700ms var(--ease-wipe)';
-                setTimeout(function () {
-                  child.style.clipPath = 'inset(0 0% 0 0)';
-                }, delay);
-              })(children[i], i * 60);
-            }
-            inkObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    document.querySelectorAll('.section-header').forEach(function (header) {
-      // Pre-hide children
-      var children = header.children;
-      for (var i = 0; i < children.length; i++) {
-        children[i].style.clipPath = 'inset(0 100% 0 0)';
-      }
-      inkObserver.observe(header);
-    });
-
-    // Ink reveal for individual elements with .ink-reveal class
     var inkElementObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -235,15 +204,7 @@
     document.querySelectorAll('.ink-reveal, .ink-reveal-image').forEach(function (el) {
       inkElementObserver.observe(el);
     });
-
   } else {
-    // Reduced motion — show immediately
-    document.querySelectorAll('.section-header').forEach(function (header) {
-      var children = header.children;
-      for (var i = 0; i < children.length; i++) {
-        children[i].style.clipPath = 'none';
-      }
-    });
     document.querySelectorAll('.ink-reveal, .ink-reveal-image').forEach(function (el) {
       el.classList.add('is-visible');
     });
@@ -374,8 +335,33 @@
           statsTicking = true;
         }
       }, { passive: true });
-      // Initial call
+
+      // Initial call + delayed fallback to catch sections already in view
       updateStats();
+      setTimeout(updateStats, 150);
+
+      // IntersectionObserver fallback: if section is visible and values are
+      // still 0, force final values after a short animation
+      var statsObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            // Give scroll-linked counter a moment to work
+            setTimeout(function () {
+              var allZero = statData.every(function (s) {
+                return s.el && s.el.textContent === '0';
+              });
+              if (allZero) {
+                // Fallback: animate to final values
+                statData.forEach(function (stat) {
+                  if (stat.el) stat.el.textContent = stat.target + stat.suffix;
+                });
+              }
+            }, 600);
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      statsObserver.observe(statsSection);
     }
   }
 
@@ -386,35 +372,7 @@
      40% of scroll speed, max 60px displacement.
      ========================================================== */
 
-  if (!prefersReducedMotion && !isMobile) {
-    var heroBg = document.querySelector('.hero-bg-overlay.parallax-bg');
-    var heroSection = document.querySelector('.hero');
-
-    function handleParallax() {
-      var scrollY = window.scrollY;
-      var vh = window.innerHeight;
-
-      // Hero parallax — background moves at 40% of scroll speed
-      if (heroBg && heroSection) {
-        var heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        if (scrollY < heroBottom) {
-          var displacement = Math.min(scrollY * 0.4, 60);
-          heroBg.style.transform = 'translateY(' + displacement + 'px)';
-        }
-      }
-    }
-
-    var parallaxTicking = false;
-    window.addEventListener('scroll', function () {
-      if (!parallaxTicking) {
-        requestAnimationFrame(function () {
-          handleParallax();
-          parallaxTicking = false;
-        });
-        parallaxTicking = true;
-      }
-    }, { passive: true });
-  }
+  // Parallax removed — editorial sites don't parallax.
 
 
   /* ==========================================================
@@ -504,56 +462,6 @@
      Shows on insight cards ("Read"), area/sector cards ("Explore").
      ========================================================== */
 
-  if (!isTouch && !isMobile) {
-    var cursorLabel = document.getElementById('cursor-label');
-    if (cursorLabel) {
-      var mouseX = 0, mouseY = 0;
-      var labelX = 0, labelY = 0;
-      var isLabelActive = false;
-      var labelRAF = null;
-
-      // Label text map
-      var labelTargets = [
-        { selector: '.insight-card', text: 'Read' },
-        { selector: '.capability-card', text: 'Explore' },
-        { selector: '.sector-tile', text: 'Explore' }
-      ];
-
-      function updateLabelPosition() {
-        // Lerp smoothing ~0.15 per frame
-        labelX += (mouseX - labelX) * 0.15;
-        labelY += (mouseY - labelY) * 0.15;
-        cursorLabel.style.transform = 'translate(' + labelX + 'px, ' + labelY + 'px) scale(' + (isLabelActive ? '1' : '0.9') + ')';
-
-        if (isLabelActive) {
-          labelRAF = requestAnimationFrame(updateLabelPosition);
-        }
-      }
-
-      document.addEventListener('mousemove', function (e) {
-        mouseX = e.clientX + 12;
-        mouseY = e.clientY + 12;
-      });
-
-      labelTargets.forEach(function (target) {
-        document.querySelectorAll(target.selector).forEach(function (el) {
-          el.addEventListener('mouseenter', function () {
-            cursorLabel.textContent = target.text;
-            isLabelActive = true;
-            cursorLabel.classList.add('is-active');
-            el.style.cursor = 'none';
-            labelRAF = requestAnimationFrame(updateLabelPosition);
-          });
-
-          el.addEventListener('mouseleave', function () {
-            isLabelActive = false;
-            cursorLabel.classList.remove('is-active');
-            el.style.cursor = '';
-            if (labelRAF) cancelAnimationFrame(labelRAF);
-          });
-        });
-      });
-    }
-  }
+  // Magnetic cursor label removed — editorial sites use standard cursors.
 
 })();
