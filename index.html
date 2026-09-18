@@ -6,1189 +6,676 @@
   <title>SLR Centre for Global Law, Geoeconomics & Emerging Technologies</title>
   <meta name="description" content="Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology. The SLR Centre analyses the forces reshaping the world.">
   <link rel="stylesheet" href="styles.css">
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/logo-slr-navy.svg">
 </head>
 <body>
 
   <!-- ============================================================
-       SECTION A — NAVIGATION
+       01. SITE NAVIGATION
        ============================================================ -->
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <!-- Logo -->
-      <a href="/" class="nav-logo" aria-label="SLR Centre — Home">
-        <img src="assets/logo-slr-white.svg" alt="SLR Centre" height="36">
+  <nav class="site-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-brand">
+      <a href="/" aria-label="SLR Home">
+        <img src="assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors">
       </a>
-
-      <!-- Centre nav links -->
-      <div class="nav-centre">
-        <!-- Areas of Focus -->
-        <div class="nav-item" data-menu="areas">
-          <button type="button" aria-expanded="false" aria-haspopup="true">
-            Areas of Focus
-            <svg class="nav-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-
-        <!-- Sectors -->
-        <div class="nav-item" data-menu="sectors">
-          <button type="button" aria-expanded="false" aria-haspopup="true">
-            Sectors
-            <svg class="nav-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-
-        <!-- What We Do -->
-        <div class="nav-item" data-menu="whatwedo">
-          <button type="button" aria-expanded="false" aria-haspopup="true">
-            What We Do
-            <svg class="nav-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-
-        <!-- Geographies -->
-        <div class="nav-item" data-menu="geographies">
-          <button type="button" aria-expanded="false" aria-haspopup="true">
-            Geographies
-            <svg class="nav-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-
-        <!-- Insights (no dropdown) -->
-        <div class="nav-item">
-          <a href="/insights">Insights</a>
-        </div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-title">SLR Centre</span>
+        <span class="nav-brand-subtitle">Global Law & Geoeconomics</span>
       </div>
+    </div>
 
-      <!-- Right side -->
-      <div class="nav-right">
-        <a href="/about" class="nav-about">About</a>
-        <a href="/engage" class="btn btn-nav">Engage the Centre</a>
-      </div>
+    <div class="nav-menu" id="nav-menu">
+      <a href="/areas-of-focus" class="nav-link">Areas of Focus</a>
+      <a href="/sectors" class="nav-link">Sectors</a>
+      <a href="/what-we-do" class="nav-link">What We Do</a>
+      <a href="/geographies" class="nav-link">Geographies</a>
+      <a href="/insights" class="nav-link">Insights</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
 
-      <!-- Hamburger (mobile) -->
-      <button class="nav-hamburger" aria-label="Open menu" id="nav-hamburger">
-        <span></span><span></span><span></span>
+    <div class="nav-actions">
+      <a href="/engage" class="nav-btn-cta">Engage the Centre</a>
+      <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-    </div>
-
-    <!-- ===== MEGA MENUS ===== -->
-
-    <!-- Areas of Focus Mega-Menu -->
-    <div class="mega-menu" id="mega-areas" role="menu" aria-label="Areas of Focus">
-      <div class="mega-menu-inner">
-        <div class="mega-menu-desc">
-          Research across five interconnected domains shaping the architecture of global power, law, capital, energy, and technology.
-        </div>
-        <div class="mega-menu-links">
-          <a href="/areas/global-law" class="mega-menu-link">01&nbsp;&nbsp;Global Law & Cross-Border Regulation</a>
-          <a href="/areas/geoeconomics" class="mega-menu-link">02&nbsp;&nbsp;Geoeconomics & Strategic Affairs</a>
-          <a href="/areas/global-finance" class="mega-menu-link">03&nbsp;&nbsp;Global Finance & Investment</a>
-        </div>
-        <div class="mega-menu-links">
-          <a href="/areas/energy" class="mega-menu-link">04&nbsp;&nbsp;Energy & Energy Transitions</a>
-          <a href="/areas/emerging-technologies" class="mega-menu-link">05&nbsp;&nbsp;Emerging Technologies & Governance</a>
-        </div>
-        <a href="/insights/sanctions-architecture" class="mega-menu-featured">
-          <div class="mega-menu-featured-left">
-            <span class="mega-menu-featured-badge">Featured Analysis</span>
-            <span class="mega-menu-featured-title">Navigating the New Cross-Border Regulatory & Sanctions Architecture</span>
-          </div>
-          <span class="mega-menu-featured-cta">Read Brief →</span>
-        </a>
-        <div class="mega-menu-footer">
-          <a href="/areas-of-focus">ALL AREAS OF FOCUS →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sectors Mega-Menu -->
-    <div class="mega-menu" id="mega-sectors" role="menu" aria-label="Sectors">
-      <div class="mega-menu-inner">
-        <div class="mega-menu-desc">
-          Applied research across the sectors where geopolitical, regulatory, and technological forces increasingly converge and interact.
-        </div>
-        <div class="mega-menu-links">
-          <a href="/sectors/defence" class="mega-menu-link">Defence & Homeland Security</a>
-          <a href="/sectors/pharma" class="mega-menu-link">Pharmaceuticals & Healthcare</a>
-          <a href="/sectors/energy-climate" class="mega-menu-link">Energy & Climate</a>
-          <a href="/sectors/technology-ai" class="mega-menu-link">Technology & AI</a>
-        </div>
-        <div class="mega-menu-links">
-          <a href="/sectors/financial-services" class="mega-menu-link">Financial Services</a>
-          <a href="/sectors/infrastructure" class="mega-menu-link">Infrastructure & Connectivity</a>
-          <a href="/sectors/semiconductors" class="mega-menu-link">Electronics & Semiconductors</a>
-        </div>
-        <a href="/insights/semiconductors-supply-chain" class="mega-menu-featured">
-          <div class="mega-menu-featured-left">
-            <span class="mega-menu-featured-badge">Sector Brief</span>
-            <span class="mega-menu-featured-title">Semiconductor Supply Chains: Strategic Dependencies & Industrial Policy</span>
-          </div>
-          <span class="mega-menu-featured-cta">Read Brief →</span>
-        </a>
-        <div class="mega-menu-footer">
-          <a href="/sectors">ALL SECTORS →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- What We Do Mega-Menu -->
-    <div class="mega-menu" id="mega-whatwedo" role="menu" aria-label="What We Do">
-      <div class="mega-menu-inner">
-        <div class="mega-menu-desc">
-          Three modes of engagement — research, intelligence, and strategic advisory — integrated to equip decision-makers with clarity.
-        </div>
-        <div class="mega-menu-links">
-          <a href="/what-we-do#research" class="mega-menu-link">Research & Strategic Intelligence</a>
-          <a href="/what-we-do#intelligence" class="mega-menu-link">Geopolitical & Regulatory Intelligence</a>
-          <a href="/what-we-do#briefings" class="mega-menu-link">Executive & C-Suite Briefings</a>
-          <a href="/what-we-do#preparation" class="mega-menu-link">Executive Preparation & Strategic Decision Support</a>
-          <a href="/what-we-do#roundtables" class="mega-menu-link">Closed-Door Roundtables & Strategic Dialogues</a>
-        </div>
-        <div class="mega-menu-links">
-          <a href="/what-we-do#policy" class="mega-menu-link">Policy & Stakeholder Engagement</a>
-          <a href="/what-we-do#market-entry" class="mega-menu-link">Market Entry & International Expansion Intelligence</a>
-          <a href="/what-we-do#risk-advisory" class="mega-menu-link">Geoeconomic & Investment Risk Advisory</a>
-          <a href="/what-we-do#scenario" class="mega-menu-link">Scenario Planning & Strategic Foresight</a>
-          <a href="/what-we-do#bespoke" class="mega-menu-link">Bespoke Research & Advisory</a>
-          <a href="/what-we-do#platforms" class="mega-menu-link">Knowledge Platforms, Conferences & Convenings</a>
-        </div>
-        <a href="/what-we-do#briefings" class="mega-menu-featured">
-          <div class="mega-menu-featured-left">
-            <span class="mega-menu-featured-badge">Advisory Practice</span>
-            <span class="mega-menu-featured-title">Executive Preparation & Decision Support for Consequential Engagements</span>
-          </div>
-          <span class="mega-menu-featured-cta">Learn More →</span>
-        </a>
-        <div class="mega-menu-footer">
-          <a href="/what-we-do">ALL OFFERINGS →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Geographies Mega-Menu -->
-    <div class="mega-menu" id="mega-geographies" role="menu" aria-label="Geographies">
-      <div class="mega-menu-inner">
-        <div class="mega-menu-desc">
-          A global perspective anchored in India and the Indo-Pacific, tracking the corridors reshaping trade, investment, and power.
-        </div>
-        <div class="mega-menu-links">
-          <a href="/geographies/india-south-asia" class="mega-menu-link">India & South Asia ★</a>
-          <a href="/geographies/indo-pacific" class="mega-menu-link">Indo-Pacific & East Asia</a>
-          <a href="/geographies/asean" class="mega-menu-link">ASEAN & Southeast Asia</a>
-          <a href="/geographies/middle-east" class="mega-menu-link">Middle East & Gulf</a>
-          <a href="/geographies/europe" class="mega-menu-link">Europe & Eurasia</a>
-        </div>
-        <div class="mega-menu-links">
-          <a href="/geographies/north-america" class="mega-menu-link">North America</a>
-          <a href="/geographies/africa" class="mega-menu-link">Africa</a>
-          <a href="/geographies/latin-america" class="mega-menu-link">Latin America & the Caribbean</a>
-          <a href="/geographies/strategic-corridors" class="mega-menu-link">Global Supply Chains & Strategic Corridors</a>
-        </div>
-        <a href="/insights/india-technology-order" class="mega-menu-featured">
-          <div class="mega-menu-featured-left">
-            <span class="mega-menu-featured-badge">Corridor Report</span>
-            <span class="mega-menu-featured-title">Mapping the India–Middle East–Europe Economic Corridor (IMEC)</span>
-          </div>
-          <span class="mega-menu-featured-cta">Read Report →</span>
-        </a>
-        <div class="mega-menu-footer">
-          <a href="/geographies">ALL GEOGRAPHIES →</a>
-        </div>
-      </div>
     </div>
   </nav>
 
-  <!-- ===== MOBILE DRAWER ===== -->
-  <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
-    <div class="mobile-drawer-header">
-      <img src="assets/logo-slr-white.svg" alt="SLR Centre" class="mobile-drawer-logo" height="28">
-      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
-    </div>
-    <div class="mobile-drawer-cta">
-      <a href="/engage" class="btn btn-primary">Engage the Centre</a>
-    </div>
-    <div class="mobile-nav-item">
-      <button type="button" data-mobile-toggle="areas">Areas of Focus <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="mobile-subnav" id="mobile-areas">
-        <a href="/areas/global-law">01 Global Law & Cross-Border Regulation</a>
-        <a href="/areas/geoeconomics">02 Geoeconomics & Strategic Affairs</a>
-        <a href="/areas/global-finance">03 Global Finance & Investment</a>
-        <a href="/areas/energy">04 Energy & Energy Transitions</a>
-        <a href="/areas/emerging-technologies">05 Emerging Technologies & Governance</a>
-        <a href="/areas-of-focus">All Areas of Focus →</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <button type="button" data-mobile-toggle="sectors">Sectors <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="mobile-subnav" id="mobile-sectors">
-        <a href="/sectors/defence">Defence & Homeland Security</a>
-        <a href="/sectors/pharma">Pharmaceuticals & Healthcare</a>
-        <a href="/sectors/energy-climate">Energy & Climate</a>
-        <a href="/sectors/technology-ai">Technology & AI</a>
-        <a href="/sectors/financial-services">Financial Services</a>
-        <a href="/sectors/infrastructure">Infrastructure & Connectivity</a>
-        <a href="/sectors/semiconductors">Electronics & Semiconductors</a>
-        <a href="/sectors">All Sectors →</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <button type="button" data-mobile-toggle="whatwedo-m">What We Do <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="mobile-subnav" id="mobile-whatwedo-m">
-        <a href="/what-we-do#research">Research & Strategic Intelligence</a>
-        <a href="/what-we-do#intelligence">Geopolitical & Regulatory Intelligence</a>
-        <a href="/what-we-do#briefings">Executive & C-Suite Briefings</a>
-        <a href="/what-we-do#roundtables">Closed-Door Roundtables & Dialogues</a>
-        <a href="/what-we-do">All Offerings →</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <button type="button" data-mobile-toggle="geo-m">Geographies <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="mobile-subnav" id="mobile-geo-m">
-        <a href="/geographies/india-south-asia">India & South Asia ★</a>
-        <a href="/geographies/indo-pacific">Indo-Pacific & East Asia</a>
-        <a href="/geographies/asean">ASEAN & Southeast Asia</a>
-        <a href="/geographies/middle-east">Middle East & Gulf</a>
-        <a href="/geographies/europe">Europe & Eurasia</a>
-        <a href="/geographies/north-america">North America</a>
-        <a href="/geographies/africa">Africa</a>
-        <a href="/geographies/latin-america">Latin America & the Caribbean</a>
-        <a href="/geographies">All Geographies →</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <a href="/insights">Insights</a>
-    </div>
-    <div class="mobile-nav-item">
-      <a href="/about">About</a>
-    </div>
-    <div class="mobile-drawer-footer">
-      <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-      </a>
-      <span>© 2026 SLR Advocates & Solicitors</span>
-    </div>
-  </div>
-
-
   <!-- ============================================================
-       SECTION B — HERO
+       02. HERO STAGE (85–95vh)
        ============================================================ -->
-  <section class="hero on-dark" id="hero">
-    <!-- SVG Node-Graph Background -->
-    <div class="hero-bg-overlay parallax-bg" aria-hidden="true">
-      <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#B08D57" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#B08D57" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="720" cy="450" r="400" fill="url(#heroGlow)"/>
-        <!-- Network nodes at geographic coordinates -->
-        <g stroke="#B08D57" stroke-width="0.5" opacity="0.6">
-          <!-- Connection lines -->
-          <line x1="580" y1="340" x2="720" y2="280"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/></line>
-          <line x1="720" y1="280" x2="900" y2="320"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="5s" repeatCount="indefinite"/></line>
-          <line x1="580" y1="340" x2="460" y2="420"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/></line>
-          <line x1="900" y1="320" x2="1020" y2="380"><animate attributeName="opacity" values="0.5;0.8;0.5" dur="4.5s" repeatCount="indefinite"/></line>
-          <line x1="720" y1="280" x2="780" y2="420"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/></line>
-          <line x1="460" y1="420" x2="580" y2="520"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="5.5s" repeatCount="indefinite"/></line>
-          <line x1="780" y1="420" x2="900" y2="500"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="4s" repeatCount="indefinite"/></line>
-          <line x1="350" y1="300" x2="580" y2="340"><animate attributeName="opacity" values="0.2;0.6;0.2" dur="6s" repeatCount="indefinite"/></line>
-          <line x1="1020" y1="380" x2="1100" y2="450"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></line>
-          <line x1="580" y1="520" x2="720" y2="580"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></line>
-          <line x1="720" y1="580" x2="900" y2="500"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="5s" repeatCount="indefinite"/></line>
-          <line x1="350" y1="300" x2="280" y2="400"><animate attributeName="opacity" values="0.2;0.5;0.2" dur="4.5s" repeatCount="indefinite"/></line>
-          <line x1="1100" y1="450" x2="1150" y2="350"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/></line>
-        </g>
-        <!-- Nodes -->
-        <g fill="#B08D57">
-          <circle cx="580" cy="340" r="4" opacity="0.8"/><!-- India -->
-          <circle cx="720" cy="280" r="3" opacity="0.6"/><!-- Central Asia -->
-          <circle cx="900" cy="320" r="3.5" opacity="0.7"/><!-- East Asia -->
-          <circle cx="460" cy="420" r="3" opacity="0.6"/><!-- Middle East -->
-          <circle cx="1020" cy="380" r="3" opacity="0.5"/><!-- Pacific -->
-          <circle cx="780" cy="420" r="2.5" opacity="0.5"/><!-- Southeast Asia -->
-          <circle cx="350" cy="300" r="3.5" opacity="0.7"/><!-- Europe -->
-          <circle cx="280" cy="400" r="2.5" opacity="0.5"/><!-- Africa -->
-          <circle cx="580" cy="520" r="2.5" opacity="0.5"/><!-- South -->
-          <circle cx="1100" cy="450" r="2.5" opacity="0.4"/><!-- Oceania -->
-          <circle cx="180" cy="340" r="3" opacity="0.5"/><!-- N. America -->
-          <circle cx="720" cy="580" r="2" opacity="0.4"/><!-- S. Indian Ocean -->
-          <circle cx="900" cy="500" r="2" opacity="0.4"/>
-          <circle cx="1150" cy="350" r="2" opacity="0.3"/>
-        </g>
-      </svg>
-    </div>
+  <section class="hero-stage" id="hero">
+    <div class="hero-bg-media"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-bg-grid"></div>
 
     <div class="hero-content">
-      <p class="eyebrow">Centre for Global Law, Geoeconomics & Emerging Technologies</p>
-      <h1 class="hero-headline"><span class="ink-reveal-line">Navigating the Forces</span><span class="ink-reveal-line">Reshaping the World</span></h1>
-      <p class="hero-subline">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
-      <div class="hero-ctas">
-        <a href="/insights" class="btn btn-primary">Explore Our Research</a>
-        <a href="/engage" class="btn btn-secondary">Engage the Centre</a>
+      <div class="hero-main">
+        <span class="eyebrow eyebrow-light">Centre for Global Law, Geoeconomics & Emerging Technologies</span>
+        <h1 class="text-hero-display">Navigating the Forces Reshaping the World</h1>
+      </div>
+
+      <div class="hero-sub">
+        <p class="hero-lead-text">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
+        <div class="hero-buttons">
+          <a href="/insights" class="btn btn-primary">Explore Our Research</a>
+          <a href="/engage" class="btn btn-secondary">Engage the Centre</a>
+        </div>
       </div>
     </div>
 
-    <!-- Scroll cue -->
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6 9l6 6 6-6"/>
-      </svg>
+    <div class="hero-footer-bar">
+      <span>Strategic Research & Intelligence Platform</span>
+      <span>Anchor: India & Global Corridors</span>
     </div>
   </section>
-
 
   <!-- ============================================================
-       SECTION C — THREE PILLARS STRIP (What We Do)
+       03. WHAT WE DO (Editorial Typographic Composition)
        ============================================================ -->
-  <section class="section pillar-strip bg-white" id="pillars">
-    <div class="container">
-      <div class="section-header text-center">
-        <p class="eyebrow">What We Do</p>
+  <section class="section-wwd" id="what-we-do">
+    <div class="stage-container">
+      <div class="wwd-header">
+        <div>
+          <span class="eyebrow">Institutional Architecture</span>
+          <h2 class="text-section-title" style="margin-top: 8px;">What We Do</h2>
+        </div>
+        <a href="/what-we-do" class="btn-ghost-gold">View All Offerings →</a>
       </div>
-      <div class="grid grid-3 quiet-stagger">
-        <!-- Pillar 1 — Research -->
-        <div class="pillar-card qs-item">
-          <div class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="6" y="4" width="22" height="30" rx="2"/>
-              <line x1="11" y1="12" x2="23" y2="12"/>
-              <line x1="11" y1="17" x2="23" y2="17"/>
-              <line x1="11" y1="22" x2="18" y2="22"/>
-              <circle cx="30" cy="30" r="7"/>
-              <line x1="35" y1="35" x2="38" y2="38"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Research</h3>
-          <div class="pillar-anchor">Evidence. Depth. Clarity.</div>
-          <p class="pillar-body">The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications — flagship reports, global outlooks, policy papers, working papers, and comparative regulatory analysis.</p>
-          <a href="/what-we-do#research" class="pillar-link">Learn more →</a>
+
+      <div class="wwd-cascade">
+        <!-- Axis 1: Research -->
+        <div class="wwd-axis">
+          <span class="wwd-num">01 // Evidence</span>
+          <h3 class="wwd-title">Research</h3>
+          <span class="wwd-tagline">Evidence. Depth. Clarity.</span>
+          <p class="wwd-desc">The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications — flagship reports, global outlooks, policy papers, working papers, and comparative regulatory analysis.</p>
         </div>
 
-        <!-- Pillar 2 — Intelligence -->
-        <div class="pillar-card qs-item">
-          <div class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="20" cy="20" r="16"/>
-              <ellipse cx="20" cy="20" rx="8" ry="16"/>
-              <line x1="4" y1="20" x2="36" y2="20"/>
-              <line x1="8" y1="10" x2="32" y2="10"/>
-              <line x1="8" y1="30" x2="32" y2="30"/>
-              <circle cx="20" cy="20" r="3" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Intelligence</h3>
-          <div class="pillar-anchor">Monitor. Interpret. Anticipate.</div>
-          <p class="pillar-body">Translating complex global developments into focused, decision-relevant intelligence — spanning geopolitical intelligence, geoeconomic monitoring, regulatory intelligence, country risk assessment, and strategic risk monitoring.</p>
-          <a href="/what-we-do#intelligence" class="pillar-link">Learn more →</a>
+        <!-- Axis 2: Intelligence -->
+        <div class="wwd-axis">
+          <span class="wwd-num">02 // Anticipation</span>
+          <h3 class="wwd-title">Intelligence</h3>
+          <span class="wwd-tagline">Monitor. Interpret. Anticipate.</span>
+          <p class="wwd-desc">Translating complex global developments into focused, decision-relevant intelligence — spanning geopolitical intelligence, geoeconomic monitoring, regulatory intelligence, country risk assessment, and strategic risk monitoring.</p>
         </div>
 
-        <!-- Pillar 3 — Strategic Advisory -->
-        <div class="pillar-card qs-item">
-          <div class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="20" cy="20" r="16"/>
-              <path d="M20 4v6"/>
-              <path d="M20 30v6"/>
-              <path d="M4 20h6"/>
-              <path d="M30 20h6"/>
-              <path d="M20 14l4 6-4 2-4-2 4-6z" fill="currentColor"/>
-              <path d="M20 22v4"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Strategic Advisory</h3>
-          <div class="pillar-anchor">Navigate. Strategise. Act.</div>
-          <p class="pillar-body">Supporting organisations navigating complex and rapidly evolving international environments — market-entry intelligence, geopolitical risk assessment, regulatory strategy, scenario planning, and cross-border intelligence.</p>
-          <a href="/what-we-do#advisory" class="pillar-link">Learn more →</a>
+        <!-- Axis 3: Advisory -->
+        <div class="wwd-axis">
+          <span class="wwd-num">03 // Strategy</span>
+          <h3 class="wwd-title">Strategic Advisory</h3>
+          <span class="wwd-tagline">Navigate. Strategise. Act.</span>
+          <p class="wwd-desc">Supporting organisations navigating complex and rapidly evolving international environments — market-entry intelligence, geopolitical risk assessment, regulatory strategy, scenario planning, and cross-border intelligence.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Gold Thread Section Divider -->
-  <div class="gold-thread-divider" aria-hidden="true">
-    <svg class="gold-thread-svg" viewBox="0 0 1280 3" preserveAspectRatio="none">
-      <line class="gold-thread-line" x1="0" y1="1.5" x2="1280" y2="1.5" style="--thread-len: 1280" />
-    </svg>
-  </div>
-
 
   <!-- ============================================================
-       SECTION D — AREAS OF FOCUS
+       04. CAPABILITY STRIP (Compact 3-Part Color Strip)
        ============================================================ -->
-  <section class="section bg-ivory" id="areas">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow">Areas of Focus</p>
-        <h2>Five domains. One mandate.</h2>
-        <p class="lead">The Centre analyses how evolving configurations of power, capital, trade, energy, regulation, and technology are reshaping economies, industries, and institutions worldwide.</p>
+  <div class="stage-container capability-strip-container">
+    <div class="capability-strip">
+      <div class="cap-panel cap-panel-1">
+        <div>
+          <div class="cap-micro-header">
+            <span>Primary Function</span>
+            <span>01</span>
+          </div>
+          <h4 class="cap-headline">Rigorous, evidence-based research illuminating global trends.</h4>
+        </div>
+        <a href="/what-we-do#research" class="cap-link">Explore Research →</a>
       </div>
 
-      <div class="editorial-list quiet-stagger">
-        <div class="capability-card qs-item">
-          <div>
-            <span class="capability-card-number">01</span>
-            <h3 class="capability-card-title">Global Law & Cross-Border Regulation</h3>
-            <p class="capability-card-body">The evolving legal and regulatory architecture that governs international commerce, investment, technology, sanctions, and cross-border transactions across fragmented jurisdictions.</p>
+      <div class="cap-panel cap-panel-2">
+        <div>
+          <div class="cap-micro-header">
+            <span>Primary Function</span>
+            <span>02</span>
           </div>
-          <a href="/areas/global-law" class="capability-card-link">Explore →</a>
+          <h4 class="cap-headline">Decision-relevant intelligence spanning geopolitical risk.</h4>
         </div>
-
-        <div class="capability-card qs-item">
-          <div>
-            <span class="capability-card-number">02</span>
-            <h3 class="capability-card-title">Geoeconomics & Strategic Affairs</h3>
-            <p class="capability-card-body">The strategic deployment of trade, investment, finance, technology, resources, and economic policy as instruments of statecraft, economic security, and international influence.</p>
-          </div>
-          <a href="/areas/geoeconomics" class="capability-card-link">Explore →</a>
-        </div>
-
-        <div class="capability-card qs-item">
-          <div>
-            <span class="capability-card-number">03</span>
-            <h3 class="capability-card-title">Global Finance & Investment</h3>
-            <p class="capability-card-body">The global financial architecture, sovereign and institutional capital flows, economic restrictions, and the deepening nexus between capital allocation and geopolitical risk.</p>
-          </div>
-          <a href="/areas/global-finance" class="capability-card-link">Explore →</a>
-        </div>
-
-        <div class="capability-card qs-item">
-          <div>
-            <span class="capability-card-number">04</span>
-            <h3 class="capability-card-title">Energy & Energy Transitions</h3>
-            <p class="capability-card-body">Energy security, global markets, critical minerals, transition finance, and the reconfiguration of global energy systems impacting industrial competitiveness.</p>
-          </div>
-          <a href="/areas/energy" class="capability-card-link">Explore →</a>
-        </div>
-
-        <div class="capability-card qs-item">
-          <div>
-            <span class="capability-card-number">05</span>
-            <h3 class="capability-card-title">Emerging Technologies & Governance</h3>
-            <p class="capability-card-body">Artificial intelligence, semiconductors, digital economies, autonomous systems, cyber policy, technology governance, and nascent cross-border regulatory frameworks.</p>
-          </div>
-          <a href="/areas/emerging-technologies" class="capability-card-link">Explore →</a>
-        </div>
-
-        <!-- 6th Card: All Areas of Focus (Completing the 3x2 Grid per Brief §10.1) -->
-        <div class="capability-card capability-card--all qs-item">
-          <div>
-            <span class="capability-card-number">06</span>
-            <h3 class="capability-card-title">All Areas of Focus</h3>
-            <p class="capability-card-body">An integrated multidisciplinary research agenda equipping leaders to anticipate risks, discern opportunities, and navigate global complexity.</p>
-          </div>
-          <a href="/areas-of-focus" class="capability-card-link">Explore All Domains →</a>
-        </div>
+        <a href="/what-we-do#intelligence" class="cap-link">Explore Intelligence →</a>
       </div>
 
-      <div class="section-footer">
-        <a href="/areas-of-focus" class="section-footer-link">All Areas of Focus →</a>
+      <div class="cap-panel cap-panel-3">
+        <div>
+          <div class="cap-micro-header">
+            <span>Primary Function</span>
+            <span>03</span>
+          </div>
+          <h4 class="cap-headline">Supporting organisations in navigating complex environments.</h4>
+        </div>
+        <a href="/what-we-do#advisory" class="cap-link">Explore Advisory →</a>
       </div>
     </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION E — STATS / CREDIBILITY STRIP
-       ============================================================ -->
-  <section class="stats-strip section--rest bg-navy on-dark" id="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item" data-count="8" data-suffix="+">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Geographies Tracked</div>
-        </div>
-        <div class="stat-item" data-count="5">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Areas of Focus</div>
-        </div>
-        <div class="stat-item" data-count="7">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Priority Sectors</div>
-        </div>
-        <div class="stat-item" data-count="11">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Engagement Formats</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION F — PRIORITY SECTORS
-       ============================================================ -->
-  <section class="section bg-white" id="sectors">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow">Priority Sectors</p>
-        <h2>Where geopolitics meets industry</h2>
-        <p class="lead">Applied research across the sectors where geopolitical, regulatory, technological and economic forces increasingly converge.</p>
-      </div>
-
-      <div class="grid grid-3 sector-grid quiet-stagger">
-        <a href="/sectors/defence" class="sector-tile sector-tile--defence qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5.55-3.84 10.74-8 12-4.16-1.26-8-6.45-8-12V6l8-4z"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Defence & Homeland Security</div>
-            <div class="sector-tile-tagline">Strategic technologies, defence regulation, security frameworks and the foundations of economic resilience.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/pharma" class="sector-tile sector-tile--pharma qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="3"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Pharmaceuticals & Healthcare</div>
-            <div class="sector-tile-tagline">Global health security, pharmaceutical regulation, supply-chain integrity, innovation pathways and market access.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/energy-climate" class="sector-tile sector-tile--energy qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Energy & Climate</div>
-            <div class="sector-tile-tagline">Energy security, transition pathways, critical minerals, infrastructure development and climate-related investment.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/technology-ai" class="sector-tile sector-tile--tech qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Technology & AI</div>
-            <div class="sector-tile-tagline">AI governance, digital regulation, semiconductors, cyber policy and the broader landscape of emerging technologies.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/financial-services" class="sector-tile sector-tile--finance qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-4 7 4"/><line x1="6" y1="10" x2="6" y2="21"/><line x1="10" y1="10" x2="10" y2="21"/><line x1="14" y1="10" x2="14" y2="21"/><line x1="18" y1="10" x2="18" y2="21"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Financial Services</div>
-            <div class="sector-tile-tagline">Global financial architecture, investment flows, fintech innovation, regulatory evolution and the geopolitics of finance.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/infrastructure" class="sector-tile sector-tile--infra qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Infrastructure & Connectivity</div>
-            <div class="sector-tile-tagline">Trade corridors, logistics networks, digital infrastructure, investment frameworks and regional connectivity.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors/semiconductors" class="sector-tile sector-tile--semiconductors qs-item">
-          <div class="sector-tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="12" height="12" rx="1"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="5" x2="19" y2="7"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="19" x2="19" y2="17"/></svg>
-          </div>
-          <div class="sector-tile-content">
-            <div class="sector-tile-title">Electronics & Semiconductors</div>
-            <div class="sector-tile-tagline">Technology supply chains, industrial policy, investment dynamics and strategic dependencies.</div>
-          </div>
-          <span class="sector-tile-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a href="/sectors" class="sector-tile sector-tile--all qs-item">
-          <div class="sector-tile-content" style="width: 100%;">
-            <div class="sector-tile-title" style="display: flex; align-items: center; justify-content: space-between;">All Sectors <span style="color: var(--gold); font-size: 20px;">→</span></div>
-          </div>
-        </a>
-      </div>
-
-      <div class="section-footer">
-        <a href="/sectors" class="section-footer-link">All Priority Sectors →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gold Thread Section Divider -->
-  <div class="gold-thread-divider" aria-hidden="true">
-    <svg class="gold-thread-svg" viewBox="0 0 1280 3" preserveAspectRatio="none">
-      <line class="gold-thread-line" x1="0" y1="1.5" x2="1280" y2="1.5" style="--thread-len: 1280" />
-    </svg>
   </div>
 
   <!-- ============================================================
-       SECTION G — INSIGHTS SPOTLIGHT
+       05. TYPOGRAPHIC INTERRUPTION
        ============================================================ -->
-  <section class="section bg-ivory" id="insights">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow">Latest Insights</p>
-        <h2>Research that anticipates what's next</h2>
+  <section class="section-interruption">
+    <div class="stage-container">
+      <div class="interruption-inner">
+        <div class="interruption-rule"></div>
+        <blockquote class="interruption-quote">Where geopolitics meets industry</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       06. AREAS OF FOCUS (Large Editorial Index)
+       ============================================================ -->
+  <section class="section-areas" id="areas-of-focus">
+    <div class="stage-container">
+      <div class="areas-header-row">
+        <div>
+          <span class="eyebrow">Strategic Research Agenda</span>
+          <h2 class="text-section-title" style="margin-top: 8px;">Five domains. One mandate.</h2>
+        </div>
+        <p class="text-lead" style="margin-bottom: 0;">The Centre analyses how evolving configurations of power, capital, trade, energy, regulation, and technology are reshaping economies, industries, and institutions worldwide.</p>
       </div>
 
-      <div class="insights-grid">
-        <!-- Featured card (left, 7 cols) -->
-        <div class="insight-card insight-card--featured qs-item">
-          <div class="insight-card-image">
-            <img src="assets/insight-india-tech.jpg" alt="India's Strategic Position in the Global Technology Order" loading="lazy" width="800" height="450">
-            <span class="insight-card-badge insight-card-badge--featured">Featured</span>
-          </div>
-          <div class="insight-card-body">
-            <span class="insight-card-eyebrow">Report</span>
-            <h3 class="insight-card-title">India's Strategic Position in the Global Technology Order</h3>
-            <p class="insight-card-excerpt">An examination of India's evolving role within global technology value chains, semiconductor ecosystems, and digital governance frameworks — and what this means for businesses, investors, and policymakers navigating the new technology order.</p>
-            <div class="insight-card-footer">
-              <span class="insight-card-date">12 September 2026</span>
-              <a href="/insights/india-technology-order" class="insight-card-read">Read →</a>
+      <div class="areas-index-list">
+        <div class="area-index-item active">
+          <span class="area-item-num">01</span>
+          <h3 class="area-item-title">Global Law & Cross-Border Regulation</h3>
+          <p class="area-item-desc">The evolving legal and regulatory architecture that governs international commerce, investment, technology, sanctions, and cross-border transactions across fragmented jurisdictions.</p>
+          <span class="area-item-arrow">→</span>
+        </div>
+
+        <div class="area-index-item">
+          <span class="area-item-num">02</span>
+          <h3 class="area-item-title">Geoeconomics & Strategic Affairs</h3>
+          <p class="area-item-desc">The strategic deployment of trade, investment, finance, technology, resources, and economic policy as instruments of statecraft, economic security, and international influence.</p>
+          <span class="area-item-arrow">→</span>
+        </div>
+
+        <div class="area-index-item">
+          <span class="area-item-num">03</span>
+          <h3 class="area-item-title">Global Finance & Investment</h3>
+          <p class="area-item-desc">The global financial architecture, sovereign and institutional capital flows, economic restrictions, and the deepening nexus between capital allocation and geopolitical risk.</p>
+          <span class="area-item-arrow">→</span>
+        </div>
+
+        <div class="area-index-item">
+          <span class="area-item-num">04</span>
+          <h3 class="area-item-title">Energy & Energy Transitions</h3>
+          <p class="area-item-desc">Energy security, global markets, critical minerals, transition finance, and the reconfiguration of global energy systems impacting industrial competitiveness.</p>
+          <span class="area-item-arrow">→</span>
+        </div>
+
+        <div class="area-index-item">
+          <span class="area-item-num">05</span>
+          <h3 class="area-item-title">Emerging Technologies & Governance</h3>
+          <p class="area-item-desc">Artificial intelligence, semiconductors, digital economies, autonomous systems, cyber policy, technology governance, and nascent cross-border regulatory frameworks.</p>
+          <span class="area-item-arrow">→</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 36px; text-align: right;">
+        <a href="/areas-of-focus" class="btn-ghost-gold">All Areas of Focus →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       07. PRIORITY SECTORS (Interactive Horizontal Canvas)
+       ============================================================ -->
+  <div class="stage-container">
+    <section class="section-sectors" id="sectors">
+      <div class="sectors-header">
+        <div>
+          <span class="eyebrow">Convergence of Forces</span>
+          <h2 class="text-section-title" style="margin-top: 8px;">Priority Sectors</h2>
+        </div>
+        <a href="/sectors" class="btn-ghost-gold">All Priority Sectors →</a>
+      </div>
+
+      <div class="sectors-accordion" id="sectors-accordion">
+        <div class="sector-acc-item active" style="--sector-color: var(--color-navy);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">01</span>
+              <h3 class="sector-acc-title">Defence & Homeland Security</h3>
             </div>
+            <span class="sector-acc-toggle">−</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Strategic technologies, defence regulation, security frameworks and the foundations of economic resilience.</p>
+            <a href="/sectors/defence" class="btn-ghost-gold">Explore Sector →</a>
           </div>
         </div>
 
-        <!-- Right column: 2 stacked cards -->
-        <div class="insights-grid-right">
-          <div class="insight-card qs-item">
-            <div class="insight-card-image">
-              <img src="assets/insight-sanctions.jpg" alt="Navigating the New Sanctions Architecture" loading="lazy" width="800" height="450">
-              <span class="insight-card-badge">Intelligence Brief</span>
+        <div class="sector-acc-item" style="--sector-color: var(--color-slate);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">02</span>
+              <h3 class="sector-acc-title">Pharmaceuticals & Healthcare</h3>
             </div>
-            <div class="insight-card-body">
-              <span class="insight-card-eyebrow">Intelligence Brief</span>
-              <h3 class="insight-card-title">Navigating the New Sanctions Architecture</h3>
-              <p class="insight-card-excerpt">How evolving sanctions regimes are reshaping cross-border commerce, investment flows, and corporate compliance frameworks.</p>
-              <div class="insight-card-footer">
-                <span class="insight-card-date">8 September 2026</span>
-                <a href="/insights/sanctions-architecture" class="insight-card-read">Read →</a>
-              </div>
+            <span class="sector-acc-toggle">+</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Global health security, pharmaceutical regulation, supply-chain integrity, innovation pathways and market access.</p>
+            <a href="/sectors/pharma" class="btn-ghost-gold">Explore Sector →</a>
+          </div>
+        </div>
+
+        <div class="sector-acc-item" style="--sector-color: var(--color-forest);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">03</span>
+              <h3 class="sector-acc-title">Energy & Climate</h3>
             </div>
+            <span class="sector-acc-toggle">+</span>
           </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Energy security, transition pathways, critical minerals, infrastructure development and climate-related investment.</p>
+            <a href="/sectors/energy-climate" class="btn-ghost-gold">Explore Sector →</a>
+          </div>
+        </div>
 
-          <div class="insight-card qs-item">
-            <div class="insight-card-image">
-              <img src="assets/insight-energy.jpg" alt="Energy Security and the Geopolitics of Critical Minerals" loading="lazy" width="800" height="450">
-              <span class="insight-card-badge">Policy Paper</span>
+        <div class="sector-acc-item" style="--sector-color: var(--color-gold);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">04</span>
+              <h3 class="sector-acc-title">Technology & AI</h3>
             </div>
-            <div class="insight-card-body">
-              <span class="insight-card-eyebrow">Policy Paper</span>
-              <h3 class="insight-card-title">Energy Security and the Geopolitics of Critical Minerals</h3>
-              <p class="insight-card-excerpt">The intersection of energy transition and mineral supply chains — risks, dependencies, and strategic opportunities.</p>
-              <div class="insight-card-footer">
-                <span class="insight-card-date">1 September 2026</span>
-                <a href="/insights/critical-minerals" class="insight-card-read">Read →</a>
-              </div>
+            <span class="sector-acc-toggle">+</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">AI governance, digital regulation, semiconductors, cyber policy and the broader landscape of emerging technologies.</p>
+            <a href="/sectors/technology-ai" class="btn-ghost-gold">Explore Sector →</a>
+          </div>
+        </div>
+
+        <div class="sector-acc-item" style="--sector-color: var(--color-charcoal);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">05</span>
+              <h3 class="sector-acc-title">Financial Services</h3>
             </div>
+            <span class="sector-acc-toggle">+</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Global financial architecture, investment flows, fintech innovation, regulatory evolution and the geopolitics of finance.</p>
+            <a href="/sectors/financial-services" class="btn-ghost-gold">Explore Sector →</a>
+          </div>
+        </div>
+
+        <div class="sector-acc-item" style="--sector-color: var(--color-slate);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">06</span>
+              <h3 class="sector-acc-title">Infrastructure & Connectivity</h3>
+            </div>
+            <span class="sector-acc-toggle">+</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Trade corridors, logistics networks, digital infrastructure, investment frameworks and regional connectivity.</p>
+            <a href="/sectors/infrastructure" class="btn-ghost-gold">Explore Sector →</a>
+          </div>
+        </div>
+
+        <div class="sector-acc-item" style="--sector-color: var(--color-burgundy);">
+          <div class="sector-acc-header">
+            <div class="sector-acc-title-group">
+              <span class="sector-acc-num">07</span>
+              <h3 class="sector-acc-title">Electronics & Semiconductors</h3>
+            </div>
+            <span class="sector-acc-toggle">+</span>
+          </div>
+          <div class="sector-acc-body">
+            <p class="sector-acc-desc">Technology supply chains, industrial policy, investment dynamics and strategic dependencies.</p>
+            <a href="/sectors/semiconductors" class="btn-ghost-gold">Explore Sector →</a>
           </div>
         </div>
       </div>
-
-      <div class="section-footer">
-        <a href="/insights" class="section-footer-link">View all insights →</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION H — GEOGRAPHIES & STRATEGIC CORRIDORS
-       ============================================================ -->
-  <section class="geo-tabs section--rest bg-navy on-dark" id="geographies">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow on-dark-eyebrow">Geographies & Strategic Corridors</p>
-        <h2 class="on-dark-heading">Where the world moves, we follow</h2>
-      </div>
-
-      <!-- Tab bar -->
-      <div class="geo-tab-bar" role="tablist">
-        <button class="geo-tab active" role="tab" data-tab="india" aria-selected="true">India & South Asia</button>
-        <button class="geo-tab" role="tab" data-tab="indopacific" aria-selected="false">Indo-Pacific & East Asia</button>
-        <button class="geo-tab" role="tab" data-tab="asean" aria-selected="false">ASEAN & Southeast Asia</button>
-        <button class="geo-tab" role="tab" data-tab="middleeast" aria-selected="false">Middle East & Gulf</button>
-        <button class="geo-tab" role="tab" data-tab="europe" aria-selected="false">Europe & Eurasia</button>
-        <button class="geo-tab" role="tab" data-tab="northamerica" aria-selected="false">North America</button>
-        <button class="geo-tab" role="tab" data-tab="africa" aria-selected="false">Africa</button>
-        <button class="geo-tab" role="tab" data-tab="latam" aria-selected="false">Latin America & Caribbean</button>
-        <button class="geo-tab" role="tab" data-tab="corridors" aria-selected="false">Strategic Corridors</button>
-      </div>
-
-      <!-- Tab content panels -->
-      <div class="geo-tab-content active" id="tab-india" role="tabpanel">
-        <div class="geo-info">
-          <h3>India & South Asia</h3>
-          <p>India constitutes the Centre's principal geographic anchor. Research examines India's evolving role in global trade, investment, technology, energy, defence, pharmaceuticals and critical supply chains, together with its relationships with South Asian neighbours and major global partners.</p>
-          <ul class="geo-themes">
-            <li>Role in global value chains</li>
-            <li>India–Middle East–Europe corridor</li>
-            <li>Technology and defence partnerships</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">India's Strategic Trade and Investment Landscape: 2026 Outlook</div>
-            <div class="geo-card-meta">Report · September 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">South Asia's Digital Connectivity and Regulatory Convergence</div>
-            <div class="geo-card-meta">Intelligence Brief · August 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-indopacific" role="tabpanel">
-        <div class="geo-info">
-          <h3>Indo-Pacific & East Asia</h3>
-          <p>The Indo-Pacific remains a core area of focus given its centrality to global trade, maritime connectivity, technology, manufacturing and strategic competition — spanning China, Japan, South Korea, Taiwan, and the ASEAN economies.</p>
-          <ul class="geo-themes">
-            <li>China+1 supply chain networks</li>
-            <li>Semiconductor ecosystems</li>
-            <li>Maritime trade and connectivity</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">Semiconductor Supply Chain Diversification in the Indo-Pacific</div>
-            <div class="geo-card-meta">Report · August 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">Maritime Chokepoints and Trade Resilience</div>
-            <div class="geo-card-meta">Strategic Brief · July 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-asean" role="tabpanel">
-        <div class="geo-info">
-          <h3>ASEAN & Southeast Asia</h3>
-          <p>ASEAN economies are increasingly pivotal as beneficiaries of supply-chain diversification, digital economy growth, and strategic competition between major powers. The Centre tracks regulatory developments, investment flows, and connectivity frameworks across the region.</p>
-          <ul class="geo-themes">
-            <li>Supply-chain diversification beneficiaries</li>
-            <li>Digital economy regulation</li>
-            <li>RCEP and trade frameworks</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">ASEAN as a Manufacturing Hub: Opportunities and Regulatory Challenges</div>
-            <div class="geo-card-meta">Working Paper · July 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">Digital Trade Governance in Southeast Asia</div>
-            <div class="geo-card-meta">Policy Paper · June 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-middleeast" role="tabpanel">
-        <div class="geo-info">
-          <h3>Middle East & Gulf</h3>
-          <p>The Gulf region is undergoing profound economic diversification, expanding its role as an investment hub, energy corridor, and technology adopter. The Centre examines the strategic partnerships, sovereign investment flows, and regulatory evolution shaping the region.</p>
-          <ul class="geo-themes">
-            <li>Economic diversification programmes</li>
-            <li>Sovereign wealth and investment flows</li>
-            <li>Gulf–India–Asia energy corridor</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">Gulf Investment Strategies and Indo-Pacific Connectivity</div>
-            <div class="geo-card-meta">Report · August 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">Energy Transition in the Gulf Economies</div>
-            <div class="geo-card-meta">Policy Paper · July 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-europe" role="tabpanel">
-        <div class="geo-info">
-          <h3>Europe & Eurasia</h3>
-          <p>Europe remains a critical axis for global regulatory standard-setting, investment, and strategic autonomy. The Centre tracks EU regulatory evolution, trade policy, technology governance, and the continent's shifting economic relationships with Asia and the Indo-Pacific.</p>
-          <ul class="geo-themes">
-            <li>EU regulatory standard-setting</li>
-            <li>Strategic autonomy and de-risking</li>
-            <li>Europe–Asia connectivity</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">EU Digital Regulation and Global Implications</div>
-            <div class="geo-card-meta">Report · September 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">European Strategic Autonomy: Trade, Technology, and Energy</div>
-            <div class="geo-card-meta">Working Paper · August 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-northamerica" role="tabpanel">
-        <div class="geo-info">
-          <h3>North America</h3>
-          <p>North America's role as a technology leader, capital market anchor, and regulatory pace-setter has significant global implications. The Centre examines US trade and technology policy, transatlantic relations, and North America's position in global supply chain reconfiguration.</p>
-          <ul class="geo-themes">
-            <li>US technology and trade policy</li>
-            <li>Transatlantic economic relations</li>
-            <li>Critical minerals and industrial policy</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">US Industrial Policy and Global Supply Chain Implications</div>
-            <div class="geo-card-meta">Report · August 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">North American Critical Minerals Strategy</div>
-            <div class="geo-card-meta">Intelligence Brief · July 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-africa" role="tabpanel">
-        <div class="geo-info">
-          <h3>Africa</h3>
-          <p>Africa is an increasingly important geography for critical minerals, energy resources, demographic growth, and infrastructure development. The Centre tracks investment flows, resource governance, and Africa's evolving connectivity with India, the Gulf, and Asia.</p>
-          <ul class="geo-themes">
-            <li>Critical minerals and resources</li>
-            <li>Infrastructure and connectivity</li>
-            <li>Africa–India–Gulf investment corridors</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">Africa's Critical Minerals and the Global Energy Transition</div>
-            <div class="geo-card-meta">Report · July 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">India–Africa Economic Partnerships: New Frontiers</div>
-            <div class="geo-card-meta">Strategic Brief · June 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-latam" role="tabpanel">
-        <div class="geo-info">
-          <h3>Latin America & the Caribbean</h3>
-          <p>Latin America is emerging as a critical geography for nearshoring, critical minerals, energy resources, and as a node in the reconfiguration of global supply chains. The Centre examines regional investment dynamics, trade frameworks, and strategic economic partnerships.</p>
-          <ul class="geo-themes">
-            <li>Nearshoring and manufacturing</li>
-            <li>Critical minerals and energy resources</li>
-            <li>Regional trade frameworks</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">Latin America in Global Supply Chain Reconfiguration</div>
-            <div class="geo-card-meta">Working Paper · August 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">Lithium, Copper, and the Americas' Resource Advantage</div>
-            <div class="geo-card-meta">Intelligence Brief · July 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="geo-tab-content" id="tab-corridors" role="tabpanel">
-        <div class="geo-info">
-          <h3>Strategic Corridors</h3>
-          <p>The Centre tracks the corridors that increasingly define global trade, investment, and connectivity — routes along which goods, capital, energy, technology, and strategic influence flow and converge.</p>
-          <ul class="geo-themes">
-            <li>India–Middle East–Europe</li>
-            <li>India–Indo-Pacific</li>
-            <li>China+1 Supply-Chain Networks</li>
-            <li>Gulf–India–Asia Energy & Investment Corridor</li>
-            <li>Europe–Eurasia–Asia Connectivity</li>
-            <li>Africa–Middle East–India Corridor</li>
-            <li>Americas–Europe–Indo-Pacific Strategic Supply Chains</li>
-          </ul>
-        </div>
-        <div class="geo-cards">
-          <div class="geo-card">
-            <div class="geo-card-title">Mapping the India–Middle East–Europe Economic Corridor</div>
-            <div class="geo-card-meta">Report · September 2026</div>
-          </div>
-          <div class="geo-card">
-            <div class="geo-card-title">Strategic Supply Chains: Americas to Indo-Pacific</div>
-            <div class="geo-card-meta">Working Paper · August 2026</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-footer">
-        <a href="/geographies" class="section-footer-link">Explore all geographies →</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION I — WHO WE ENGAGE WITH
-       ============================================================ -->
-  <section class="section bg-ivory" id="stakeholders">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow">Who We Engage With</p>
-        <h2>Serving leaders who shape the global agenda</h2>
-      </div>
-
-      <div class="stakeholders-grid quiet-stagger">
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="6" y="12" width="28" height="24" rx="2"/><path d="M6 20h28"/><path d="M20 4v8"/><path d="M14 8h12"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Businesses & Multinational Corporations</h3>
-          <p class="stakeholder-card-body">Supporting organisations as they navigate international markets, regulatory change and geopolitical uncertainty with clarity and strategic foresight.</p>
-        </div>
-
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 34V14l8-8 8 8v20"/><path d="M22 18l12 8v8"/><line x1="6" y1="22" x2="22" y2="22"/><line x1="14" y1="14" x2="14" y2="22"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Investors & Financial Institutions</h3>
-          <p class="stakeholder-card-body">Providing targeted intelligence on markets, sectors, investment environments and emerging risks to inform capital allocation and portfolio strategy.</p>
-        </div>
-
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 4l16 8v2H4v-2l16-8z"/><line x1="8" y1="14" x2="8" y2="30"/><line x1="16" y1="14" x2="16" y2="30"/><line x1="24" y1="14" x2="24" y2="30"/><line x1="32" y1="14" x2="32" y2="30"/><path d="M4 30h32v4H4z"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Governments & Public Institutions</h3>
-          <p class="stakeholder-card-body">Supporting policy research, comparative analysis and international engagement to strengthen evidence-based decision-making.</p>
-        </div>
-
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="20" cy="20" r="16"/><path d="M4 20h32"/><ellipse cx="20" cy="20" rx="8" ry="16"/><path d="M8 10c4 2 8 2 12 0s8-2 12 0"/><path d="M8 30c4-2 8-2 12 0s8 2 12 0"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">International Organisations</h3>
-          <p class="stakeholder-card-body">Contributing research and informed perspectives on global governance and the management of cross-border challenges.</p>
-        </div>
-
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="14" cy="14" r="6"/><circle cx="26" cy="14" r="6"/><path d="M4 34c0-6 4-10 10-10"/><path d="M26 24c6 0 10 4 10 10"/><circle cx="20" cy="20" r="4"/><path d="M14 34c0-4 2.7-8 6-8s6 4 6 8"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Industry Associations</h3>
-          <p class="stakeholder-card-body">Developing sector-specific research, intelligence and policy insights that advance collective understanding and coordinated responses.</p>
-        </div>
-
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 4l-4 10h8l-4-10z"/><path d="M8 14h24v4H8z"/><rect x="10" y="18" width="20" height="16" rx="2"/><line x1="16" y1="24" x2="24" y2="24"/><line x1="16" y1="28" x2="22" y2="28"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Universities & Research Institutions</h3>
-          <p class="stakeholder-card-body">Advancing collaborative research, knowledge exchange and academic dialogue on issues of shared strategic importance.</p>
-        </div>
-
-        <!-- 7th Stakeholder: Diplomatic & International Networks (from PDF page 6) -->
-        <div class="stakeholder-card qs-item">
-          <div class="stakeholder-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="20" cy="20" r="6"/><circle cx="8" cy="14" r="3"/><circle cx="32" cy="14" r="3"/><circle cx="10" cy="28" r="3"/><circle cx="30" cy="28" r="3"/><line x1="11" y1="15" x2="15" y2="18"/><line x1="29" y1="15" x2="25" y2="18"/><line x1="13" y1="27" x2="16" y2="24"/><line x1="27" y1="27" x2="24" y2="24"/>
-            </svg>
-          </div>
-          <h3 class="stakeholder-card-title">Diplomatic & International Networks</h3>
-          <p class="stakeholder-card-body">Creating carefully curated platforms for dialogue on emerging global and regional developments, foreign policy, and cross-border cooperation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION J — EVENTS PREVIEW
-       ============================================================ -->
-  <section class="section bg-slate on-dark" id="events">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow on-dark-eyebrow">Upcoming Events</p>
-        <h2 class="on-dark-heading">Dialogues that drive decisions</h2>
-      </div>
-
-      <div class="qs-item">
-        <div class="event-row">
-          <span class="event-badge">Roundtable</span>
-          <span class="event-date">15 Oct 2026</span>
-          <span class="event-location">· New Delhi</span>
-          <span class="event-title">India's Role in the Global Technology Order</span>
-          <a href="/events/india-technology-order" class="event-register">Register →</a>
-        </div>
-        <div class="event-row">
-          <span class="event-badge">Forum</span>
-          <span class="event-date">8 Nov 2026</span>
-          <span class="event-location">· Dubai</span>
-          <span class="event-title">Gulf–India Energy and Investment Corridors</span>
-          <a href="/events/gulf-india-corridors" class="event-register">Register →</a>
-        </div>
-        <div class="event-row">
-          <span class="event-badge">Conference</span>
-          <span class="event-date">3 Dec 2026</span>
-          <span class="event-location">· London</span>
-          <span class="event-title">Rethinking Global Supply Chains in an Era of Strategic Competition</span>
-          <a href="/events/supply-chains" class="event-register">Register →</a>
-        </div>
-      </div>
-
-      <div class="section-footer">
-        <a href="/events" class="section-footer-link">View all events →</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION K — ABOUT THE CENTRE
-       ============================================================ -->
-  <section class="section section--spacious bg-white" id="about">
-    <div class="container">
-      <div class="about-split">
-        <!-- Left 55% -->
-        <div class="qs-item">
-          <p class="eyebrow">About the Centre</p>
-          <h2 class="about-heading">Rigorous analysis. Actionable intelligence.</h2>
-          <p class="about-body">The Centre rigorously examines the profound transformations underway in global power structures, regulatory frameworks, capital flows, energy systems and technological innovation, assessing their impact on markets, institutions and the international order. It converts these complex developments into precise, actionable intelligence for businesses, governments and institutional stakeholders.</p>
-          <a href="/about" class="section-footer-link about-link">Learn about the Centre →</a>
-        </div>
-
-        <!-- Right 45% -->
-        <div class="about-quote-panel margin-note qs-item">
-          <p class="about-quote-text">"Situated at the nexus of law, geoeconomics, and emerging technologies, the Centre equips businesses, governments, investors, and institutions to anticipate emerging risks, discern opportunities, and navigate an increasingly intricate global landscape with clarity and confidence."</p>
-          <p class="about-quote-attr">— SLR Centre for Global Law, Geoeconomics & Emerging Technologies</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION L — ENGAGEMENT CTA BANNER
-       ============================================================ -->
-  <section class="cta-banner section--spacious bg-navy on-dark" id="cta-banner">
-    <!-- Diamond pattern background -->
-    <div class="cta-banner-pattern" aria-hidden="true">
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="diamonds" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="#B08D57" stroke-width="0.5"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#diamonds)"/>
-      </svg>
-    </div>
-
-    <div class="container">
-      <div class="cta-banner-content qs-item">
-        <h2>Commission Research.<br>Attend a Dialogue.<br>Request a Briefing.</h2>
-        <p>Engage the Centre to navigate what's changing in your world.</p>
-        <a href="/engage" class="btn btn-primary">Engage the Centre</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SECTION M — FOOTER
-       ============================================================ -->
-  <!-- Gold Thread Footer Border (C.1 — 600ms, one-time draw) -->
-  <div class="footer-gold-thread" aria-hidden="true">
-    <svg class="gold-thread-svg" viewBox="0 0 1280 3" preserveAspectRatio="none">
-      <line class="gold-thread-line" x1="0" y1="1.5" x2="1280" y2="1.5" style="--thread-len: 1280" />
-    </svg>
+    </section>
   </div>
-  <footer class="footer bg-navy on-dark" id="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Col 1: Logo + Tagline -->
-        <div>
-          <img src="assets/logo-slr-white.svg" alt="SLR Centre" class="footer-logo" height="36">
-          <p class="centre-name">Centre for Global Law, Geoeconomics & Emerging Technologies</p>
-          <p class="footer-tagline">Let justice be done though the heavens fall</p>
-          <a href="https://linkedin.com" class="footer-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-          </a>
-        </div>
 
-        <!-- Col 2: Areas of Focus -->
-        <div>
-          <h4 class="footer-col-title">Areas of Focus</h4>
-          <div class="footer-links">
-            <a href="/areas/global-law">01 Global Law & Regulation</a>
-            <a href="/areas/geoeconomics">02 Geoeconomics & Strategic Affairs</a>
-            <a href="/areas/global-finance">03 Global Finance & Investment</a>
-            <a href="/areas/energy">04 Energy & Energy Transitions</a>
-            <a href="/areas/emerging-technologies">05 Emerging Technologies & Governance</a>
-          </div>
-        </div>
-
-        <!-- Col 3: Sectors -->
-        <div>
-          <h4 class="footer-col-title">Sectors</h4>
-          <div class="footer-links">
-            <a href="/sectors/defence">Defence & Homeland Security</a>
-            <a href="/sectors/pharma">Pharmaceuticals & Healthcare</a>
-            <a href="/sectors/energy-climate">Energy & Climate</a>
-            <a href="/sectors/technology-ai">Technology & AI</a>
-            <a href="/sectors/financial-services">Financial Services</a>
-            <a href="/sectors/infrastructure">Infrastructure & Connectivity</a>
-            <a href="/sectors/semiconductors">Electronics & Semiconductors</a>
-          </div>
-        </div>
-
-        <!-- Col 4: Connect -->
-        <div>
-          <h4 class="footer-col-title">Connect</h4>
-          <div class="footer-links">
-            <a href="/insights">Insights & Publications</a>
-            <a href="/events">Events & Dialogues</a>
-            <a href="/engage">Engage the Centre</a>
-          </div>
-          <div class="footer-newsletter">
-            <h4 class="footer-col-title footer-newsletter-title">Newsletter</h4>
-            <form class="footer-newsletter-form" onsubmit="return false;">
-              <input type="email" class="footer-newsletter-input" placeholder="Email address" aria-label="Email address" required>
-              <button type="submit" class="footer-newsletter-btn">Subscribe</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="footer-bottom">
-        <span>© 2026 SLR Advocates & Solicitors. All rights reserved.</span>
-        <div class="footer-legal-links">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Use</a>
-          <a href="/cookies">Cookie Settings</a>
+  <!-- ============================================================
+       08. FEATURED INSIGHT (Asymmetric 50/50 Editorial Split)
+       ============================================================ -->
+  <div class="stage-container section-featured-insight">
+    <div class="featured-split">
+      <div class="featured-split-media"></div>
+      <div class="featured-split-content">
+        <span class="featured-badge">Featured Report // 12 September 2026</span>
+        <h2 class="featured-title">India's Strategic Position in the Global Technology Order</h2>
+        <p class="featured-excerpt">An examination of India's evolving role within global technology value chains, semiconductor ecosystems, and digital governance frameworks — and what this means for businesses, investors, and policymakers navigating the new technology order.</p>
+        <div style="margin-top: 12px;">
+          <a href="/insights/india-technology-order" class="btn btn-secondary">Read Report →</a>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- Magnetic Cursor Label (C.7) -->
-  <div class="cursor-label" id="cursor-label" aria-hidden="true"></div>
+  <!-- ============================================================
+       09. PUBLICATIONS & NEWSROOM ENVIRONMENT
+       ============================================================ -->
+  <section class="section-publications" id="insights">
+    <div class="stage-container">
+      <div class="publications-frame">
+        <div class="pub-frame-header">
+          <div>
+            <span class="eyebrow">Research & Intelligence</span>
+            <h2 class="text-section-title" style="margin-top: 8px;">Research that anticipates what's next</h2>
+          </div>
+          <a href="/insights" class="btn-ghost-gold">View All Insights →</a>
+        </div>
+
+        <div class="pub-newsroom-grid">
+          <!-- Article 1 -->
+          <article class="pub-article-card">
+            <div class="pub-article-image">
+              <img src="assets/insight-sanctions.jpg" alt="Sanctions Architecture">
+            </div>
+            <div class="pub-meta-line">
+              <span class="pub-type-tag">Intelligence Brief</span>
+              <span>•</span>
+              <span>8 September 2026</span>
+            </div>
+            <h3 class="pub-card-headline">Navigating the New Sanctions Architecture</h3>
+            <p class="pub-card-excerpt">How evolving sanctions regimes are reshaping cross-border commerce, investment flows, and corporate compliance frameworks.</p>
+            <a href="/insights/sanctions" class="btn-ghost-gold">Read Brief →</a>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="pub-article-card">
+            <div class="pub-article-image">
+              <img src="assets/insight-energy.jpg" alt="Critical Minerals & Energy">
+            </div>
+            <div class="pub-meta-line">
+              <span class="pub-type-tag">Policy Paper</span>
+              <span>•</span>
+              <span>1 September 2026</span>
+            </div>
+            <h3 class="pub-card-headline">Energy Security and the Geopolitics of Critical Minerals</h3>
+            <p class="pub-card-excerpt">The intersection of energy transition and mineral supply chains — risks, dependencies, and strategic opportunities.</p>
+            <a href="/insights/critical-minerals" class="btn-ghost-gold">Read Paper →</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. GEOGRAPHIES (Interactive Index + Detail)
+       ============================================================ -->
+  <div class="stage-container">
+    <section class="section-geographies" id="geographies">
+      <div class="geo-inner" style="padding: 0 var(--outer-padding);">
+        <div class="geo-top-row">
+          <div>
+            <span class="eyebrow eyebrow-light">Global Footprint</span>
+            <h2 class="text-section-title" style="color: var(--color-white); margin-top: 8px;">Where the world moves, we follow</h2>
+          </div>
+          <a href="/geographies" class="btn-ghost-gold" style="color: var(--color-gold-light);">Explore All Geographies →</a>
+        </div>
+
+        <div class="geo-grid-layout">
+          <!-- Left: Geography Index Navigation -->
+          <div class="geo-nav-list" id="geo-nav-list">
+            <button class="geo-nav-btn active" data-geo="geo-1">India & South Asia</button>
+            <button class="geo-nav-btn" data-geo="geo-2">Indo-Pacific & East Asia</button>
+            <button class="geo-nav-btn" data-geo="geo-3">ASEAN & Southeast Asia</button>
+            <button class="geo-nav-btn" data-geo="geo-4">Middle East & Gulf</button>
+            <button class="geo-nav-btn" data-geo="geo-5">Europe & Eurasia</button>
+            <button class="geo-nav-btn" data-geo="geo-6">North America</button>
+            <button class="geo-nav-btn" data-geo="geo-7">Africa</button>
+            <button class="geo-nav-btn" data-geo="geo-8">Latin America & the Caribbean</button>
+            <button class="geo-nav-btn" data-geo="geo-9" style="color: var(--color-gold-light); margin-top: 14px;">Strategic Corridors</button>
+          </div>
+
+          <!-- Right: Contextual Intelligence Panel -->
+          <div class="geo-detail-panel" id="geo-detail-panel">
+            <span class="eyebrow eyebrow-light" id="geo-detail-type">Principal Geographic Anchor</span>
+            <h3 class="geo-detail-title" id="geo-detail-title">India & South Asia</h3>
+            <p class="geo-detail-text" id="geo-detail-desc">India constitutes the Centre's principal geographic anchor. Research examines India's evolving role in global trade, investment, technology, energy, defence, pharmaceuticals and critical supply chains, together with its relationships with South Asian neighbours and major global partners.</p>
+            <div class="geo-recent-report" id="geo-detail-report">
+              <span class="eyebrow eyebrow-light" style="font-size: 10px;">Recent Intelligence Report</span>
+              <h4 style="font-family: var(--font-serif); font-size: 18px; color: var(--color-white);">India's Strategic Trade and Investment Landscape: 2026 Outlook</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       11. CHAPTER VISUAL BREAK
+       ============================================================ -->
+  <div class="stage-container">
+    <section class="section-chapter-break">
+      <div class="chapter-break-rule"></div>
+      <h2 class="chapter-break-title">Five domains. One mandate.</h2>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       12. WHO WE ENGAGE WITH (Flowing Institutional List)
+       ============================================================ -->
+  <section class="section-stakeholders" id="stakeholders">
+    <div class="stage-container">
+      <div class="stakeholders-header">
+        <div>
+          <span class="eyebrow">Institutional Network</span>
+          <h2 class="text-section-title" style="margin-top: 8px;">Who We Engage With</h2>
+        </div>
+        <p class="text-lead" style="margin-bottom: 0;">Serving leaders who shape the global agenda across seven strategic constituencies.</p>
+      </div>
+
+      <div class="stakeholders-grid">
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">01 // Global Enterprise</span>
+          <h3 class="stakeholder-title">Businesses & Multinational Corporations</h3>
+          <p class="stakeholder-desc">Advising enterprise leadership navigating international sanctions, cross-border regulatory shifts, and supply-chain realignment.</p>
+        </div>
+
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">02 // Capital Allocation</span>
+          <h3 class="stakeholder-title">Investors & Financial Institutions</h3>
+          <p class="stakeholder-desc">Providing sovereign wealth funds, private equity, and institutional investors with geopolitical risk assessments and regulatory foresight.</p>
+        </div>
+
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">03 // Public Leadership</span>
+          <h3 class="stakeholder-title">Governments & Public Institutions</h3>
+          <p class="stakeholder-desc">Delivering comparative policy analysis, strategic scenario planning, and cross-border regulatory intelligence to ministries and regulatory bodies.</p>
+        </div>
+
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">04 // Multilateral Systems</span>
+          <h3 class="stakeholder-title">International Organisations</h3>
+          <p class="stakeholder-desc">Contributing empirical research and policy frameworks to multilateral institutions shaping global economic governance.</p>
+        </div>
+
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">05 // Sector Bodies</span>
+          <h3 class="stakeholder-title">Industry Associations</h3>
+          <p class="stakeholder-desc">Partnering with peak industry bodies to analyze regulatory headwinds, trade barriers, and industrial policy developments.</p>
+        </div>
+
+        <div class="stakeholder-card">
+          <span class="eyebrow" style="color: var(--color-slate);">06 // Academic Centers</span>
+          <h3 class="stakeholder-title">Universities & Research Institutions</h3>
+          <p class="stakeholder-desc">Collaborating with leading global policy institutes, law faculties, and think tanks on joint research initiatives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. EVENTS (Editorial Chronology)
+       ============================================================ -->
+  <div class="stage-container">
+    <section class="section-events" id="events">
+      <div class="events-header">
+        <div>
+          <span class="eyebrow">Convening Authority</span>
+          <h2 class="text-section-title" style="margin-top: 8px;">Dialogues that drive decisions</h2>
+        </div>
+        <a href="/events" class="btn-ghost-gold">View All Events →</a>
+      </div>
+
+      <div class="events-list">
+        <!-- Event 1 -->
+        <div class="event-row-item">
+          <div class="event-badge-group">
+            <span class="event-badge badge-burgundy">Roundtable</span>
+            <span class="event-date-text">15 Oct 2026</span>
+          </div>
+          <div class="event-info">
+            <h3 class="event-title-text">India's Role in the Global Technology Order</h3>
+            <span class="event-location-text">Closed-Door Dialogue // New Delhi, India</span>
+          </div>
+          <div class="event-action">
+            <a href="/events" class="btn btn-outline-navy">Request Invitation</a>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-row-item">
+          <div class="event-badge-group">
+            <span class="event-badge badge-slate">Forum</span>
+            <span class="event-date-text">08 Nov 2026</span>
+          </div>
+          <div class="event-info">
+            <h3 class="event-title-text">Gulf–India Energy and Investment Corridors</h3>
+            <span class="event-location-text">Executive Forum // Dubai, UAE</span>
+          </div>
+          <div class="event-action">
+            <a href="/events" class="btn btn-outline-navy">Request Invitation</a>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="event-row-item">
+          <div class="event-badge-group">
+            <span class="event-badge badge-burgundy">Conference</span>
+            <span class="event-date-text">03 Dec 2026</span>
+          </div>
+          <div class="event-info">
+            <h3 class="event-title-text">Rethinking Global Supply Chains in an Era of Strategic Competition</h3>
+            <span class="event-location-text">International Conference // London, UK</span>
+          </div>
+          <div class="event-action">
+            <a href="/events" class="btn btn-outline-navy">Request Invitation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       14. ABOUT / CLOSING STATEMENT
+       ============================================================ -->
+  <section class="section-about" id="about">
+    <div class="stage-container">
+      <div class="about-split-stage">
+        <div class="about-content-col">
+          <span class="eyebrow">Institutional Mandate</span>
+          <h2 class="text-section-title">Rigorous analysis. Actionable intelligence.</h2>
+          <p class="text-lead">The SLR Centre for Global Law, Geoeconomics and Emerging Technologies provides senior decision-makers with the analytical depth and strategic foresight needed to navigate an increasingly fragmented international order.</p>
+          <div>
+            <a href="/about" class="btn btn-outline-navy">Learn About the Centre →</a>
+          </div>
+        </div>
+
+        <div class="about-quote-box">
+          <blockquote class="about-quote-text">"Situated at the nexus of law, geoeconomics, and emerging technologies, the Centre bridges scholarly rigor and executive decision-making."</blockquote>
+          <span class="about-quote-author">— SLR Centre for Global Law</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       15. CTA BANNER (Institutional Closing Stage)
+       ============================================================ -->
+  <div class="stage-container">
+    <section class="section-cta-banner" id="engage">
+      <div class="cta-banner-bg-lattice"></div>
+      <div class="cta-banner-content">
+        <span class="eyebrow eyebrow-light">Executive Engagement</span>
+        <h2 class="text-editorial-giant" style="color: var(--color-white);">Commission Research. Attend a Dialogue. Request a Briefing.</h2>
+        <p class="hero-lead-text">Engage the Centre to navigate what's changing in your world.</p>
+        <div>
+          <a href="/engage" class="btn btn-primary">Engage the Centre</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       16. MEMORABLE INSTITUTIONAL FOOTER
+       ============================================================ -->
+  <div class="stage-container" style="padding-bottom: 24px;">
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top-row">
+          <div class="footer-identity">
+            <div class="footer-logo-wrap">
+              <img src="assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors">
+            </div>
+            <h3 class="footer-org-title">Centre for Global Law, Geoeconomics & Emerging Technologies</h3>
+            <p class="footer-motto">Let justice be done though the heavens fall</p>
+          </div>
+          <div>
+            <a href="/engage" class="btn btn-secondary">Engage the Centre</a>
+          </div>
+        </div>
+
+        <div class="footer-grid-nav">
+          <div class="footer-col">
+            <span class="footer-col-header">Areas of Focus</span>
+            <a href="/areas-of-focus#global-law" class="footer-col-link">01 Global Law & Regulation</a>
+            <a href="/areas-of-focus#geoeconomics" class="footer-col-link">02 Geoeconomics & Strategic Affairs</a>
+            <a href="/areas-of-focus#finance" class="footer-col-link">03 Global Finance & Investment</a>
+            <a href="/areas-of-focus#energy" class="footer-col-link">04 Energy & Energy Transitions</a>
+            <a href="/areas-of-focus#tech" class="footer-col-link">05 Emerging Technologies & Governance</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-header">Priority Sectors</span>
+            <a href="/sectors/defence" class="footer-col-link">Defence & Homeland Security</a>
+            <a href="/sectors/pharma" class="footer-col-link">Pharmaceuticals & Healthcare</a>
+            <a href="/sectors/energy-climate" class="footer-col-link">Energy & Climate</a>
+            <a href="/sectors/technology-ai" class="footer-col-link">Technology & AI</a>
+            <a href="/sectors/financial-services" class="footer-col-link">Financial Services</a>
+            <a href="/sectors/infrastructure" class="footer-col-link">Infrastructure & Connectivity</a>
+            <a href="/sectors/semiconductors" class="footer-col-link">Electronics & Semiconductors</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-header">Connect</span>
+            <a href="/insights" class="footer-col-link">Insights & Publications</a>
+            <a href="/events" class="footer-col-link">Events & Dialogues</a>
+            <a href="/engage" class="footer-col-link">Engage the Centre</a>
+            <a href="/about" class="footer-col-link">About the Centre</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-header">Locations</span>
+            <span class="footer-col-link" style="color: rgba(255,255,255,0.9);">New Delhi, India</span>
+            <span class="footer-col-link" style="color: rgba(255,255,255,0.9);">London, United Kingdom</span>
+            <span class="footer-col-link" style="color: rgba(255,255,255,0.9);">Dubai, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div>© 2026 SLR Advocates & Solicitors. All rights reserved.</div>
+          <div class="footer-legal-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script src="main.js"></script>
 </body>
