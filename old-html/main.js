@@ -10,19 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================================
 
   // --- Priority Sectors Accordion ---
-  const sectorItems = document.querySelectorAll('.sector-acc-item');
+  const sectorItems = document.querySelectorAll('.sector-editorial-item, .sector-acc-item');
   if (sectorItems.length > 0) {
     sectorItems.forEach(item => {
-      item.addEventListener('click', () => {
+      const header = item.querySelector('.sector-item-header, .sector-acc-header') || item;
+      header.addEventListener('click', (e) => {
+        // Prevent trigger if clicking an inner link
+        if (e.target.closest('a')) return;
         const isActive = item.classList.contains('active');
         sectorItems.forEach(si => {
           si.classList.remove('active');
-          const toggle = si.querySelector('.sector-acc-toggle');
+          const toggle = si.querySelector('.sector-item-symbol, .sector-acc-toggle');
           if (toggle) toggle.textContent = '+';
         });
         if (!isActive) {
           item.classList.add('active');
-          const toggle = item.querySelector('.sector-acc-toggle');
+          const toggle = item.querySelector('.sector-item-symbol, .sector-acc-toggle');
           if (toggle) toggle.textContent = '−';
         }
       });
@@ -30,14 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Areas of Focus Index Interaction ---
-  const areaItems = document.querySelectorAll('.area-index-item');
-  if (areaItems.length > 0) {
-    areaItems.forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        areaItems.forEach(ai => ai.classList.remove('active'));
-        item.classList.add('active');
+  const areaRows = document.querySelectorAll('.area-index-row, .area-index-item');
+  const areasList = document.querySelector('.areas-index-list');
+  if (areaRows.length > 0) {
+    areaRows.forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        areaRows.forEach(r => {
+          r.classList.remove('active');
+          r.classList.add('dimmed');
+        });
+        row.classList.remove('dimmed');
+        row.classList.add('active');
       });
     });
+    if (areasList) {
+      areasList.addEventListener('mouseleave', () => {
+        areaRows.forEach(r => r.classList.remove('dimmed'));
+        if (areaRows[0]) areaRows[0].classList.add('active');
+      });
+    }
   }
 
   // --- Geographies Interactive Index ---
@@ -98,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const geoBtns = document.querySelectorAll('.geo-nav-btn');
+  const geoBtns = document.querySelectorAll('.geo-item-btn, .geo-nav-btn');
   const geoTypeEl = document.getElementById('geo-detail-type');
   const geoTitleEl = document.getElementById('geo-detail-title');
   const geoDescEl = document.getElementById('geo-detail-desc');
