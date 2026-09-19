@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { areasOfFocus, sectors, geographies } from "@/lib/content";
 
 export default function Footer() {
   return (
@@ -17,43 +18,43 @@ export default function Footer() {
 
         <div className="footer-directory-grid">
           <div className="footer-col-group">
-            <span className="footer-header-label">Areas of Focus</span>
-            <Link href="/areas-of-focus#global-law" className="footer-dir-link">01 Global Law & Regulation</Link>
-            <Link href="/areas-of-focus#geoeconomics" className="footer-dir-link">02 Geoeconomics & Strategic Affairs</Link>
-            <Link href="/areas-of-focus#finance" className="footer-dir-link">03 Global Finance & Investment</Link>
-            <Link href="/areas-of-focus#energy" className="footer-dir-link">04 Energy & Energy Transitions</Link>
-            <Link href="/areas-of-focus#tech" className="footer-dir-link">05 Emerging Technologies & Governance</Link>
+            <span className="footer-header-label">Research</span>
+            {areasOfFocus.map((a) => (
+              <Link key={a.slug} href={`/research?area=${a.slug}`} className="footer-dir-link">
+                {a.num} {a.title}
+              </Link>
+            ))}
+            <Link href="/research" className="footer-dir-link" style={{ color: "var(--color-gold-light)" }}>All Research →</Link>
           </div>
 
           <div className="footer-col-group">
-            <span className="footer-header-label">Priority Sectors</span>
-            <Link href="/sectors/defence" className="footer-dir-link">Defence & Homeland Security</Link>
-            <Link href="/sectors/pharma" className="footer-dir-link">Pharmaceuticals & Healthcare</Link>
-            <Link href="/sectors/energy-climate" className="footer-dir-link">Energy & Climate</Link>
-            <Link href="/sectors/technology-ai" className="footer-dir-link">Technology & AI</Link>
-            <Link href="/sectors/financial-services" className="footer-dir-link">Financial Services</Link>
-            <Link href="/sectors/infrastructure" className="footer-dir-link">Infrastructure & Connectivity</Link>
-            <Link href="/sectors/semiconductors" className="footer-dir-link">Electronics & Semiconductors</Link>
+            <span className="footer-header-label">Sectors</span>
+            {sectors.map((s) => (
+              <Link key={s.slug} href={`/sectors/${s.slug}`} className="footer-dir-link">{s.title}</Link>
+            ))}
+            <Link href="/sectors" className="footer-dir-link" style={{ color: "var(--color-gold-light)" }}>Sector Observatory →</Link>
+          </div>
+
+          <div className="footer-col-group">
+            <span className="footer-header-label">Geographies</span>
+            {geographies.map((g) => (
+              <Link key={g.slug} href={`/geographies/${g.slug}`} className="footer-dir-link">{g.name}{g.isAnchor ? " ★" : ""}</Link>
+            ))}
+            <Link href="/corridors" className="footer-dir-link" style={{ color: "var(--color-gold-light)" }}>Strategic Corridors →</Link>
           </div>
 
           <div className="footer-col-group">
             <span className="footer-header-label">Connect</span>
-            <Link href="/insights" className="footer-dir-link">Insights & Publications</Link>
-            <Link href="/events" className="footer-dir-link">Events & Dialogues</Link>
-            <Link href="/engage" className="footer-dir-link">Engage the Centre</Link>
+            <Link href="/insights" className="footer-dir-link">Insights &amp; Publications</Link>
+            <Link href="/events" className="footer-dir-link">Events &amp; Dialogues</Link>
+            <Link href="/capabilities" className="footer-dir-link">Capabilities</Link>
             <Link href="/about" className="footer-dir-link">About the Centre</Link>
-          </div>
-
-          <div className="footer-col-group">
-            <span className="footer-header-label">Locations</span>
-            <span className="footer-dir-link" style={{ color: "var(--color-ivory)" }}>New Delhi, India</span>
-            <span className="footer-dir-link" style={{ color: "var(--color-ivory)" }}>London, United Kingdom</span>
-            <span className="footer-dir-link" style={{ color: "var(--color-ivory)" }}>Dubai, United Arab Emirates</span>
+            <Link href="/engage" className="footer-dir-link">Engage the Centre</Link>
           </div>
         </div>
 
         <div className="footer-closing-bar">
-          <div>© 2026 SLR Advocates & Solicitors. All rights reserved.</div>
+          <div>© 2026 SLR Advocates &amp; Solicitors. All rights reserved.</div>
           <div style={{ display: "flex", gap: "20px" }}>
             <Link href="/privacy" className="footer-dir-link" style={{ fontSize: "12px" }}>Privacy Policy</Link>
             <Link href="/terms" className="footer-dir-link" style={{ fontSize: "12px" }}>Terms of Use</Link>

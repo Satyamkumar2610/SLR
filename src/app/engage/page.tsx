@@ -1,255 +1,142 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { geographies } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Engage the Centre — SLR Centre",
+  description: "Commission research. Attend a dialogue. Request a briefing. We work with senior decision-makers across business, government, and international organisations.",
+};
+
+const engagementFormats = [
+  "Research & Strategic Intelligence",
+  "Geopolitical & Regulatory Intelligence",
+  "Executive & C-Suite Briefings",
+  "Closed-Door Roundtables & Strategic Dialogues",
+  "Market Entry & International Expansion Intelligence",
+  "Geoeconomic & Investment Risk Advisory",
+  "Scenario Planning & Strategic Foresight",
+  "Bespoke Research & Advisory",
+];
+
+const enquiryTypes = [
+  "Research Inquiry",
+  "Advisory Services",
+  "Roundtables & Events",
+  "Media Enquiry",
+  "Partnership",
+  "Other",
+];
 
 export default function EngagePage() {
   return (
     <main>
-      {/* ===== MOBILE DRAWER ===== */}
-  <div className="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
-    <div className="mobile-drawer-header">
-      <img src="assets/logo-slr-white.svg" alt="SLR Centre" className="mobile-drawer-logo" height="28" />
-      <button className="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
-    </div>
-    <div className="mobile-drawer-cta">
-      <a href="/engage" className="btn btn-primary">Engage the Centre</a>
-    </div>
-    <div className="mobile-nav-item">
-      <button type="button" data-mobile-toggle="areas">Areas of Focus <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div className="mobile-subnav" id="mobile-areas">
-        <a href="/areas/global-law">01 Global Law & Cross-Border Regulation</a>
-        <a href="/areas/geoeconomics">02 Geoeconomics & Strategic Affairs</a>
-        <a href="/areas/global-finance">03 Global Finance & Investment</a>
-        <a href="/areas/energy">04 Energy & Energy Transitions</a>
-        <a href="/areas/emerging-technologies">05 Emerging Technologies & Governance</a>
-        <a href="/areas-of-focus">All Areas of Focus →</a>
-      </div>
-    </div>
-    <div className="mobile-nav-item">
-      <button type="button" data-mobile-toggle="sectors">Sectors <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div className="mobile-subnav" id="mobile-sectors">
-        <a href="/sectors/defence">Defence & Homeland Security</a>
-        <a href="/sectors/pharma">Pharmaceuticals & Healthcare</a>
-        <a href="/sectors/energy-climate">Energy & Climate</a>
-        <a href="/sectors/technology-ai">Technology & AI</a>
-        <a href="/sectors/financial-services">Financial Services</a>
-        <a href="/sectors/infrastructure">Infrastructure & Connectivity</a>
-        <a href="/sectors/semiconductors">Electronics & Semiconductors</a>
-        <a href="/sectors">All Sectors →</a>
-      </div>
-    </div>
-    <div className="mobile-nav-item">
-      <button type="button" data-mobile-toggle="whatwedo-m">What We Do <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div className="mobile-subnav" id="mobile-whatwedo-m">
-        <a href="/what-we-do#research">Research & Strategic Intelligence</a>
-        <a href="/what-we-do#intelligence">Geopolitical & Regulatory Intelligence</a>
-        <a href="/what-we-do#briefings">Executive & C-Suite Briefings</a>
-        <a href="/what-we-do#roundtables">Closed-Door Roundtables & Dialogues</a>
-        <a href="/what-we-do">All Offerings →</a>
-      </div>
-    </div>
-    <div className="mobile-nav-item">
-      <button type="button" data-mobile-toggle="geo-m">Geographies <svg width="12" height="8" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div className="mobile-subnav" id="mobile-geo-m">
-        <a href="/geographies/india-south-asia">India & South Asia ★</a>
-        <a href="/geographies/indo-pacific">Indo-Pacific & East Asia</a>
-        <a href="/geographies/asean">ASEAN & Southeast Asia</a>
-        <a href="/geographies/middle-east">Middle East & Gulf</a>
-        <a href="/geographies/europe">Europe & Eurasia</a>
-        <a href="/geographies/north-america">North America</a>
-        <a href="/geographies/africa">Africa</a>
-        <a href="/geographies/latin-america">Latin America & the Caribbean</a>
-        <a href="/geographies">All Geographies →</a>
-      </div>
-    </div>
-    <div className="mobile-nav-item">
-      <a href="/insights">Insights</a>
-    </div>
-    <div className="mobile-nav-item">
-      <a href="/about">About</a>
-    </div>
-    <div className="mobile-drawer-footer">
-      <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-      </a>
-      <span>© 2026 SLR Advocates & Solicitors</span>
-    </div>
-  </div>
-
-
-  <section className="page-hero on-dark">
-    <div className="container">
-      <div className="page-hero-breadcrumb">
-        <a href="/">Home</a>
-        <span className="breadcrumb-sep">/</span>
-        <span>Engage</span>
-      </div>
-      <p className="eyebrow">Get in Touch</p>
-      <h1>Commission research. Attend a dialogue. Request a briefing.</h1>
-      <p className="lead">We work with senior decision-makers across business, government, and international organisations.</p>
-    </div>
-  </section>
-
-  <section className="section section--spacious bg-ivory">
-    <div className="container">
-      <div className="engage-grid">
-        <div className="engage-info">
-          <h2>How to engage the Centre</h2>
-          <p className="lead">The SLR Centre offers multiple modes of engagement — from commissioned research and executive briefings to closed-door roundtables and strategic advisory.</p>
-          
-          <div className="engage-formats">
-            <h3>Engagement Formats</h3>
-            <ul>
-              <li>Research &amp; Strategic Intelligence</li>
-              <li>Geopolitical &amp; Regulatory Intelligence</li>
-              <li>Executive &amp; C-Suite Briefings</li>
-              <li>Closed-Door Roundtables &amp; Strategic Dialogues</li>
-              <li>Market Entry &amp; International Expansion Intelligence</li>
-              <li>Geoeconomic &amp; Investment Risk Advisory</li>
-              <li>Scenario Planning &amp; Strategic Foresight</li>
-              <li>Bespoke Research &amp; Advisory</li>
-            </ul>
+      <section className="page-hero">
+        <div className="stage-container">
+          <div className="breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="breadcrumb-sep">/</span>
+            <span>Engage</span>
           </div>
-
-          <p className="engage-response">We respond within 2 working days.</p>
-
-          <a href="https://linkedin.com" target="_blank" rel="noopener" style={{display: "inline-flex", alignItems: "center", gap: "8px", marginTop: "var(--s3)", color: "var(--navy)", fontWeight: "600", fontSize: "14px"}}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-            Connect on LinkedIn
-          </a>
+          <span className="eyebrow eyebrow-light">Get in Touch</span>
+          <h1 className="page-hero-title">Commission research. Attend a dialogue. Request a briefing.</h1>
+          <p className="page-hero-lead">
+            We work with senior decision-makers across business, government, and international organisations.
+          </p>
         </div>
+      </section>
 
-        <div className="engage-form-panel">
-          <form >
-            <div className="form-group">
-              <label className="form-label">Full Name <span className="form-required">*</span></label>
-              <input type="text" className="form-input" required />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Organisation <span className="form-required">*</span></label>
-              <input type="text" className="form-input" required />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Role / Title</label>
-              <input type="text" className="form-input" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Email Address <span className="form-required">*</span></label>
-              <input type="email" className="form-input" required />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Country / Region</label>
-              <select className="form-select">
-                <option value="">Select a region</option>
-                <option>India &amp; South Asia</option>
-                <option>Indo-Pacific &amp; East Asia</option>
-                <option>ASEAN &amp; Southeast Asia</option>
-                <option>Middle East &amp; Gulf</option>
-                <option>Europe &amp; Eurasia</option>
-                <option>North America</option>
-                <option>Africa</option>
-                <option>Latin America &amp; the Caribbean</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Nature of Enquiry</label>
-              <select className="form-select">
-                <option value="">Select enquiry type</option>
-                <option>Research Inquiry</option>
-                <option>Advisory Services</option>
-                <option>Roundtables &amp; Events</option>
-                <option>Media Enquiry</option>
-                <option>Partnership</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Message</label>
-              <textarea className="form-textarea" rows={5} placeholder="Tell us about your enquiry..."></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary" style={{width: "100%"}}>Send Enquiry</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+      <section className="page-section">
+        <div className="stage-container">
+          <div className="contact-grid">
+            <div className="contact-info-block">
+              <div>
+                <span className="rail-label">How to Engage the Centre</span>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "15px", lineHeight: 1.7, color: "var(--color-charcoal)" }}>
+                  The SLR Centre offers multiple modes of engagement — from commissioned research and
+                  executive briefings to closed-door roundtables and strategic advisory.
+                </p>
+              </div>
 
+              <div>
+                <span className="rail-label">Engagement Formats</span>
+                <div className="contact-formats-list">
+                  {engagementFormats.map((f) => (
+                    <div className="contact-format-row" key={f}>{f}</div>
+                  ))}
+                </div>
+              </div>
 
-  {/* Gold Thread Footer Border (C.1 — 600ms, one-time draw) */}
-  <div className="footer-gold-thread" aria-hidden="true">
-    <svg className="gold-thread-svg" viewBox="0 0 1280 3" preserveAspectRatio="none">
-      <line className="gold-thread-line" x1="0" y1="1.5" x2="1280" y2="1.5" style={{ "--thread-len": "1280" } as React.CSSProperties} />
-    </svg>
-  </div>
-  <footer className="footer bg-navy on-dark" id="footer">
-    <div className="container">
-      <div className="footer-grid">
-        {/* Col 1: Logo + Tagline */}
-        <div>
-          <img src="assets/logo-slr-white.svg" alt="SLR Centre" className="footer-logo" height="36" />
-          <p className="centre-name">Centre for Global Law, Geoeconomics & Emerging Technologies</p>
-          <p className="footer-tagline">Let justice be done though the heavens fall</p>
-          <a href="https://linkedin.com" className="footer-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-          </a>
-        </div>
+              <div>
+                <span className="rail-label">Response Time</span>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "15px", color: "var(--color-charcoal)" }}>
+                  We respond within 2 working days.
+                </p>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost-gold"
+                  style={{ marginTop: "10px", display: "inline-flex" }}
+                >
+                  Connect on LinkedIn →
+                </a>
+              </div>
+            </div>
 
-        {/* Col 2: Areas of Focus */}
-        <div>
-          <h4 className="footer-col-title">Areas of Focus</h4>
-          <div className="footer-links">
-            <a href="/areas/global-law">01 Global Law & Regulation</a>
-            <a href="/areas/geoeconomics">02 Geoeconomics & Strategic Affairs</a>
-            <a href="/areas/global-finance">03 Global Finance & Investment</a>
-            <a href="/areas/energy">04 Energy & Energy Transitions</a>
-            <a href="/areas/emerging-technologies">05 Emerging Technologies & Governance</a>
-          </div>
-        </div>
+            <form>
+              <div className="form-row-2">
+                <div className="form-field">
+                  <label className="form-label" htmlFor="fullName">Full Name *</label>
+                  <input className="form-input" id="fullName" name="fullName" type="text" required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label" htmlFor="organisation">Organisation *</label>
+                  <input className="form-input" id="organisation" name="organisation" type="text" required />
+                </div>
+              </div>
 
-        {/* Col 3: Sectors */}
-        <div>
-          <h4 className="footer-col-title">Sectors</h4>
-          <div className="footer-links">
-            <a href="/sectors/defence">Defence & Homeland Security</a>
-            <a href="/sectors/pharma">Pharmaceuticals & Healthcare</a>
-            <a href="/sectors/energy-climate">Energy & Climate</a>
-            <a href="/sectors/technology-ai">Technology & AI</a>
-            <a href="/sectors/financial-services">Financial Services</a>
-            <a href="/sectors/infrastructure">Infrastructure & Connectivity</a>
-            <a href="/sectors/semiconductors">Electronics & Semiconductors</a>
-          </div>
-        </div>
+              <div className="form-row-2">
+                <div className="form-field">
+                  <label className="form-label" htmlFor="role">Role / Title</label>
+                  <input className="form-input" id="role" name="role" type="text" />
+                </div>
+                <div className="form-field">
+                  <label className="form-label" htmlFor="email">Email Address *</label>
+                  <input className="form-input" id="email" name="email" type="email" required />
+                </div>
+              </div>
 
-        {/* Col 4: Connect */}
-        <div>
-          <h4 className="footer-col-title">Connect</h4>
-          <div className="footer-links">
-            <a href="/insights">Insights & Publications</a>
-            <a href="/events">Events & Dialogues</a>
-            <a href="/engage">Engage the Centre</a>
-          </div>
-          <div className="footer-newsletter">
-            <h4 className="footer-col-title footer-newsletter-title">Newsletter</h4>
-            <form className="footer-newsletter-form" >
-              <input type="email" className="footer-newsletter-input" placeholder="Email address" aria-label="Email address" required />
-              <button type="submit" className="footer-newsletter-btn">Subscribe</button>
+              <div className="form-row-2">
+                <div className="form-field">
+                  <label className="form-label" htmlFor="region">Country / Region</label>
+                  <select className="form-select" id="region" name="region" defaultValue="">
+                    <option value="" disabled>Select a region</option>
+                    {geographies.map((g) => (
+                      <option key={g.slug} value={g.slug}>{g.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-field">
+                  <label className="form-label" htmlFor="enquiry">Nature of Enquiry</label>
+                  <select className="form-select" id="enquiry" name="enquiry" defaultValue="">
+                    <option value="" disabled>Select enquiry type</option>
+                    {enquiryTypes.map((t) => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-field">
+                <label className="form-label" htmlFor="message">Message</label>
+                <textarea className="form-textarea" id="message" name="message" rows={5} />
+              </div>
+
+              <button type="submit" className="btn btn-primary">Send Enquiry</button>
             </form>
           </div>
         </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="footer-bottom">
-        <span>© 2026 SLR Advocates & Solicitors. All rights reserved.</span>
-        <div className="footer-legal-links">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Use</a>
-          <a href="/cookies">Cookie Settings</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  {/* Magnetic Cursor Label (C.7) */}
-  <div className="cursor-label" id="cursor-label" aria-hidden="true"></div>
+      </section>
     </main>
   );
 }

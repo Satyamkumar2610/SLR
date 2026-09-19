@@ -2,8 +2,12 @@ import Link from "next/link";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
+import { corridors, insights, events, stakeholders, centre, pillars } from "@/lib/content";
 
 export default function Home() {
+  const featured = insights.find((i) => i.featured) ?? insights[0];
+  const latest = insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
+
   return (
     <main>
       {/* ============================================================
@@ -23,7 +27,7 @@ export default function Home() {
           <div className="hero-sub">
             <p className="hero-lead-text">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
             <div className="hero-buttons">
-              <Link href="/insights" className="btn btn-primary">Explore Our Research</Link>
+              <Link href="/research" className="btn btn-primary">Explore Our Research</Link>
               <Link href="/engage" className="btn btn-secondary">Engage the Centre</Link>
             </div>
           </div>
@@ -31,7 +35,7 @@ export default function Home() {
 
         <div className="hero-footer-bar">
           <span>Strategic Research & Intelligence Platform</span>
-          <span>Anchor: India & Global Corridors</span>
+          <span>Anchor: {centre.anchor} & Global Corridors</span>
         </div>
       </section>
 
@@ -49,26 +53,14 @@ export default function Home() {
             </div>
 
             <div className="wwd-tiers-column">
-              <div className="wwd-tier wwd-tier-1">
-                <span className="wwd-tier-num">01 // Evidence</span>
-                <h3 className="wwd-tier-title">Research</h3>
-                <span className="wwd-tier-tagline">Evidence. Depth. Clarity.</span>
-                <p className="wwd-tier-desc">The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications — flagship reports, global outlooks, policy papers, working papers, and comparative regulatory analysis.</p>
-              </div>
-
-              <div className="wwd-tier wwd-tier-2">
-                <span className="wwd-tier-num">02 // Anticipation</span>
-                <h3 className="wwd-tier-title">Intelligence</h3>
-                <span className="wwd-tier-tagline">Monitor. Interpret. Anticipate.</span>
-                <p className="wwd-tier-desc">Translating complex global developments into focused, decision-relevant intelligence — spanning geopolitical intelligence, geoeconomic monitoring, regulatory intelligence, country risk assessment, and strategic risk monitoring.</p>
-              </div>
-
-              <div className="wwd-tier wwd-tier-3">
-                <span className="wwd-tier-num">03 // Strategy</span>
-                <h3 className="wwd-tier-title">Strategic Advisory</h3>
-                <span className="wwd-tier-tagline">Navigate. Strategise. Act.</span>
-                <p className="wwd-tier-desc">Supporting organisations navigating complex and rapidly evolving international environments — market-entry intelligence, geopolitical risk assessment, regulatory strategy, scenario planning, and cross-border intelligence.</p>
-              </div>
+              {pillars.map((pillar) => (
+                <div className={`wwd-tier wwd-tier-${pillar.num}`} key={pillar.slug}>
+                  <span className="wwd-tier-num">{pillar.num} · {pillar.tagline.split(".")[0]}</span>
+                  <h3 className="wwd-tier-title">{pillar.title}</h3>
+                  <span className="wwd-tier-tagline">{pillar.tagline}</span>
+                  <p className="wwd-tier-desc">{pillar.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -79,38 +71,18 @@ export default function Home() {
            ============================================================ */}
       <div className="stage-container capability-strip-stage">
         <div className="capability-strip">
-          <div className="cap-panel cap-panel-1">
-            <div>
-              <div className="cap-micro-header">
-                <span>Primary Function</span>
-                <span>01</span>
+          {pillars.map((pillar) => (
+            <div className={`cap-panel cap-panel-${pillar.num}`} key={pillar.slug}>
+              <div>
+                <div className="cap-micro-header">
+                  <span>Primary Function</span>
+                  <span>{pillar.num}</span>
+                </div>
+                <h4 className="cap-headline">{pillar.description.split(". ")[0]}.</h4>
               </div>
-              <h4 className="cap-headline">Rigorous, evidence-based research illuminating global trends.</h4>
+              <Link href={`/capabilities#${pillar.slug}`} className="cap-link">Explore {pillar.title} →</Link>
             </div>
-            <Link href="/what-we-do#research" className="cap-link">Explore Research →</Link>
-          </div>
-
-          <div className="cap-panel cap-panel-2">
-            <div>
-              <div className="cap-micro-header">
-                <span>Primary Function</span>
-                <span>02</span>
-              </div>
-              <h4 className="cap-headline">Decision-relevant intelligence spanning geopolitical risk.</h4>
-            </div>
-            <Link href="/what-we-do#intelligence" className="cap-link">Explore Intelligence →</Link>
-          </div>
-
-          <div className="cap-panel cap-panel-3">
-            <div>
-              <div className="cap-micro-header">
-                <span>Primary Function</span>
-                <span>03</span>
-              </div>
-              <h4 className="cap-headline">Supporting organisations in navigating complex environments.</h4>
-            </div>
-            <Link href="/what-we-do#advisory" className="cap-link">Explore Advisory →</Link>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -143,11 +115,11 @@ export default function Home() {
         <div className="featured-split-card">
           <div className="featured-media-side"></div>
           <div className="featured-editorial-side">
-            <span className="featured-eyebrow-tag">Featured Report // 12 September 2026</span>
-            <h2 className="featured-story-title">India&apos;s Strategic Position in the Global Technology Order</h2>
-            <p className="featured-story-excerpt">An examination of India&apos;s evolving role within global technology value chains, semiconductor ecosystems, and digital governance frameworks — and what this means for businesses, investors, and policymakers navigating the new technology order.</p>
+            <span className="featured-eyebrow-tag">{featured.category} · {featured.date}</span>
+            <h2 className="featured-story-title">{featured.title}</h2>
+            <p className="featured-story-excerpt">{featured.excerpt}</p>
             <div>
-              <Link href="/insights/india-technology-order" className="btn btn-secondary">Read Report →</Link>
+              <Link href={`/insights/${featured.slug}`} className="btn btn-secondary">Read {featured.category} →</Link>
             </div>
           </div>
         </div>
@@ -168,37 +140,29 @@ export default function Home() {
             </div>
 
             <div className="newsroom-asymmetric-grid">
-              <article className="story-lead">
-                <div className="story-lead-image">
-                  <img src="/assets/insight-sanctions.jpg" alt="Sanctions Architecture" />
-                </div>
-                <div className="story-meta">
-                  <span className="story-tag">Intelligence Brief</span>
-                  <span>•</span>
-                  <span>8 September 2026</span>
-                </div>
-                <h3 className="story-title" style={{ fontSize: "28px" }}>Navigating the New Sanctions Architecture</h3>
-                <p className="story-excerpt">How evolving sanctions regimes are reshaping cross-border commerce, investment flows, and corporate compliance frameworks.</p>
-                <div>
-                  <Link href="/insights/sanctions" className="btn-ghost-gold">Read Brief →</Link>
-                </div>
-              </article>
-
-              <article className="story-secondary">
-                <div className="story-secondary-image">
-                  <img src="/assets/insight-energy.jpg" alt="Critical Minerals & Energy" />
-                </div>
-                <div className="story-meta">
-                  <span className="story-tag">Policy Paper</span>
-                  <span>•</span>
-                  <span>1 September 2026</span>
-                </div>
-                <h3 className="story-title">Energy Security and the Geopolitics of Critical Minerals</h3>
-                <p className="story-excerpt">The intersection of energy transition and mineral supply chains — risks, dependencies, and strategic opportunities.</p>
-                <div>
-                  <Link href="/insights/critical-minerals" className="btn-ghost-gold">Read Paper →</Link>
-                </div>
-              </article>
+              {latest.map((item, idx) => (
+                <article className={idx === 0 ? "story-lead" : "story-secondary"} key={item.slug}>
+                  {idx === 0 ? (
+                    <div className="story-lead-image">
+                      <img src="/assets/insight-sanctions.jpg" alt="" />
+                    </div>
+                  ) : (
+                    <div className="story-secondary-image">
+                      <img src="/assets/insight-energy.jpg" alt="" />
+                    </div>
+                  )}
+                  <div className="story-meta">
+                    <span className="story-tag">{item.category}</span>
+                    <span>•</span>
+                    <span>{item.date}</span>
+                  </div>
+                  <h3 className="story-title" style={idx === 0 ? { fontSize: "28px" } : undefined}>{item.title}</h3>
+                  <p className="story-excerpt">{item.excerpt}</p>
+                  <div>
+                    <Link href={`/insights/${item.slug}`} className="btn-ghost-gold">Read →</Link>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </div>
@@ -210,12 +174,25 @@ export default function Home() {
       <GeographicIndex />
 
       {/* ============================================================
-           SCENE 10 — CHAPTER VISUAL RESET
+           SCENE 10 — STRATEGIC CORRIDORS
            ============================================================ */}
       <div className="stage-container">
-        <section className="section-chapter-reset">
-          <div className="chapter-reset-rule"></div>
-          <h2 className="chapter-reset-heading">Five domains. One mandate.</h2>
+        <section className="section-chapter-reset" style={{ padding: "72px var(--outer-padding)", textAlign: "left" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "40px" }}>
+            <div>
+              <span className="eyebrow eyebrow-light">Where Trade Meets Strategy</span>
+              <h2 className="chapter-reset-heading" style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginTop: "10px", textAlign: "left" }}>Seven corridors. One connected world.</h2>
+            </div>
+            <Link href="/corridors" className="btn-ghost-gold" style={{ color: "var(--color-gold-light)" }}>Explore Strategic Corridors →</Link>
+          </div>
+          <div className="corridor-list">
+            {corridors.slice(0, 4).map((corridor) => (
+              <div className="corridor-row" key={corridor.slug}>
+                <h3 className="corridor-name">{corridor.name}</h3>
+                <p className="corridor-desc">{corridor.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
 
@@ -233,41 +210,13 @@ export default function Home() {
           </div>
 
           <div className="stakeholder-editorial-roster">
-            <div className="roster-row">
-              <span className="roster-num">01</span>
-              <h3 className="roster-title">Businesses & Multinational Corporations</h3>
-              <p className="roster-desc">Advising enterprise leadership navigating international sanctions, cross-border regulatory shifts, and supply-chain realignment.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">02</span>
-              <h3 className="roster-title">Investors & Financial Institutions</h3>
-              <p className="roster-desc">Providing sovereign wealth funds, private equity, and institutional investors with geopolitical risk assessments and regulatory foresight.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">03</span>
-              <h3 className="roster-title">Governments & Public Institutions</h3>
-              <p className="roster-desc">Delivering comparative policy analysis, strategic scenario planning, and cross-border regulatory intelligence to ministries and regulatory bodies.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">04</span>
-              <h3 className="roster-title">International Organisations</h3>
-              <p className="roster-desc">Contributing empirical research and policy frameworks to multilateral institutions shaping global economic governance.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">05</span>
-              <h3 className="roster-title">Industry Associations</h3>
-              <p className="roster-desc">Partnering with peak industry bodies to analyze regulatory headwinds, trade barriers, and industrial policy developments.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">06</span>
-              <h3 className="roster-title">Universities & Research Institutions</h3>
-              <p className="roster-desc">Collaborating with leading global policy institutes, law faculties, and think tanks on joint research initiatives.</p>
-            </div>
-            <div className="roster-row">
-              <span className="roster-num">07</span>
-              <h3 className="roster-title">Diplomatic & International Networks</h3>
-              <p className="roster-desc">Providing strategic intelligence and advisory support to diplomatic missions, embassies, and cross-border international networks.</p>
-            </div>
+            {stakeholders.map((s) => (
+              <div className="roster-row" key={s.num}>
+                <span className="roster-num">{s.num}</span>
+                <h3 className="roster-title">{s.title}</h3>
+                <p className="roster-desc">{s.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -286,47 +235,21 @@ export default function Home() {
           </div>
 
           <div className="events-chronology-list">
-            <div className="event-chronology-row">
-              <div>
-                <span className="event-badge-pill pill-burgundy">Roundtable</span>
-                <div className="event-date-display">15 Oct 2026</div>
+            {events.map((event, idx) => (
+              <div className="event-chronology-row" key={event.slug}>
+                <div>
+                  <span className={`event-badge-pill ${idx % 2 === 0 ? "pill-burgundy" : "pill-slate"}`}>{event.type}</span>
+                  <div className="event-date-display">{event.date}</div>
+                </div>
+                <div>
+                  <h3 className="event-headline-text">{event.title}</h3>
+                  <span className="event-venue-meta">{event.venue}</span>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <Link href="/events" className="btn btn-outline-navy">Request Invitation</Link>
+                </div>
               </div>
-              <div>
-                <h3 className="event-headline-text">India&apos;s Role in the Global Technology Order</h3>
-                <span className="event-venue-meta">Closed-Door Dialogue // New Delhi, India</span>
-              </div>
-              <div style={{ textAlign: "right" }}>
-                <Link href="/events" className="btn btn-outline-navy">Request Invitation</Link>
-              </div>
-            </div>
-
-            <div className="event-chronology-row">
-              <div>
-                <span className="event-badge-pill pill-slate">Forum</span>
-                <div className="event-date-display">08 Nov 2026</div>
-              </div>
-              <div>
-                <h3 className="event-headline-text">Gulf–India Energy and Investment Corridors</h3>
-                <span className="event-venue-meta">Executive Forum // Dubai, UAE</span>
-              </div>
-              <div style={{ textAlign: "right" }}>
-                <Link href="/events" className="btn btn-outline-navy">Request Invitation</Link>
-              </div>
-            </div>
-
-            <div className="event-chronology-row">
-              <div>
-                <span className="event-badge-pill pill-burgundy">Conference</span>
-                <div className="event-date-display">03 Dec 2026</div>
-              </div>
-              <div>
-                <h3 className="event-headline-text">Rethinking Global Supply Chains in an Era of Strategic Competition</h3>
-                <span className="event-venue-meta">International Conference // London, UK</span>
-              </div>
-              <div style={{ textAlign: "right" }}>
-                <Link href="/events" className="btn btn-outline-navy">Request Invitation</Link>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </div>
@@ -347,8 +270,8 @@ export default function Home() {
             </div>
 
             <div className="about-quote-box">
-              <blockquote className="about-quote-text">&quot;Situated at the nexus of law, geoeconomics, and emerging technologies, the Centre bridges scholarly rigor and executive decision-making.&quot;</blockquote>
-              <span className="about-quote-author">— SLR Centre for Global Law</span>
+              <blockquote className="about-quote-text">&quot;{centre.positioning.split(". By integrating")[0]}.&quot;</blockquote>
+              <span className="about-quote-author">— {centre.name}</span>
             </div>
           </div>
         </div>
