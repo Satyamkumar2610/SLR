@@ -40,6 +40,7 @@ export default function Navigation() {
         aria-label="Main Navigation"
         onMouseLeave={closeAll}
       >
+        <div className="nav-inner">
         <div className="nav-brand">
           <Link href="/" aria-label="SLR Centre home" onClick={closeAll}>
             <img src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" />
@@ -233,6 +234,7 @@ export default function Navigation() {
             <span></span>
             <span></span>
           </button>
+        </div>
         </div>
       </nav>
 

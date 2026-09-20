@@ -1,93 +1,94 @@
 import Link from "next/link";
+import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
-import { corridors, insights, events, stakeholders, centre, pillars } from "@/lib/content";
+import { corridors, insights, events, stakeholders, centre, pillars, areasOfFocus, sectors, geographies } from "@/lib/content";
+
+const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Home() {
+  const heroFacts = [
+    { num: pad(areasOfFocus.length), label: "Research domains" },
+    { num: pad(sectors.length), label: "Priority sectors" },
+    { num: pad(geographies.length), label: "Geographies" },
+    { num: pad(corridors.length), label: "Strategic corridors" },
+  ];
   const featured = insights.find((i) => i.featured) ?? insights[0];
   const latest = insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
 
   return (
     <main>
       {/* ============================================================
-           SCENE 01 — IMMERSIVE HERO STAGE (85–95vh)
+           SCENE 01 — HERO (navigation floats over this stage)
            ============================================================ */}
       <section className="hero-stage" id="hero">
         <div className="hero-bg-media"></div>
         <div className="hero-bg-overlay"></div>
-        <div className="hero-bg-grid"></div>
 
-        <div className="hero-body" style={{ paddingTop: "80px" }}>
-          <div className="hero-main">
-            <span className="eyebrow eyebrow-light">Centre for Global Law, Geoeconomics & Emerging Technologies</span>
-            <h1 className="text-hero-display">Navigating the Forces Reshaping the World</h1>
-          </div>
-
-          <div className="hero-sub">
-            <p className="hero-lead-text">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
-            <div className="hero-buttons">
-              <Link href="/research" className="btn btn-primary">Explore Our Research</Link>
-              <Link href="/engage" className="btn btn-secondary">Engage the Centre</Link>
-            </div>
+        <div className="hero-body">
+          <span className="eyebrow eyebrow-light hero-reveal hero-reveal-eyebrow">Centre for Global Law, Geoeconomics & Emerging Technologies</span>
+          <AnimatedHeading text="Navigating the Forces Reshaping the World" className="text-hero-display" />
+          <p className="hero-lead-text hero-reveal hero-reveal-lead">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
+          <div className="hero-buttons hero-reveal hero-reveal-buttons">
+            <Link href="/research" className="btn btn-primary">Explore Our Research</Link>
+            <Link href="/engage" className="btn btn-secondary">Engage the Centre</Link>
           </div>
         </div>
 
-        <div className="hero-footer-bar">
-          <span>Strategic Research & Intelligence Platform</span>
-          <span>Anchor: {centre.anchor} & Global Corridors</span>
+        <div className="hero-facts hero-reveal hero-reveal-facts">
+          <div className="hero-facts-inner">
+            {heroFacts.map((fact) => (
+              <div className="hero-fact" key={fact.label}>
+                <span className="hero-fact-num">{fact.num}</span>
+                <span className="hero-fact-label">{fact.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ============================================================
-           SCENE 02 — TYPOGRAPHIC STATEMENT (WHAT WE DO)
+           SCENE 02 — WHAT WE DO
            ============================================================ */}
-      <section className="section-wwd-editorial" id="what-we-do">
+      <section className="section-wwd" id="what-we-do">
         <div className="stage-container">
-          <div className="wwd-editorial-layout">
+          <div className="wwd-head">
             <div>
-              <div className="wwd-stacked-heading">
-                WHAT<br/>WE<br/>DO
-              </div>
-              <div className="wwd-ledger-rule"></div>
+              <span className="eyebrow">What We Do</span>
+              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Three integrated functions. One analytical core.</h2>
             </div>
+            <p className="text-lead" style={{ marginBottom: 0 }}>Research builds the evidence, intelligence interprets what is changing, and advisory turns both into decisions.</p>
+          </div>
 
-            <div className="wwd-tiers-column">
-              {pillars.map((pillar) => (
-                <div className={`wwd-tier wwd-tier-${pillar.num}`} key={pillar.slug}>
-                  <span className="wwd-tier-num">{pillar.num} · {pillar.tagline.split(".")[0]}</span>
-                  <h3 className="wwd-tier-title">{pillar.title}</h3>
-                  <span className="wwd-tier-tagline">{pillar.tagline}</span>
-                  <p className="wwd-tier-desc">{pillar.description}</p>
+          <div className="wwd-rows">
+            {pillars.map((pillar) => (
+              <article className="wwd-row" key={pillar.slug} id={pillar.slug}>
+                <header className="wwd-row-head">
+                  <span className="wwd-row-num">{pillar.num}</span>
+                  <h3 className="wwd-row-title">{pillar.title}</h3>
+                  <span className="wwd-row-tagline">{pillar.tagline}</span>
+                </header>
+
+                <div className="wwd-row-body">
+                  <p className="wwd-row-intro">{pillar.intro}</p>
+                  <span className="wwd-items-label">{pillar.itemsLabel}</span>
+                  <ul className="wwd-items">
+                    {pillar.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  {pillar.closing && <p className="wwd-row-closing">{pillar.closing}</p>}
+                  <Link href={`/capabilities#${pillar.slug}`} className="btn-ghost-gold">Explore {pillar.title} →</Link>
                 </div>
-              ))}
-            </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ============================================================
-           SCENE 03 — CAPABILITY STRIP
-           ============================================================ */}
-      <div className="stage-container capability-strip-stage">
-        <div className="capability-strip">
-          {pillars.map((pillar) => (
-            <div className={`cap-panel cap-panel-${pillar.num}`} key={pillar.slug}>
-              <div>
-                <div className="cap-micro-header">
-                  <span>Primary Function</span>
-                  <span>{pillar.num}</span>
-                </div>
-                <h4 className="cap-headline">{pillar.description.split(". ")[0]}.</h4>
-              </div>
-              <Link href={`/capabilities#${pillar.slug}`} className="cap-link">Explore {pillar.title} →</Link>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================
-           SCENE 04 — TYPOGRAPHIC INTERRUPTION
+           SCENE 03 — STATEMENT
            ============================================================ */}
       <section className="section-interruption">
         <div className="stage-container">

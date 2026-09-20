@@ -442,6 +442,11 @@ export interface Pillar {
   title: string;
   tagline: string;
   description: string;
+  /** Structured breakdown of `description`, used for the scannable home-page layout. */
+  intro: string;
+  itemsLabel: string;
+  items: string[];
+  closing?: string;
 }
 
 export const pillars: Pillar[] = [
@@ -452,6 +457,9 @@ export const pillars: Pillar[] = [
     tagline: "Evidence. Depth. Clarity.",
     description:
       "The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications. Its research portfolio encompasses flagship reports, global outlooks, policy papers, working papers, country studies, sector studies, comparative regulatory analysis, thematic inquiries and strategic briefs.",
+    intro: "The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications.",
+    itemsLabel: "The research portfolio",
+    items: ["Flagship reports", "Global outlooks", "Policy papers", "Working papers", "Country studies", "Sector studies", "Comparative regulatory analysis", "Thematic inquiries", "Strategic briefs"],
   },
   {
     num: "02",
@@ -460,6 +468,10 @@ export const pillars: Pillar[] = [
     tagline: "Monitor. Interpret. Anticipate.",
     description:
       "The Centre translates complex global developments into focused, decision-relevant intelligence. This work spans geopolitical intelligence, geoeconomic monitoring, regulatory intelligence, country risk assessment, market and sector intelligence, investment intelligence, emerging technology intelligence and strategic risk monitoring. The objective is to enable organisations to identify what is changing, understand why it matters, and anticipate where the consequences are most likely to materialise.",
+    intro: "The Centre translates complex global developments into focused, decision-relevant intelligence.",
+    itemsLabel: "This work spans",
+    items: ["Geopolitical intelligence", "Geoeconomic monitoring", "Regulatory intelligence", "Country risk assessment", "Market and sector intelligence", "Investment intelligence", "Emerging technology intelligence", "Strategic risk monitoring"],
+    closing: "The objective is to enable organisations to identify what is changing, understand why it matters, and anticipate where the consequences are most likely to materialise.",
   },
   {
     num: "03",
@@ -468,6 +480,10 @@ export const pillars: Pillar[] = [
     tagline: "Navigate. Strategise. Act.",
     description:
       "The Centre supports organisations navigating complex and rapidly evolving international environments. Its advisory services include market-entry intelligence, geopolitical risk assessment, international expansion strategy, regulatory strategy, scenario planning, investment risk evaluation, policy strategy, stakeholder mapping, strategic foresight and cross-border intelligence. By integrating deep research with applied strategic analysis, the Centre equips decision-makers with the clarity required for better-informed choices.",
+    intro: "The Centre supports organisations navigating complex and rapidly evolving international environments.",
+    itemsLabel: "Advisory services include",
+    items: ["Market-entry intelligence", "Geopolitical risk assessment", "International expansion strategy", "Regulatory strategy", "Scenario planning", "Investment risk evaluation", "Policy strategy", "Stakeholder mapping", "Strategic foresight", "Cross-border intelligence"],
+    closing: "By integrating deep research with applied strategic analysis, the Centre equips decision-makers with the clarity required for better-informed choices.",
   },
 ];
 

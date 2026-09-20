@@ -15,11 +15,12 @@
   --color-slate:       #3B506E; /* Slate Blue: Secondary surfaces, dividers, hover */
   --color-gold:        #B08D57; /* Burnished Gold: Restrained accent, jewellery, micro-details */
   --color-gold-light:  #D4BC8E; /* Subtle gold tint for borders & hovers */
-  --color-ivory:       #F8F7F3; /* Warm Ivory: Primary website light background */
+  --color-ivory:       #FFFFFF; /* Page background: clean white (name kept for compatibility) */
+  --color-mist:        #F3F6FA; /* Mist: cool tint for alternating panels, cards & hover states */
 
   /* Supporting Colours */
   --color-charcoal:    #222222; /* Charcoal: Body copy and paragraphs */
-  --color-grey-soft:   #D8D8D8; /* Soft Grey: Hairline borders, dividers */
+  --color-grey-soft:   #DCE2EA; /* Cool hairline: borders, dividers */
   --color-grey-muted:  #8E929A; /* Muted metadata grey */
   --color-white:       #FFFFFF; /* White: Clean contrast, card surfaces */
   --color-forest:      #2E5E3E; /* Deep Forest: Energy & Climate accent */
@@ -274,65 +275,102 @@ img, svg {
 }
 
 /* ============================================================
-   SCENE 01 — IMMERSIVE HERO STAGE
+   SCENE 01 — HERO STAGE
+   The navigation floats over the hero so the two read as one surface.
    ============================================================ */
 .hero-stage {
-  height: 92vh;
-  min-height: 720px;
-  background-color: var(--color-navy);
-  border-radius: var(--radius-hero);
+  /* Full-bleed: cancels the 16px page frame so the hero covers the whole viewport */
+  margin: 0 -16px;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--color-navy-deep);
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   color: var(--color-white);
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(10, 31, 68, 0.12);
+}
+
+/* Home page only: remove the top frame gap and pin the nav to the viewport edge */
+body:has(.hero-stage) { padding-top: 0; }
+body:has(.hero-stage) .site-nav:not(.is-scrolled) {
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
 }
 
 .hero-bg-media {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  inset: 0;
   background-image: url('/assets/insight-energy.jpg');
   background-size: cover;
-  background-position: center;
-  opacity: 0.22;
-  mix-blend-mode: luminosity;
-  filter: contrast(1.15);
+  background-position: center right;
+  opacity: 0.55;
+  filter: grayscale(0.35) contrast(1.08);
+  animation: hero-drift 24s ease-out both;
+}
+@keyframes hero-drift {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
 }
 
 .hero-bg-overlay {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 80% 20%, rgba(59, 80, 110, 0.4) 0%, rgba(10, 31, 68, 0.96) 80%);
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6, 19, 43, 0.86) 0%, rgba(10, 31, 68, 0.62) 60%, rgba(10, 31, 68, 0.4) 100%),
+    linear-gradient(180deg, rgba(6, 19, 43, 0.8) 0%, rgba(6, 19, 43, 0) 26%, rgba(6, 19, 43, 0) 70%, rgba(6, 19, 43, 0.9) 100%);
 }
 
-.hero-bg-grid {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: radial-gradient(rgba(176, 141, 87, 0.14) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.6;
-}
-
-/* Integrated Navigation */
+/* Navigation — transparent over the hero, solid once the page scrolls */
 .site-nav {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
   z-index: 200;
-  padding: 22px var(--outer-padding);
+  border-radius: var(--radius-hero) var(--radius-hero) 0 0;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base), top var(--transition-base), left var(--transition-base), right var(--transition-base), border-radius var(--transition-base);
+}
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px var(--outer-padding);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(216, 216, 216, 0.12);
-  background: linear-gradient(180deg, rgba(6, 19, 43, 0.85) 0%, rgba(6, 19, 43, 0) 100%);
-  transition: background-color var(--transition-base), padding var(--transition-base), box-shadow var(--transition-base);
+  gap: 24px;
+  position: relative;
+  transition: padding var(--transition-base);
+}
+.nav-inner::after {
+  content: '';
+  position: absolute;
+  left: var(--outer-padding);
+  right: var(--outer-padding);
+  bottom: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.14);
+  transition: opacity var(--transition-base);
 }
 .site-nav.is-scrolled {
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
+  background-color: var(--color-navy);
+  box-shadow: 0 12px 30px rgba(6, 19, 43, 0.25);
+}
+.site-nav.is-scrolled .nav-inner {
   padding-top: 14px;
   padding-bottom: 14px;
-  background: var(--color-navy);
-  box-shadow: 0 12px 30px rgba(6,19,43,0.25);
+}
+.site-nav.is-scrolled .nav-inner::after { opacity: 0; }
+
+@media (max-width: 768px) {
+  .site-nav { top: 0; left: 0; right: 0; border-radius: 0; }
+  .site-nav:not(.is-scrolled) { background-color: transparent; }
 }
 
 .nav-brand {
@@ -590,59 +628,85 @@ img, svg {
 .hero-body {
   position: relative;
   z-index: 10;
-  padding: var(--space-8) var(--outer-padding);
+  flex: 1;
+  width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 60px;
-  align-items: end;
-}
-
-@media (max-width: 980px) {
-  .hero-body {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding: var(--space-5) var(--outer-padding);
-  }
-}
-
-.hero-main {
+  padding: 150px var(--outer-padding) 64px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 28px;
 }
 
-.hero-sub {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  border-left: 1px solid rgba(176, 141, 87, 0.35);
-  padding-left: 36px;
+.hero-stage .text-hero-display {
+  font-size: clamp(40px, 5.8vw, 84px);
+  line-height: 1.06;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+@media (min-width: 1100px) {
+  .hero-stage .text-hero-display { max-width: 20ch; }
 }
 
-@media (max-width: 980px) {
-  .hero-sub {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid rgba(176, 141, 87, 0.35);
-    padding-top: 24px;
-  }
+/* Centred eyebrow gets a rule on both sides */
+.hero-stage .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background-color: var(--color-gold-light);
+}
+
+/* Letter-by-letter headline reveal */
+.word { display: inline-block; white-space: nowrap; }
+.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  filter: blur(6px);
+  animation: char-in 700ms var(--ease-settle) forwards;
+  animation-delay: calc(350ms + var(--i) * 38ms);
+}
+@keyframes char-in {
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* Supporting hero elements fade up after the headline finishes */
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: hero-reveal 800ms var(--ease-settle) forwards;
+}
+@keyframes hero-reveal {
+  to { opacity: 1; transform: none; }
+}
+.hero-reveal-eyebrow { animation-delay: 100ms; }
+.hero-reveal-lead    { animation-delay: 2000ms; }
+.hero-reveal-buttons { animation-delay: 2250ms; }
+.hero-reveal-facts   { animation-delay: 2500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .char, .hero-reveal { animation: none; opacity: 1; transform: none; filter: none; }
+  .hero-bg-media { animation: none; }
 }
 
 .hero-lead-text {
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.65;
-  color: rgba(248, 247, 243, 0.92);
-  max-width: 480px;
+  color: rgba(250, 251, 252, 0.88);
+  max-width: 600px;
 }
 
 .hero-buttons {
   display: flex;
+  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-top: 4px;
 }
 
 .hero-buttons .btn-primary {
@@ -667,207 +731,197 @@ img, svg {
   color: var(--color-gold-light);
 }
 
-.hero-footer-bar {
+/* Key facts strip anchored to the bottom of the hero */
+.hero-facts {
   position: relative;
   z-index: 10;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 14px var(--outer-padding);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  color: var(--color-gold-light);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(6, 19, 43, 0.55);
+  backdrop-filter: blur(6px);
 }
-
-/* ============================================================
-   SCENE 02 — TYPOGRAPHIC STATEMENT (WHAT WE DO)
-   ============================================================ */
-.section-wwd-editorial {
-  padding: 120px 0 100px 0;
-  background-color: var(--color-ivory);
-}
-
-.wwd-editorial-layout {
+.hero-facts-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--outer-padding);
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 60px;
+  grid-template-columns: repeat(4, 1fr);
 }
-
-@media (max-width: 900px) {
-  .wwd-editorial-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
-
-.wwd-stacked-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(48px, 6vw, 76px);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--color-navy);
-  position: sticky;
-  top: 120px;
-}
-
-.wwd-ledger-rule {
-  width: 40px;
-  height: 2px;
-  background-color: var(--color-gold);
-  margin-top: 24px;
-}
-
-.wwd-tiers-column {
+.hero-fact {
   display: flex;
-  flex-direction: column;
-  gap: 70px;
-}
-
-.wwd-tier {
-  display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
   gap: 14px;
-  position: relative;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--color-grey-soft);
+  padding: 24px 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
 }
-.wwd-tier:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.hero-fact:first-child {
+  border-left: none;
 }
-
-.wwd-tier-1 { margin-left: 0; }
-.wwd-tier-2 { margin-left: 10%; }
-.wwd-tier-3 { margin-left: 20%; }
-
-@media (max-width: 900px) {
-  .wwd-tier-2, .wwd-tier-3 { margin-left: 0; }
-}
-
-.wwd-tier-num {
+.hero-fact-num {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--color-gold-light);
+}
+.hero-fact-label {
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: var(--color-gold);
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
 }
 
-.wwd-tier-title {
-  font-family: var(--font-serif);
-  font-size: clamp(34px, 4vw, 54px);
-  font-weight: 600;
-  line-height: 1.1;
-  color: var(--color-navy);
-}
-
-.wwd-tier-tagline {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-slate);
-}
-
-.wwd-tier-desc {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--color-charcoal);
-  max-width: 640px;
-}
-
-/* ============================================================
-   SCENE 03 — CAPABILITY STRIP
-   ============================================================ */
-.capability-strip-stage {
-  margin-bottom: 100px;
-}
-
-.capability-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-radius: var(--radius-stage);
-  overflow: hidden;
-  border: 1px solid var(--color-grey-soft);
+@media (max-width: 768px) {
+  .hero-stage { margin: 0; }
 }
 
 @media (max-width: 860px) {
-  .capability-strip {
-    grid-template-columns: 1fr;
-  }
+  .hero-body { padding-top: 120px; padding-bottom: 40px; gap: 22px; }
+  .hero-facts-inner { grid-template-columns: 1fr 1fr; }
+  .hero-fact { padding: 18px 8px; }
+  .hero-fact:nth-child(odd) { border-left: none; }
+  .hero-fact:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, 0.12); }
+  .hero-fact-num { font-size: 26px; }
 }
 
-.cap-panel {
-  padding: 44px 36px;
+/* ============================================================
+   SCENE 02 — WHAT WE DO
+   ============================================================ */
+.section-wwd {
+  padding: 96px 0 40px 0;
+  background-color: var(--color-ivory);
+}
+
+.wwd-head {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 56px;
+  align-items: end;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--color-navy);
+}
+@media (max-width: 900px) {
+  .wwd-head { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.wwd-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 5fr) 8fr;
+  gap: 56px;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--color-grey-soft);
+}
+.wwd-row:last-child { border-bottom: none; }
+@media (max-width: 900px) {
+  .wwd-row { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+}
+
+.wwd-row-head {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 250px;
-  position: relative;
+  gap: 10px;
+  align-items: flex-start;
+  position: sticky;
+  top: 112px;
+  align-self: start;
+}
+@media (max-width: 900px) {
+  .wwd-row-head { position: static; }
 }
 
-.cap-panel-1 {
-  background-color: var(--color-white);
+.wwd-row-num {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-gold);
+}
+
+.wwd-row-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 3.6vw, 46px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   color: var(--color-navy);
-  border-right: 1px solid var(--color-grey-soft);
 }
 
-.cap-panel-2 {
-  background-color: var(--color-navy);
-  color: var(--color-white);
+.wwd-row-tagline {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-slate);
 }
 
-.cap-panel-3 {
-  background-color: var(--color-slate);
-  color: var(--color-white);
-}
-
-.cap-micro-header {
+.wwd-row-body {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.wwd-row-intro {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-navy);
+  max-width: 700px;
+}
+
+.wwd-items-label {
+  margin-top: 4px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-}
-.cap-panel-1 .cap-micro-header { color: var(--color-gold); }
-.cap-panel-2 .cap-micro-header { color: var(--color-gold-light); }
-.cap-panel-3 .cap-micro-header { color: var(--color-gold-light); }
-
-.cap-headline {
-  font-family: var(--font-serif);
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 24px;
+  color: var(--color-grey-muted);
 }
 
-.cap-link {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.wwd-items {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  margin-top: -6px;
 }
-.cap-panel-1 .cap-link { color: var(--color-navy); }
-.cap-panel-2 .cap-link { color: var(--color-gold-light); }
-.cap-panel-3 .cap-link { color: var(--color-white); }
-.cap-link:hover { gap: 12px; }
+.wwd-items li {
+  position: relative;
+  padding: 10px 0 10px 20px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-charcoal);
+  border-bottom: 1px solid var(--color-grey-soft);
+}
+.wwd-items li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.25em;
+  width: 8px;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+@media (max-width: 600px) {
+  .wwd-items { grid-template-columns: 1fr; }
+}
+
+.wwd-row-closing {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-slate);
+  max-width: 700px;
+}
 
 /* ============================================================
-   SCENE 04 — TYPOGRAPHIC INTERRUPTION
+   SCENE 03 — STATEMENT
    ============================================================ */
 .section-interruption {
-  padding: 140px 0;
+  padding: 48px 0 0 0;
   background-color: var(--color-ivory);
   text-align: center;
 }
@@ -878,26 +932,27 @@ img, svg {
 }
 
 .interruption-rule {
-  width: 70px;
+  width: 56px;
   height: 2px;
   background-color: var(--color-gold);
-  margin: 0 auto 36px auto;
+  margin: 0 auto 22px auto;
 }
 
 .interruption-quote {
   font-family: var(--font-serif);
-  font-size: clamp(40px, 5.5vw, 76px);
+  font-size: clamp(30px, 3.8vw, 52px);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: -0.015em;
   color: var(--color-navy);
+  text-wrap: balance;
 }
 
 /* ============================================================
    SCENE 05 — AREAS OF FOCUS (Large Editorial Index)
    ============================================================ */
 .section-areas {
-  padding: 60px 0 120px 0;
+  padding: 56px 0 104px 0;
   background-color: var(--color-ivory);
 }
 
@@ -942,7 +997,7 @@ img, svg {
 
 .area-index-row:hover,
 .area-index-row.active {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--color-mist);
 }
 
 .area-index-row:hover::before,
@@ -951,7 +1006,7 @@ img, svg {
 }
 
 .area-index-row.dimmed {
-  opacity: 0.45;
+  opacity: 0.62;
 }
 
 .area-row-num {
@@ -1003,8 +1058,8 @@ img, svg {
    SCENE 06 — PRIORITY SECTORS (Typographic Sector Navigation)
    ============================================================ */
 .section-sectors-stage {
-  padding: 100px 0;
-  background-color: var(--color-white);
+  padding: 72px 0 24px;
+  background-color: var(--color-mist);
   border-radius: var(--radius-stage);
   border: 1px solid var(--color-grey-soft);
   margin-bottom: 100px;
@@ -1043,7 +1098,7 @@ img, svg {
 
 .sector-editorial-item:hover,
 .sector-editorial-item.active {
-  background-color: rgba(248, 247, 243, 0.7);
+  background-color: rgba(250, 251, 252, 0.7);
 }
 
 .sector-item-header {
@@ -1200,7 +1255,7 @@ img, svg {
 }
 
 .newsroom-container {
-  background-color: var(--color-white);
+  background-color: var(--color-mist);
   border-radius: var(--radius-stage);
   border: 1px solid var(--color-grey-soft);
   padding: 48px var(--outer-padding);
@@ -1493,8 +1548,8 @@ img, svg {
    SCENE 12 — EVENTS CHRONOLOGY
    ============================================================ */
 .section-events-stage {
-  padding: 100px 0;
-  background-color: var(--color-white);
+  padding: 72px 0 24px;
+  background-color: var(--color-mist);
   border-radius: var(--radius-stage);
   border: 1px solid var(--color-grey-soft);
   margin-bottom: 100px;
@@ -1517,7 +1572,7 @@ img, svg {
   padding: 36px var(--outer-padding);
   border-bottom: 1px solid var(--color-grey-soft);
   display: grid;
-  grid-template-columns: 190px 1fr 200px;
+  grid-template-columns: 190px 1fr auto;
   gap: 32px;
   align-items: center;
 }
@@ -1669,7 +1724,7 @@ img, svg {
 
 .section-cta-stage .hero-lead-text,
 .section-cta-stage p {
-  color: rgba(248, 247, 243, 0.9);
+  color: rgba(250, 251, 252, 0.9);
 }
 
 .section-cta-stage .btn-primary {
@@ -2227,7 +2282,7 @@ img, svg {
   font-size: 11px;
   letter-spacing: 0.03em;
   color: var(--color-slate);
-  background: var(--color-ivory);
+  background: var(--color-mist);
   border: 1px solid var(--color-grey-soft);
   padding: 5px 10px;
   border-radius: 3px;
@@ -2943,3 +2998,5 @@ img, svg {
   color: var(--color-grey-muted);
   margin-bottom: var(--s6);
 }
+
+.btn, .btn-ghost-gold { white-space: nowrap; }
