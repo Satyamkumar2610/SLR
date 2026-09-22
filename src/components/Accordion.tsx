@@ -30,14 +30,17 @@ export default function Accordion({
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
               <span>{item.title}</span>
-              <span className="accordion-symbol" aria-hidden="true">{isOpen ? "−" : "+"}</span>
+              <span className="accordion-symbol" aria-hidden="true" />
             </button>
             <div
               className={`accordion-panel ${isOpen ? "open" : ""}`}
               id={`accordion-panel-${item.id}`}
               role="region"
+              inert={!isOpen}
             >
-              <div className="accordion-panel-inner">{item.content}</div>
+              <div className="accordion-panel-clip">
+                <div className="accordion-panel-inner">{item.content}</div>
+              </div>
             </div>
           </div>
         );

@@ -1,12 +1,14 @@
 import { geographies, corridors } from "@/lib/content";
+import { WORLD_VIEWBOX, GEO_MAP_POSITIONS } from "@/lib/worldMap";
 
 /**
- * A restrained schematic (not a literal map) showing which geographies
- * each strategic corridor connects — thin navy lines, gold nodes, ivory
- * canvas. Node order is a rough west-to-east arrangement; positions are
- * illustrative, not cartographic. No quantitative flows are implied —
- * only the relationships stated in the Centre's own corridor
- * descriptions.
+ * The strategic-corridor network drawn over an actual, geographically
+ * projected world map (Natural Earth 110m land data, equirectangular —
+ * see src/lib/worldMap.ts) rather than an abstract schematic: nodes sit at
+ * real approximate coordinates for each geography, so the shape of each
+ * corridor route reads as a real path across the globe. No quantitative
+ * flows are implied — only the relationships stated in the Centre's own
+ * corridor descriptions.
  *
  * Pass `highlightSlug` to render a compact "glass" variant that keeps the
  * full network visible but brings only the requested corridor's route and
@@ -25,17 +27,6 @@ const order = [
   "indo-pacific",
 ];
 
-const nodePositions: Record<string, { x: number; y: number }> = {
-  "north-america": { x: 60, y: 70 },
-  "latin-america": { x: 110, y: 190 },
-  africa: { x: 260, y: 190 },
-  europe: { x: 280, y: 60 },
-  "middle-east": { x: 400, y: 110 },
-  "india-south-asia": { x: 520, y: 140 },
-  asean: { x: 640, y: 170 },
-  "indo-pacific": { x: 700, y: 80 },
-};
-
 export default function CorridorDiagram({
   highlightSlug,
   variant = "full",
@@ -53,17 +44,19 @@ export default function CorridorDiagram({
   return (
     <svg
       className={`corridor-diagram ${variant === "compact" ? "corridor-diagram-compact" : ""}`}
-      viewBox="0 0 760 240"
+      viewBox={WORLD_VIEWBOX}
       role="img"
       aria-label={
         highlighted
-          ? `Schematic map highlighting the geographies connected by the ${highlighted.name} corridor`
-          : "Schematic diagram of geographies connected by SLR's tracked strategic corridors"
+          ? `Map highlighting the geographies connected by the ${highlighted.name} corridor`
+          : "World map of geographies connected by SLR's tracked strategic corridors"
       }
     >
+      <use href="#world-land-mass" className="corridor-diagram-land" />
+
       {corridors.map((corridor) => {
         const pts = corridor.geographies
-          .map((slug) => nodePositions[slug])
+          .map((slug) => GEO_MAP_POSITIONS[slug])
           .filter(Boolean);
         if (pts.length < 2) return null;
         const d = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
@@ -82,15 +75,16 @@ export default function CorridorDiagram({
       })}
 
       {nodes.map((geo) => {
-        const pos = nodePositions[geo.slug];
+        const pos = GEO_MAP_POSITIONS[geo.slug];
         const isRelevant = !relevant || relevant.has(geo.slug);
         return (
           <g key={geo.slug} className={relevant && !isRelevant ? "is-dimmed" : ""}>
-            <circle cx={pos.x} cy={pos.y} r={geo.isAnchor ? 7 : 5} className="corridor-diagram-node" />
+            <circle cx={pos.x} cy={pos.y} r={geo.isAnchor ? 26 : 19} className="corridor-diagram-node-halo" />
+            <circle cx={pos.x} cy={pos.y} r={geo.isAnchor ? 14 : 10} className="corridor-diagram-node" />
             {(!relevant || isRelevant) && (
               <text
                 x={pos.x}
-                y={pos.y - 12}
+                y={pos.y - (geo.isAnchor ? 32 : 25)}
                 textAnchor="middle"
                 className="corridor-diagram-node-label"
               >

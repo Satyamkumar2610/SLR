@@ -5,7 +5,7 @@
  *
  * SOURCE OF TRUTH: "SLR Centre for Global Law, Geoeconomics & Emerging
  * Technologies — Centre Profile" (supplied PDF) and the previous
- * site's editorial copy (old-html/). Nothing in this file that is
+ * site's editorial copy (the former static build, retired from the repo). Nothing in this file that is
  * presented as institutional fact (areas of focus, sectors, offerings,
  * geographies, corridors, who-we-engage) has been invented — it is
  * transcribed or lightly restructured (e.g. into "key issues tracked"
@@ -669,6 +669,7 @@ export interface Insight {
   isoDate: string;
   excerpt: string;
   featured?: boolean;
+  image?: { src: string; alt: string };
 }
 
 export const insights: Insight[] = [
@@ -682,6 +683,7 @@ export const insights: Insight[] = [
     excerpt:
       "An examination of India's evolving role within global technology value chains, semiconductor ecosystems, and digital governance frameworks — and what this means for businesses, investors, and policymakers navigating the new technology order.",
     featured: true,
+    image: { src: "/assets/insight-india-tech.jpg", alt: "A technician in a cleanroom suit on a semiconductor fabrication line, a silicon wafer held in the foreground" },
   },
   {
     slug: "india-emerging-tech-order",
@@ -702,6 +704,7 @@ export const insights: Insight[] = [
     isoDate: "2026-09-04",
     excerpt:
       "The evolving sanctions landscape demands a fundamental rethinking of compliance strategy as regulatory fragmentation accelerates.",
+    image: { src: "/assets/insight-sanctions.jpg", alt: "A neoclassical courtroom with marble columns and rows of empty seats facing the bench" },
   },
   {
     slug: "critical-minerals",
@@ -712,6 +715,7 @@ export const insights: Insight[] = [
     isoDate: "2026-08-28",
     excerpt:
       "As the energy transition accelerates, control of critical mineral supply chains is becoming a primary axis of geopolitical competition.",
+    image: { src: "/assets/insight-energy.jpg", alt: "Aerial view at dusk of lithium brine evaporation ponds beside a mineral processing site" },
   },
   {
     slug: "semiconductor-supply-chains",

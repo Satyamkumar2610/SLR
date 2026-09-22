@@ -1,19 +1,36 @@
+import Image from "next/image";
 import Link from "next/link";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
 import CorridorDiagram from "@/components/CorridorDiagram";
-import { corridors, insights, events, stakeholders, centre, pillars, areasOfFocus, sectors, geographies, offeringsForPillar } from "@/lib/content";
+import InsightMedia from "@/components/InsightMedia";
+import SectionIndex from "@/components/SectionIndex";
+import CountUp from "@/components/CountUp";
+import WhatWeDo from "@/components/WhatWeDo";
+import { corridors, insights, events, stakeholders, centre, areasOfFocus, sectors, geographies } from "@/lib/content";
 
-const pad = (n: number) => String(n).padStart(2, "0");
+const homeSections = [
+  { id: "what-we-do", label: "What We Do" },
+  { id: "areas-of-focus", label: "Research Agenda" },
+  { id: "sectors", label: "Priority Sectors" },
+  { id: "featured", label: "Featured" },
+  { id: "insights", label: "Latest Insights" },
+  { id: "geographies", label: "Geographies" },
+  { id: "corridors", label: "Corridors" },
+  { id: "stakeholders", label: "Network" },
+  { id: "events", label: "Events" },
+  { id: "about", label: "About" },
+  { id: "engage", label: "Engage" },
+];
 
 export default function Home() {
   const heroFacts = [
-    { num: pad(areasOfFocus.length), label: "Research domains" },
-    { num: pad(sectors.length), label: "Priority sectors" },
-    { num: pad(geographies.length), label: "Geographies" },
-    { num: pad(corridors.length), label: "Strategic corridors" },
+    { num: areasOfFocus.length, label: "Research domains" },
+    { num: sectors.length, label: "Priority sectors" },
+    { num: geographies.length, label: "Geographies" },
+    { num: corridors.length, label: "Strategic corridors" },
   ];
   const featured = insights.find((i) => i.featured) ?? insights[0];
   const latest = insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
@@ -24,7 +41,9 @@ export default function Home() {
            SCENE 01 — HERO (navigation floats over this stage)
            ============================================================ */}
       <section className="hero-stage" id="hero">
-        <div className="hero-bg-media"></div>
+        <div className="hero-bg-media">
+          <Image src="/assets/insight-energy.jpg" alt="" fill preload sizes="100vw" />
+        </div>
         <div className="hero-bg-overlay"></div>
 
         <div className="hero-body">
@@ -39,9 +58,9 @@ export default function Home() {
 
         <div className="hero-facts hero-reveal hero-reveal-facts">
           <div className="hero-facts-inner">
-            {heroFacts.map((fact) => (
+            {heroFacts.map((fact, i) => (
               <div className="hero-fact" key={fact.label}>
-                <span className="hero-fact-num">{fact.num}</span>
+                <CountUp value={fact.num} delay={900 + i * 120} />
                 <span className="hero-fact-label">{fact.label}</span>
               </div>
             ))}
@@ -52,43 +71,7 @@ export default function Home() {
       {/* ============================================================
            SCENE 02 — WHAT WE DO
            ============================================================ */}
-      <section className="section-wwd" id="what-we-do">
-        <div className="stage-container">
-          <div className="wwd-head">
-            <div>
-              <span className="eyebrow">What We Do</span>
-              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Three integrated functions. One analytical core.</h2>
-            </div>
-            <p className="text-lead" style={{ marginBottom: 0 }}>Research builds the evidence, intelligence interprets what is changing, and advisory turns both into decisions.</p>
-          </div>
-
-          <div className="wwd-rows">
-            {pillars.map((pillar) => (
-              <article className="wwd-row" key={pillar.slug} id={pillar.slug}>
-                <header className="wwd-row-head">
-                  <span className="wwd-row-num">{pillar.num}</span>
-                  <h3 className="wwd-row-title">{pillar.title}</h3>
-                  <span className="wwd-row-tagline">{pillar.tagline}</span>
-                </header>
-
-                <div className="wwd-row-body">
-                  <p className="wwd-row-intro">{pillar.intro}</p>
-                  <span className="wwd-items-label">{pillar.itemsLabel}</span>
-                  <ul className="wwd-items">
-                    {offeringsForPillar(pillar.slug).map((offering) => (
-                      <li key={offering.slug}>
-                        <Link href={`/capabilities#${offering.slug}`}>{offering.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                  {pillar.closing && <p className="wwd-row-closing">{pillar.closing}</p>}
-                  <Link href={`/capabilities#${pillar.slug}`} className="btn-ghost-gold">Explore {pillar.title} →</Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhatWeDo />
 
       {/* ============================================================
            SCENE 03 — STATEMENT
@@ -115,12 +98,14 @@ export default function Home() {
       {/* ============================================================
            SCENE 07 — EDITORIAL FEATURE
            ============================================================ */}
-      <div className="stage-container section-featured-feature">
+      <div className="stage-container section-featured-feature" id="featured">
         <div className="featured-split-card">
-          <div className="featured-media-side"></div>
+          <InsightMedia insight={featured} sizes="(max-width: 900px) 100vw, 55vw" className="featured-media-side reveal-media" />
           <div className="featured-editorial-side">
             <span className="featured-eyebrow-tag">{featured.category} · {featured.date}</span>
-            <h2 className="featured-story-title">{featured.title}</h2>
+            <h2 className="featured-story-title">
+              <Link href={`/insights/${featured.slug}`}>{featured.title}</Link>
+            </h2>
             <p className="featured-story-excerpt">{featured.excerpt}</p>
             <div>
               <Link href={`/insights/${featured.slug}`} className="btn btn-secondary">Read {featured.category} →</Link>
@@ -146,24 +131,24 @@ export default function Home() {
             <div className="newsroom-asymmetric-grid">
               {latest.map((item, idx) => (
                 <article className={idx === 0 ? "story-lead" : "story-secondary"} key={item.slug}>
-                  {idx === 0 ? (
-                    <div className="story-lead-image">
-                      <img src="/assets/insight-sanctions.jpg" alt="" />
-                    </div>
-                  ) : (
-                    <div className="story-secondary-image">
-                      <img src="/assets/insight-energy.jpg" alt="" />
-                    </div>
-                  )}
+                  <Link href={`/insights/${item.slug}`} tabIndex={-1} className="story-media-link">
+                    <InsightMedia
+                      insight={item}
+                      sizes={idx === 0 ? "(max-width: 900px) 100vw, 45vw" : "(max-width: 900px) 100vw, 32vw"}
+                      className={`${idx === 0 ? "story-lead-image" : "story-secondary-image"} reveal-media`}
+                    />
+                  </Link>
                   <div className="story-meta">
                     <span className="story-tag">{item.category}</span>
                     <span>•</span>
                     <span>{item.date}</span>
                   </div>
-                  <h3 className="story-title" style={idx === 0 ? { fontSize: "28px" } : undefined}>{item.title}</h3>
+                  <h3 className={`story-title ${idx === 0 ? "story-title-lead" : ""}`}>
+                    <Link href={`/insights/${item.slug}`}>{item.title}</Link>
+                  </h3>
                   <p className="story-excerpt">{item.excerpt}</p>
                   <div>
-                    <Link href={`/insights/${item.slug}`} className="btn-ghost-gold">Read →</Link>
+                    <Link href={`/insights/${item.slug}`} className="btn-ghost-gold" aria-label={`Read: ${item.title}`}>Read →</Link>
                   </div>
                 </article>
               ))}
@@ -181,7 +166,7 @@ export default function Home() {
            SCENE 10 — STRATEGIC CORRIDORS
            ============================================================ */}
       <div className="stage-container">
-        <section className="section-chapter-reset" style={{ padding: "72px var(--outer-padding)", textAlign: "left" }}>
+        <section className="section-chapter-reset" id="corridors" style={{ padding: "72px var(--outer-padding)", textAlign: "left" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "40px" }}>
             <div>
               <span className="eyebrow eyebrow-light">Where Trade Meets Strategy</span>
@@ -300,6 +285,8 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      <SectionIndex sections={homeSections} hideWhileVisible="hero" />
     </main>
   );
 }

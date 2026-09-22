@@ -40,7 +40,7 @@ export default function CapabilitiesPage() {
           </div>
 
           {pillars.map((pillar) => (
-            <div key={pillar.slug} style={{ marginBottom: "var(--s10)" }}>
+            <div key={pillar.slug} id={pillar.slug} style={{ marginBottom: "var(--s10)" }}>
               <div className="section-head-row">
                 <div>
                   <span className="eyebrow">Pillar {pillar.num}</span>

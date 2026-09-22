@@ -1,7 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { SearchTrigger } from "@/components/SearchPalette";
 import { areasOfFocus, sectors, geographies, insightCategories, offerings } from "@/lib/content";
 
 type MenuKey = "research" | "sectors" | "geographies" | "insights" | "capabilities";
@@ -11,6 +14,18 @@ export default function Navigation() {
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const pathname = usePathname();
+  const [lastPath, setLastPath] = useState(pathname);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpenMenu(null);
+    setMobileOpen(false);
+  }
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -20,30 +35,52 @@ export default function Navigation() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!mobileOpen) return;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+    const toggle = toggleRef.current;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+      toggle?.focus();
     };
   }, [mobileOpen]);
 
   const closeAll = () => setOpenMenu(null);
 
+  // Mega-menus open on hover and on keyboard focus, and close on Escape or
+  // when focus leaves the item.
+  const menuProps = (key: MenuKey) => ({
+    className: `nav-item-wrap ${openMenu === key ? "is-open" : ""}`,
+    onMouseEnter: () => setOpenMenu(key),
+    onFocus: () => setOpenMenu(key),
+    onBlur: (e: React.FocusEvent<HTMLDivElement>) => {
+      if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenMenu((m) => (m === key ? null : m));
+    },
+    onKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Escape") {
+        setOpenMenu(null);
+        e.currentTarget.querySelector<HTMLElement>(".nav-link")?.focus();
+      }
+    },
+  });
+
   return (
     <>
       <nav
         className={`site-nav ${scrolled ? "is-scrolled" : ""}`}
-        role="navigation"
         aria-label="Main Navigation"
         onMouseLeave={closeAll}
+        style={{ viewTransitionName: "site-header" }}
       >
         <div className="nav-inner">
         <div className="nav-brand">
           <Link href="/" aria-label="SLR Centre home" onClick={closeAll}>
-            <img src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" />
+            <Image src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" width={120} height={48} unoptimized preload style={{ height: "38px", width: "auto" }} />
           </Link>
           <div className="nav-brand-text">
             <span className="nav-brand-title">SLR Centre</span>
@@ -53,12 +90,9 @@ export default function Navigation() {
 
         <div className="nav-menu" id="nav-menu">
           {/* RESEARCH */}
-          <div
-            className={`nav-item-wrap ${openMenu === "research" ? "is-open" : ""}`}
-            onMouseEnter={() => setOpenMenu("research")}
-          >
-            <Link href="/research" className="nav-link">
-              Research <span className="nav-item-chevron">▾</span>
+          <div {...menuProps("research")}>
+            <Link href="/research" className={`nav-link ${isActive("/research") ? "is-active" : ""}`} aria-haspopup="true" aria-expanded={openMenu === "research"}>
+              Research <span className="nav-item-chevron" aria-hidden="true" />
             </Link>
             <div className={`nav-dropdown ${openMenu === "research" ? "is-open" : ""}`}>
               <div>
@@ -84,12 +118,9 @@ export default function Navigation() {
           </div>
 
           {/* SECTORS */}
-          <div
-            className={`nav-item-wrap ${openMenu === "sectors" ? "is-open" : ""}`}
-            onMouseEnter={() => setOpenMenu("sectors")}
-          >
-            <Link href="/sectors" className="nav-link">
-              Sectors <span className="nav-item-chevron">▾</span>
+          <div {...menuProps("sectors")}>
+            <Link href="/sectors" className={`nav-link ${isActive("/sectors") ? "is-active" : ""}`} aria-haspopup="true" aria-expanded={openMenu === "sectors"}>
+              Sectors <span className="nav-item-chevron" aria-hidden="true" />
             </Link>
             <div className={`nav-dropdown ${openMenu === "sectors" ? "is-open" : ""}`}>
               <div>
@@ -119,12 +150,9 @@ export default function Navigation() {
           </div>
 
           {/* GEOGRAPHIES */}
-          <div
-            className={`nav-item-wrap ${openMenu === "geographies" ? "is-open" : ""}`}
-            onMouseEnter={() => setOpenMenu("geographies")}
-          >
-            <Link href="/geographies" className="nav-link">
-              Geographies <span className="nav-item-chevron">▾</span>
+          <div {...menuProps("geographies")}>
+            <Link href="/geographies" className={`nav-link ${isActive("/geographies") ? "is-active" : ""}`} aria-haspopup="true" aria-expanded={openMenu === "geographies"}>
+              Geographies <span className="nav-item-chevron" aria-hidden="true" />
             </Link>
             <div className={`nav-dropdown ${openMenu === "geographies" ? "is-open" : ""}`}>
               <div>
@@ -155,15 +183,12 @@ export default function Navigation() {
           </div>
 
           {/* CORRIDORS (simple link) */}
-          <Link href="/corridors" className="nav-link">Corridors</Link>
+          <Link href="/corridors" className={`nav-link ${isActive("/corridors") ? "is-active" : ""}`}>Corridors</Link>
 
           {/* INSIGHTS */}
-          <div
-            className={`nav-item-wrap ${openMenu === "insights" ? "is-open" : ""}`}
-            onMouseEnter={() => setOpenMenu("insights")}
-          >
-            <Link href="/insights" className="nav-link">
-              Insights <span className="nav-item-chevron">▾</span>
+          <div {...menuProps("insights")}>
+            <Link href="/insights" className={`nav-link ${isActive("/insights") ? "is-active" : ""}`} aria-haspopup="true" aria-expanded={openMenu === "insights"}>
+              Insights <span className="nav-item-chevron" aria-hidden="true" />
             </Link>
             <div className={`nav-dropdown ${openMenu === "insights" ? "is-open" : ""}`}>
               <div>
@@ -189,12 +214,9 @@ export default function Navigation() {
           </div>
 
           {/* CAPABILITIES */}
-          <div
-            className={`nav-item-wrap ${openMenu === "capabilities" ? "is-open" : ""}`}
-            onMouseEnter={() => setOpenMenu("capabilities")}
-          >
-            <Link href="/capabilities" className="nav-link">
-              Capabilities <span className="nav-item-chevron">▾</span>
+          <div {...menuProps("capabilities")}>
+            <Link href="/capabilities" className={`nav-link ${isActive("/capabilities") ? "is-active" : ""}`} aria-haspopup="true" aria-expanded={openMenu === "capabilities"}>
+              Capabilities <span className="nav-item-chevron" aria-hidden="true" />
             </Link>
             <div className={`nav-dropdown ${openMenu === "capabilities" ? "is-open" : ""}`}>
               <div>
@@ -219,12 +241,14 @@ export default function Navigation() {
             </div>
           </div>
 
-          <Link href="/about" className="nav-link">About</Link>
+          <Link href="/about" className={`nav-link ${isActive("/about") ? "is-active" : ""}`}>About</Link>
         </div>
 
         <div className="nav-actions">
+          <SearchTrigger variant="nav" />
           <Link href="/engage" className="nav-btn-cta">Engage the Centre</Link>
           <button
+            ref={toggleRef}
             className={`nav-mobile-toggle ${mobileOpen ? "active" : ""}`}
             aria-label="Open navigation menu"
             aria-expanded={mobileOpen}
@@ -240,9 +264,19 @@ export default function Navigation() {
 
       {/* MOBILE DRAWER */}
       <div className={`mobile-drawer-scrim ${mobileOpen ? "is-open" : ""}`} onClick={() => setMobileOpen(false)} aria-hidden="true" />
-      <div className={`mobile-drawer-panel ${mobileOpen ? "is-open" : ""}`} role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div
+        className={`mobile-drawer-panel ${mobileOpen ? "is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        inert={!mobileOpen}
+      >
         <div className="mobile-drawer-top">
-          <button className="mobile-drawer-close" aria-label="Close menu" onClick={() => setMobileOpen(false)}>✕</button>
+          <button ref={closeBtnRef} className="mobile-drawer-close" aria-label="Close menu" onClick={() => setMobileOpen(false)}>✕</button>
+        </div>
+
+        <div className="mobile-drawer-search" onClick={() => setMobileOpen(false)}>
+          <SearchTrigger variant="drawer" />
         </div>
 
         <MobileSection

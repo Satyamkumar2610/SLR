@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { insights, getInsight, getArea, sectorsForArea } from "@/lib/content";
 import MetadataRail from "@/components/MetadataRail";
+import InsightMedia from "@/components/InsightMedia";
 
 export function generateStaticParams() {
   return insights.map((i) => ({ slug: i.slug }));
@@ -54,7 +55,13 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
           </div>
         </header>
 
-        <section className="page-section">
+        <div className="stage-container">
+          <figure className="article-media">
+            <InsightMedia insight={insight} sizes="(max-width: 1380px) 100vw, 1300px" preload />
+          </figure>
+        </div>
+
+        <section className="page-section article-section">
           <div className="stage-container">
             <div className="article-layout">
               <div className="article-body">
@@ -87,7 +94,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
 
         <section className="page-section" style={{ paddingTop: 0 }}>
           <div className="stage-container">
-            <Link href="/insights" className="btn-outline-navy">← Back to Insights &amp; Publications</Link>
+            <Link href="/insights" className="btn btn-outline-navy">← Back to Insights &amp; Publications</Link>
           </div>
         </section>
       </article>

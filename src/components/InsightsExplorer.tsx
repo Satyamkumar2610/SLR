@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { insights, insightCategories, type InsightCategory } from "@/lib/content";
 import InsightList from "@/components/InsightList";
+import InsightMedia from "@/components/InsightMedia";
 
 export default function InsightsExplorer() {
   const searchParams = useSearchParams();
@@ -31,7 +32,7 @@ export default function InsightsExplorer() {
 
   return (
     <div>
-      <div className="filter-pill-row" role="tablist" aria-label="Filter insights by content type">
+      <div className="filter-pill-row" role="group" aria-label="Filter insights by content type">
         <button
           className={`filter-pill ${active === "All" ? "active" : ""}`}
           onClick={() => setActive("All")}
@@ -54,7 +55,9 @@ export default function InsightsExplorer() {
       <div className="panel-fade-in" key={active}>
         {showFeatured && featured && (
           <div className="pub-featured">
-            <div className="pub-featured-media" aria-hidden="true" />
+            <Link href={`/insights/${featured.slug}`} tabIndex={-1} className="story-media-link">
+              <InsightMedia insight={featured} sizes="(max-width: 860px) 100vw, 50vw" className="pub-featured-media reveal-media" />
+            </Link>
             <div>
               <span className="pub-category">{featured.category} · {featured.date}</span>
               <h2 className="pub-featured-title">

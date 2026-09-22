@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { geographies } from "@/lib/content";
+import EnquiryForm from "@/components/EnquiryForm";
 
 export const metadata: Metadata = {
   title: "Engage the Centre — SLR Centre",
@@ -16,15 +17,6 @@ const engagementFormats = [
   "Geoeconomic & Investment Risk Advisory",
   "Scenario Planning & Strategic Foresight",
   "Bespoke Research & Advisory",
-];
-
-const enquiryTypes = [
-  "Research Inquiry",
-  "Advisory Services",
-  "Roundtables & Events",
-  "Media Enquiry",
-  "Partnership",
-  "Other",
 ];
 
 export default function EngagePage() {
@@ -83,57 +75,7 @@ export default function EngagePage() {
               </div>
             </div>
 
-            <form>
-              <div className="form-row-2">
-                <div className="form-field">
-                  <label className="form-label" htmlFor="fullName">Full Name *</label>
-                  <input className="form-input" id="fullName" name="fullName" type="text" required />
-                </div>
-                <div className="form-field">
-                  <label className="form-label" htmlFor="organisation">Organisation *</label>
-                  <input className="form-input" id="organisation" name="organisation" type="text" required />
-                </div>
-              </div>
-
-              <div className="form-row-2">
-                <div className="form-field">
-                  <label className="form-label" htmlFor="role">Role / Title</label>
-                  <input className="form-input" id="role" name="role" type="text" />
-                </div>
-                <div className="form-field">
-                  <label className="form-label" htmlFor="email">Email Address *</label>
-                  <input className="form-input" id="email" name="email" type="email" required />
-                </div>
-              </div>
-
-              <div className="form-row-2">
-                <div className="form-field">
-                  <label className="form-label" htmlFor="region">Country / Region</label>
-                  <select className="form-select" id="region" name="region" defaultValue="">
-                    <option value="" disabled>Select a region</option>
-                    {geographies.map((g) => (
-                      <option key={g.slug} value={g.slug}>{g.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-field">
-                  <label className="form-label" htmlFor="enquiry">Nature of Enquiry</label>
-                  <select className="form-select" id="enquiry" name="enquiry" defaultValue="">
-                    <option value="" disabled>Select enquiry type</option>
-                    {enquiryTypes.map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-field">
-                <label className="form-label" htmlFor="message">Message</label>
-                <textarea className="form-textarea" id="message" name="message" rows={5} />
-              </div>
-
-              <button type="submit" className="btn btn-primary">Send Enquiry</button>
-            </form>
+            <EnquiryForm regions={geographies.map(({ slug, name }) => ({ slug, name }))} />
           </div>
         </div>
       </section>

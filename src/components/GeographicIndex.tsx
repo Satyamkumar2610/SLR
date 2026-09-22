@@ -26,6 +26,7 @@ export default function GeographicIndex() {
                   key={geo.slug}
                   className={`geo-item-btn ${activeGeo.slug === geo.slug ? "active" : ""}`}
                   onClick={() => setActiveGeo(geo)}
+                  aria-pressed={activeGeo.slug === geo.slug}
                 >
                   {geo.name}{geo.isAnchor ? " ★" : ""}
                 </button>

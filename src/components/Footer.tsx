@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { areasOfFocus, sectors, geographies } from "@/lib/content";
 
@@ -7,7 +8,7 @@ export default function Footer() {
       <footer className="signature-footer">
         <div className="footer-top-layout">
           <div className="footer-brand-wrap">
-            <img src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" />
+            <Image src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" width={125} height={50} unoptimized style={{ height: "50px", width: "auto" }} />
             <h3 className="footer-institution-name">Centre for Global Law, Geoeconomics & Emerging Technologies</h3>
             <p className="footer-motto-phrase">Let justice be done though the heavens fall</p>
           </div>
