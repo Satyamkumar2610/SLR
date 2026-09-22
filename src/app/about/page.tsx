@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="stage-container">
           <div className="section-head-row">
             <div>
-              <span className="eyebrow">Who It Engages</span>
+              <span className="eyebrow">Who We Engage With</span>
               <h2 className="text-section-title" style={{ marginTop: "8px" }}>Serving leaders who shape the global agenda</h2>
             </div>
           </div>

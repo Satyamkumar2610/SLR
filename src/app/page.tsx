@@ -3,7 +3,8 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
-import { corridors, insights, events, stakeholders, centre, pillars, areasOfFocus, sectors, geographies } from "@/lib/content";
+import CorridorDiagram from "@/components/CorridorDiagram";
+import { corridors, insights, events, stakeholders, centre, pillars, areasOfFocus, sectors, geographies, offeringsForPillar } from "@/lib/content";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -74,8 +75,10 @@ export default function Home() {
                   <p className="wwd-row-intro">{pillar.intro}</p>
                   <span className="wwd-items-label">{pillar.itemsLabel}</span>
                   <ul className="wwd-items">
-                    {pillar.items.map((item) => (
-                      <li key={item}>{item}</li>
+                    {offeringsForPillar(pillar.slug).map((offering) => (
+                      <li key={offering.slug}>
+                        <Link href={`/capabilities#${offering.slug}`}>{offering.title}</Link>
+                      </li>
                     ))}
                   </ul>
                   {pillar.closing && <p className="wwd-row-closing">{pillar.closing}</p>}
@@ -191,6 +194,9 @@ export default function Home() {
               <div className="corridor-row" key={corridor.slug}>
                 <h3 className="corridor-name">{corridor.name}</h3>
                 <p className="corridor-desc">{corridor.description}</p>
+                <div className="corridor-row-map">
+                  <CorridorDiagram highlightSlug={corridor.slug} variant="compact" />
+                </div>
               </div>
             ))}
           </div>

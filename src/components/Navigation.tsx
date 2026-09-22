@@ -338,14 +338,12 @@ function MobileSection({
         {label}
         <span className="mobile-nav-toggle-symbol">{open ? "−" : "+"}</span>
       </button>
-      {open && (
-        <div className="mobile-nav-sublist">
-          {children}
-          <Link href={allHref} onClick={onNavigate} style={{ color: "var(--color-gold-light)" }}>
-            {allLabel} →
-          </Link>
-        </div>
-      )}
+      <div className={`mobile-nav-sublist ${open ? "is-open" : ""}`}>
+        {children}
+        <Link href={allHref} onClick={onNavigate} style={{ color: "var(--color-gold-light)" }}>
+          {allLabel} →
+        </Link>
+      </div>
     </div>
   );
 }

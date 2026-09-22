@@ -67,7 +67,7 @@ export default function SectorDirectory() {
         </span>
       </div>
 
-      <div className="directory-list">
+      <div className="directory-list panel-fade-in" key={letter ?? "all"}>
         {filtered.length === 0 && (
           <div className="directory-empty">No sectors match your search.</div>
         )}

@@ -35,7 +35,7 @@ export default function GeographicIndex() {
               </Link>
             </div>
 
-            <div className="geo-intel-card" id="geo-detail-panel">
+            <div className="geo-intel-card panel-fade-in" id="geo-detail-panel" key={activeGeo.slug}>
               <span className="eyebrow eyebrow-light" id="geo-detail-type">{activeGeo.tag}</span>
               <h3 className="geo-intel-title" id="geo-detail-title">{activeGeo.name}</h3>
               <p className="geo-intel-desc" id="geo-detail-desc">{activeGeo.description}</p>

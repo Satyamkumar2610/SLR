@@ -51,21 +51,23 @@ export default function InsightsExplorer() {
         ))}
       </div>
 
-      {showFeatured && featured && (
-        <div className="pub-featured">
-          <div className="pub-featured-media" aria-hidden="true" />
-          <div>
-            <span className="pub-category">{featured.category} · {featured.date}</span>
-            <h2 className="pub-featured-title">
-              <Link href={`/insights/${featured.slug}`}>{featured.title}</Link>
-            </h2>
-            <p className="pub-excerpt">{featured.excerpt}</p>
-            <Link href={`/insights/${featured.slug}`} className="btn-ghost-gold">Read {featured.category} →</Link>
+      <div className="panel-fade-in" key={active}>
+        {showFeatured && featured && (
+          <div className="pub-featured">
+            <div className="pub-featured-media" aria-hidden="true" />
+            <div>
+              <span className="pub-category">{featured.category} · {featured.date}</span>
+              <h2 className="pub-featured-title">
+                <Link href={`/insights/${featured.slug}`}>{featured.title}</Link>
+              </h2>
+              <p className="pub-excerpt">{featured.excerpt}</p>
+              <Link href={`/insights/${featured.slug}`} className="btn-ghost-gold">Read {featured.category} →</Link>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <InsightList items={filteredRest} />
+        <InsightList items={filteredRest} />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { corridors, geographiesForCorridor, supplyChainsIntro } from "@/lib/content";
+import { corridors, supplyChainsIntro } from "@/lib/content";
 import CorridorDiagram from "@/components/CorridorDiagram";
 
 export const metadata: Metadata = {
@@ -52,24 +52,15 @@ export default function CorridorsPage() {
           </div>
 
           <div className="corridor-list">
-            {corridors.map((corridor) => {
-              const geos = geographiesForCorridor(corridor.slug);
-              return (
-                <div className="corridor-row" id={corridor.slug} key={corridor.slug}>
-                  <h3 className="corridor-name">{corridor.name}</h3>
-                  <div>
-                    <p className="corridor-desc">{corridor.description}</p>
-                    <div className="corridor-geo-tags">
-                      {geos.map((g) => (
-                        <Link key={g.slug} href={`/geographies/${g.slug}`} className="corridor-geo-tag">
-                          {g.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+            {corridors.map((corridor) => (
+              <div className="corridor-row" id={corridor.slug} key={corridor.slug}>
+                <h3 className="corridor-name">{corridor.name}</h3>
+                <p className="corridor-desc">{corridor.description}</p>
+                <div className="corridor-row-map">
+                  <CorridorDiagram highlightSlug={corridor.slug} variant="compact" />
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>

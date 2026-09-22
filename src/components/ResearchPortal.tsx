@@ -42,7 +42,7 @@ export default function ResearchPortal() {
         ))}
       </nav>
 
-      <div className="research-detail-panel">
+      <div className="research-detail-panel panel-fade-in" key={active.slug}>
         <span className="research-detail-eyebrow">Research Wing {active.num}</span>
         <h1 className="research-detail-title">{active.title}</h1>
         <p className="research-detail-summary">{active.summary}</p>

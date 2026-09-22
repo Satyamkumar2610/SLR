@@ -4,14 +4,17 @@
    Authority: SLR Advocates & Solicitors Colour Palette Guide
    ============================================================ */
 
-/* ---------- TYPOGRAPHY ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&display=swap');
+/* ---------- TYPOGRAPHY ----------
+   Fonts are self-hosted via next/font (see app/layout.tsx), which exposes
+   --font-sans-face / --font-serif-face. No external stylesheet request is
+   made here, avoiding render-blocking network calls and layout shift. */
 
 /* ---------- BRAND TOKENS ---------- */
 :root {
   /* Primary Colours (Authoritative) */
   --color-navy:        #0A1F44; /* Midnight Navy: Primary brand, headings, dark surfaces */
   --color-navy-deep:   #06132B; /* Deepest Navy for extreme depth */
+  --color-navy-deepest:#050E21; /* Footer floor — one shade below navy-deep for clear section separation */
   --color-slate:       #3B506E; /* Slate Blue: Secondary surfaces, dividers, hover */
   --color-gold:        #B08D57; /* Burnished Gold: Restrained accent, jewellery, micro-details */
   --color-gold-light:  #D4BC8E; /* Subtle gold tint for borders & hovers */
@@ -52,9 +55,11 @@
   --container-max: 1280px;
   --gutter: 32px;
 
-  /* Typography Stacks */
-  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Typography Stacks — modern, professional pairing: a geometric sans
+     for UI/body copy and an editorial variable serif for headlines,
+     self-hosted through next/font (see app/layout.tsx). */
+  --font-serif: var(--font-serif-face), 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans:  var(--font-sans-face), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Layout & Framing */
   --max-width: 1380px;
@@ -62,7 +67,8 @@
   --radius-hero: 16px;
   --radius-stage: 14px;
   --radius-card: 8px;
-  --radius-btn: 4px; /* Sharp institutional radius */
+  --radius-btn: 10px; /* Soft, modern rounding for inputs, rows & pills */
+  --radius-pill: 980px; /* Apple-style fully rounded button capsule */
 
   /* Motion Curves (250-500ms ease-out) */
   --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
@@ -134,6 +140,97 @@ img, svg {
   max-width: 100%;
 }
 
+/* ---------- ACCESSIBLE FOCUS STATES ----------
+   Keyboard focus must stay clearly visible on every interactive element —
+   links, buttons, and pills all share one consistent treatment so nothing
+   in the navigation or content ever "disappears" for keyboard users. */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+.nav-dropdown-link:focus-visible,
+.filter-pill:focus-visible,
+.az-letter:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- MOTION SYSTEM ----------
+   One shared scroll-reveal treatment for every section-level "stage" in
+   the design system (page-section, page-section-dark, and each numbered
+   homepage scene), applied via MotionRoot using IntersectionObserver so
+   it stays perfectly in sync with actual scroll position. Elements are
+   only ever hidden once JS has hydrated (html.js-ready) and gained the
+   shared `.reveal-target` marker — so content is always visible for
+   no-JS clients, crawlers, and the very first paint. */
+html.js-ready .reveal-target {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 720ms var(--ease-settle), transform 720ms var(--ease-settle);
+  will-change: opacity, transform;
+}
+html.js-ready .reveal-target.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Page-level enter transition (see app/template.tsx) — every route change
+   fades and settles the new page into place instead of hard-cutting. */
+.page-enter {
+  animation: page-enter 460ms var(--ease-settle) both;
+}
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Scroll progress indicator, fixed to the top of the viewport. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 300;
+  pointer-events: none;
+  background: transparent;
+}
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  transition: transform 120ms linear;
+}
+
+/* Lightweight fade-in used when a tab/subsection panel's content swaps
+   (Research Portal, Geographic Index) so switching feels animated rather
+   than an abrupt cut. */
+@keyframes panel-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.panel-fade-in {
+  animation: panel-fade-in 360ms var(--ease-settle) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-ready .reveal-target,
+  html.js-ready .reveal-target.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .page-enter,
+  .panel-fade-in {
+    animation: none;
+  }
+}
+
 /* ---------- TYPOGRAPHY UTILITIES ---------- */
 .font-serif { font-family: var(--font-serif); }
 .font-sans  { font-family: var(--font-sans); }
@@ -145,24 +242,11 @@ img, svg {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--color-gold);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.eyebrow::before {
-  content: '';
   display: inline-block;
-  width: 16px;
-  height: 1px;
-  background-color: var(--color-gold);
 }
 
 .eyebrow-light {
   color: var(--color-gold-light);
-}
-.eyebrow-light::before {
-  background-color: var(--color-gold-light);
 }
 
 .text-hero-display {
@@ -192,21 +276,29 @@ img, svg {
   max-width: 680px;
 }
 
-/* ---------- BUTTONS (Sharp 4px Institutional) ---------- */
+/* ---------- BUTTONS (Apple-style capsule) ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 14px 30px;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-radius: var(--radius-btn);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-pill);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   cursor: pointer;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(10, 31, 68, 0.16);
+}
+.btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
 }
 
 .btn-primary {
@@ -243,7 +335,9 @@ img, svg {
 .btn-ghost-gold {
   background-color: transparent;
   color: var(--color-gold);
-  padding: 8px 0;
+  padding: 8px 14px 8px 4px;
+  margin: -8px -14px -8px -4px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -251,19 +345,25 @@ img, svg {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
 .btn-ghost-gold::after {
   content: '';
   position: absolute;
   bottom: 4px;
-  left: 0;
+  left: 4px;
   width: 0%;
   height: 1px;
   background-color: var(--color-gold);
   transition: width var(--transition-fast);
 }
+.btn-ghost-gold:hover {
+  color: var(--color-gold-light);
+  background-color: rgba(176, 141, 87, 0.12);
+  transform: translateX(2px);
+}
 .btn-ghost-gold:hover::after {
-  width: 100%;
+  width: calc(100% - 18px);
 }
 
 /* ---------- LAYOUT CONTAINERS ---------- */
@@ -428,19 +528,24 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   gap: 20px;
 }
 .nav-btn-cta {
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 600;
   border: 1px solid var(--color-gold);
   color: var(--color-white);
-  border-radius: var(--radius-btn);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-pill);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
 }
 .nav-btn-cta:hover {
   background-color: var(--color-gold);
   color: var(--color-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(6, 19, 43, 0.3);
+}
+.nav-btn-cta:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .nav-mobile-toggle {
@@ -469,7 +574,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   position: absolute;
   top: calc(100% + 22px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-8px);
   min-width: 560px;
   background-color: var(--color-navy);
   border: 1px solid rgba(176,141,87,0.28);
@@ -481,12 +586,13 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 180ms ease;
+  transition: opacity 220ms ease, transform 220ms var(--ease-settle), visibility 220ms;
 }
 .nav-dropdown.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
 .nav-dropdown-col-title {
@@ -603,6 +709,15 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 0 0 0;
+  transition: max-height var(--transition-base), opacity var(--transition-fast), padding-bottom var(--transition-base);
+}
+.mobile-nav-sublist.is-open {
+  max-height: 640px;
+  opacity: 1;
   padding: 0 0 18px 0;
 }
 .mobile-nav-sublist a {
@@ -649,15 +764,6 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 @media (min-width: 1100px) {
   .hero-stage .text-hero-display { max-width: 20ch; }
-}
-
-/* Centred eyebrow gets a rule on both sides */
-.hero-stage .eyebrow::after {
-  content: '';
-  display: inline-block;
-  width: 16px;
-  height: 1px;
-  background-color: var(--color-gold-light);
 }
 
 /* Letter-by-letter headline reveal */
@@ -799,12 +905,17 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: 56px;
-  align-items: end;
+  align-items: baseline;
   padding-bottom: 32px;
   border-bottom: 1px solid var(--color-navy);
 }
 @media (max-width: 900px) {
   .wwd-head { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.wwd-rows {
+  display: flex;
+  flex-direction: column;
 }
 
 .wwd-row {
@@ -897,6 +1008,17 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   color: var(--color-charcoal);
   border-bottom: 1px solid var(--color-grey-soft);
 }
+.wwd-items li a {
+  display: block;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+.wwd-items li a:hover {
+  color: var(--color-navy);
+}
+.wwd-items li:has(a:hover)::before {
+  background-color: var(--color-navy);
+}
 .wwd-items li::before {
   content: '';
   position: absolute;
@@ -959,7 +1081,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 .areas-header-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: baseline;
   margin-bottom: 56px;
   border-bottom: 1px solid var(--color-grey-soft);
   padding-bottom: 28px;
@@ -1070,7 +1192,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   border-bottom: 1px solid var(--color-grey-soft);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: baseline;
 }
 
 .sectors-editorial-list {
@@ -1134,16 +1256,21 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 
 .sector-item-drawer {
   padding-left: 48px;
-  padding-top: 16px;
   max-width: 820px;
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   gap: 32px;
+  transition: max-height var(--transition-base), opacity var(--transition-fast), padding-top var(--transition-base);
 }
 
 .sector-editorial-item.active .sector-item-drawer {
-  display: flex;
+  max-height: 200px;
+  opacity: 1;
+  padding-top: 16px;
 }
 
 .sector-item-desc {
@@ -1330,6 +1457,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-base);
+}
+.story-secondary:hover .story-secondary-image img {
+  transform: scale(1.03);
 }
 
 .story-meta {
@@ -1575,6 +1706,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   grid-template-columns: 190px 1fr auto;
   gap: 32px;
   align-items: center;
+  transition: background-color var(--transition-fast);
+}
+.event-chronology-row:hover {
+  background-color: var(--color-mist);
 }
 .event-chronology-row:last-child {
   border-bottom: none;
@@ -1691,11 +1826,11 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
    ============================================================ */
 .section-cta-stage {
   padding: 110px var(--outer-padding);
-  background-color: var(--color-navy);
+  background: linear-gradient(135deg, var(--color-slate) 0%, var(--color-navy) 45%, var(--color-navy-deep) 100%);
   border-radius: var(--radius-stage);
   color: var(--color-white);
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: var(--s10);
   position: relative;
   overflow: hidden;
 }
@@ -1715,7 +1850,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: var(--s6);
+}
+.cta-stage-content .btn-primary {
+  margin-top: var(--s2);
 }
 
 .section-cta-stage h2 {
@@ -1739,17 +1877,27 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .signature-footer {
-  background-color: var(--color-navy);
+  background: linear-gradient(180deg, var(--color-navy-deep) 0%, var(--color-navy-deepest) 100%);
   border-radius: var(--radius-stage);
   color: var(--color-white);
   padding: 80px var(--outer-padding) 40px var(--outer-padding);
-  border-top: 2px solid var(--color-gold);
+  position: relative;
+  overflow: hidden;
+}
+.signature-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
 .footer-top-layout {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 50px;
@@ -2146,11 +2294,18 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   padding: var(--s12) var(--outer-padding);
 }
 .page-section-dark + .page-section-dark { margin-top: var(--s4); }
+/* Closing CTA banner (always the last block before the Footer) gets the
+   same depth treatment as the homepage CTA, plus real breathing room so
+   it never touches the footer below it. */
+.page-section-dark:last-child {
+  background: linear-gradient(135deg, var(--color-slate) 0%, var(--color-navy) 45%, var(--color-navy-deep) 100%);
+  margin-bottom: var(--s10);
+}
 
 .section-head-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: baseline;
   gap: var(--s4);
   margin-bottom: var(--s6);
   flex-wrap: wrap;
@@ -2400,6 +2555,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   padding: var(--s6) var(--s4);
   border-bottom: 1px solid var(--color-grey-soft);
   border-right: 1px solid var(--color-grey-soft);
+  transition: background-color var(--transition-fast);
+}
+.geo-directory-item:hover {
+  background-color: var(--color-mist);
 }
 .geo-directory-item:nth-child(even) { border-right: none; }
 @media (max-width: 800px) {
@@ -2436,14 +2595,23 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 .corridor-row {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px 1fr 300px;
+  align-items: center;
   gap: var(--s6);
-  padding: var(--s5) 0;
+  padding: var(--s6) 0;
   border-bottom: 1px solid rgba(255,255,255,0.14);
+  transition: background-color var(--transition-fast);
+}
+.corridor-row:hover {
+  background-color: rgba(255,255,255,0.03);
 }
 .corridor-row:first-child { border-top: 1px solid rgba(255,255,255,0.14); }
+@media (max-width: 1100px) {
+  .corridor-row { grid-template-columns: 200px 1fr; }
+  .corridor-row-map { grid-column: 1 / -1; justify-content: flex-start; margin-top: var(--s3); }
+}
 @media (max-width: 760px) {
-  .corridor-row { grid-template-columns: 1fr; gap: var(--s2); }
+  .corridor-row { grid-template-columns: 1fr; gap: var(--s3); }
 }
 .corridor-name {
   font-family: var(--font-serif);
@@ -2459,41 +2627,79 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   max-width: 560px;
 }
 
-.corridor-geo-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.corridor-geo-tag {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--color-gold-light);
-  border: 1px solid rgba(176,141,87,0.4);
-  padding: 4px 10px;
-  border-radius: 3px;
-}
-
+/* Full network map (top of /corridors) sits on the ivory page background. */
 .corridor-diagram {
   width: 100%;
   height: auto;
   margin-bottom: var(--s8);
+  background-color: var(--color-ivory);
+  border-radius: var(--radius-card);
 }
 .corridor-diagram-node {
   fill: var(--color-gold);
+  transition: fill 300ms ease, opacity 300ms ease;
 }
 .corridor-diagram-node-label {
   font-family: var(--font-sans);
-  font-size: 11px;
-  fill: rgba(255,255,255,0.75);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  fill: var(--color-navy);
+  transition: opacity 300ms ease, font-weight 300ms ease;
 }
 .corridor-diagram-line {
-  stroke: rgba(176,141,87,0.45);
+  stroke: var(--color-navy);
   stroke-width: 1;
+  stroke-opacity: 0.35;
   fill: none;
+  transition: stroke 300ms ease, stroke-width 300ms ease, stroke-opacity 300ms ease;
+}
+.corridor-diagram-line.is-active {
+  stroke: var(--color-gold);
+  stroke-width: 2.5;
+  stroke-opacity: 0.95;
+}
+.corridor-diagram-line.is-dimmed {
+  stroke-opacity: 0.08;
+}
+.corridor-diagram g.is-dimmed .corridor-diagram-node {
+  fill: var(--color-grey-soft);
+  opacity: 0.45;
+}
+
+/* Compact glass variant — embedded per-row in the corridor directory in
+   place of a plain keyword-tag list, so each corridor reads as "where in
+   the world this connects" rather than a row of bare pills. */
+.corridor-diagram-compact {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin-bottom: 0;
+  background: transparent;
+}
+.corridor-diagram-compact .corridor-diagram-line {
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-opacity: 1;
+}
+.corridor-diagram-compact .corridor-diagram-node-label {
+  fill: rgba(255, 255, 255, 0.82);
+}
+.corridor-diagram-compact g.is-dimmed .corridor-diagram-node {
+  fill: rgba(255, 255, 255, 0.28);
+}
+.corridor-diagram-compact .corridor-diagram-line.is-active {
+  stroke: var(--color-gold-light);
+}
+
+.corridor-row-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s4);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* ---------- RESEARCH PORTAL (left index / right detail) ---------- */
@@ -2518,8 +2724,13 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   align-items: baseline;
   gap: 14px;
   text-align: left;
-  padding: 16px 0;
+  width: 100%;
+  padding: 16px 12px;
   border-bottom: 1px solid var(--color-grey-soft);
+  transition: background-color var(--transition-fast);
+}
+.research-nav-item:hover {
+  background-color: var(--color-mist);
 }
 .research-nav-item:first-child { border-top: 1px solid var(--color-grey-soft); }
 .research-nav-num {
@@ -2573,6 +2784,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   margin-top: 20px;
   max-width: 680px;
 }
+.research-detail-panel {
+  display: block;
+  min-width: 0;
+}
 .research-detail-block {
   margin-top: var(--s6);
   padding-top: var(--s5);
@@ -2595,6 +2810,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   font-size: 16px;
   font-weight: 500;
   color: var(--color-navy);
+  transition: color var(--transition-fast);
+}
+.accordion-trigger:hover {
+  color: var(--color-gold);
 }
 .accordion-symbol {
   font-family: var(--font-serif);
@@ -2652,6 +2871,10 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   gap: var(--s6);
   padding: var(--s6) 0;
   border-bottom: 1px solid var(--color-grey-soft);
+  transition: background-color var(--transition-fast);
+}
+.pub-row:hover {
+  background-color: var(--color-mist);
 }
 .pub-row:first-child { border-top: 1px solid var(--color-grey-soft); }
 @media (max-width: 720px) {
