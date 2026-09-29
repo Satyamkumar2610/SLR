@@ -4,7 +4,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
-import CorridorDiagram from "@/components/CorridorDiagram";
+import CorridorExplorer from "@/components/CorridorExplorer";
 import InsightMedia from "@/components/InsightMedia";
 import SectionIndex from "@/components/SectionIndex";
 import CountUp from "@/components/CountUp";
@@ -166,7 +166,7 @@ export default function Home() {
            SCENE 10 — STRATEGIC CORRIDORS
            ============================================================ */}
       <div className="stage-container">
-        <section className="section-chapter-reset" id="corridors" style={{ padding: "72px var(--outer-padding)", textAlign: "left" }}>
+        <section className="section-chapter-reset" id="corridors" style={{ padding: "72px 0", textAlign: "left" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "40px" }}>
             <div>
               <span className="eyebrow eyebrow-light">Where Trade Meets Strategy</span>
@@ -174,17 +174,7 @@ export default function Home() {
             </div>
             <Link href="/corridors" className="btn-ghost-gold" style={{ color: "var(--color-gold-light)" }}>Explore Strategic Corridors →</Link>
           </div>
-          <div className="corridor-list">
-            {corridors.slice(0, 4).map((corridor) => (
-              <div className="corridor-row" key={corridor.slug}>
-                <h3 className="corridor-name">{corridor.name}</h3>
-                <p className="corridor-desc">{corridor.description}</p>
-                <div className="corridor-row-map">
-                  <CorridorDiagram highlightSlug={corridor.slug} variant="compact" />
-                </div>
-              </div>
-            ))}
-          </div>
+          <CorridorExplorer showAllLink={false} />
         </section>
       </div>
 

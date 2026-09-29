@@ -45,7 +45,7 @@ export default function SectorDirectory() {
           />
         </div>
 
-        <div className="az-rail" role="listbox" aria-label="Filter sectors by letter">
+        <div className="az-rail" role="group" aria-label="Filter sectors by letter">
           {ALPHABET.map((l) => {
             const active = activeLetters.has(l);
             return (

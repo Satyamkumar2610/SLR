@@ -1,5 +1,6 @@
 import { geographies, corridors } from "@/lib/content";
 import { WORLD_VIEWBOX, GEO_MAP_POSITIONS } from "@/lib/worldMap";
+import { graticulePath, routePath } from "@/lib/mapGeometry";
 
 /**
  * The strategic-corridor network drawn over an actual, geographically
@@ -10,11 +11,13 @@ import { WORLD_VIEWBOX, GEO_MAP_POSITIONS } from "@/lib/worldMap";
  * flows are implied — only the relationships stated in the Centre's own
  * corridor descriptions.
  *
- * Pass `highlightSlug` to render a compact "glass" variant that keeps the
- * full network visible but brings only the requested corridor's route and
- * geographies into focus — used inline in the corridor directory instead
- * of a plain list of keyword tags.
+ * Pass `highlightSlug` to keep the full network visible but bring only the
+ * requested corridor's route and geographies into focus. The highlighted
+ * route also carries a slow directional trace, so a corridor reads as a
+ * system with a direction of travel rather than a static line.
  */
+
+const grid = graticulePath(WORLD_VIEWBOX, 20);
 
 const order = [
   "north-america",
@@ -52,6 +55,7 @@ export default function CorridorDiagram({
           : "World map of geographies connected by SLR's tracked strategic corridors"
       }
     >
+      <path className="corridor-diagram-graticule" d={grid} />
       <use href="#world-land-mass" className="corridor-diagram-land" />
 
       {corridors.map((corridor) => {
@@ -59,18 +63,20 @@ export default function CorridorDiagram({
           .map((slug) => GEO_MAP_POSITIONS[slug])
           .filter(Boolean);
         if (pts.length < 2) return null;
-        const d = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+        const d = routePath(pts);
         const isActive = highlightSlug === corridor.slug;
         return (
-          <path
-            key={corridor.slug}
-            d={d}
-            className={[
-              "corridor-diagram-line",
-              isActive ? "is-active" : "",
-              relevant && !isActive ? "is-dimmed" : "",
-            ].join(" ").trim()}
-          />
+          <g key={corridor.slug}>
+            <path
+              d={d}
+              className={[
+                "corridor-diagram-line",
+                isActive ? "is-active" : "",
+                relevant && !isActive ? "is-dimmed" : "",
+              ].join(" ").trim()}
+            />
+            {isActive && <path d={d} className="corridor-diagram-flow" />}
+          </g>
         );
       })}
 
@@ -78,7 +84,7 @@ export default function CorridorDiagram({
         const pos = GEO_MAP_POSITIONS[geo.slug];
         const isRelevant = !relevant || relevant.has(geo.slug);
         return (
-          <g key={geo.slug} className={relevant && !isRelevant ? "is-dimmed" : ""}>
+          <g key={geo.slug} className={isRelevant ? (relevant ? "is-relevant" : "") : "is-dimmed"}>
             <circle cx={pos.x} cy={pos.y} r={geo.isAnchor ? 26 : 19} className="corridor-diagram-node-halo" />
             <circle cx={pos.x} cy={pos.y} r={geo.isAnchor ? 14 : 10} className="corridor-diagram-node" />
             {(!relevant || isRelevant) && (

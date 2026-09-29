@@ -10,7 +10,7 @@ export default function GeographicIndex() {
   return (
     <div className="stage-container">
       <section className="section-geographies-stage" id="geographies">
-        <div style={{ padding: "0 var(--outer-padding)" }}>
+        <div>
           <div className="geo-top-bar">
             <div>
               <span className="eyebrow eyebrow-light">Global Footprint</span>

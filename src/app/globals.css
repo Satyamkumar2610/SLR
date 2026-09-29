@@ -398,13 +398,9 @@ html.js-ready .reveal-target.is-revealed {
 }
 
 /* Home page only: remove the top frame gap and pin the nav to the viewport edge */
+/* The homepage hero itself still needs its own top offset cancelled — the
+   nav's own flush position (below) is no longer conditional on this. */
 body:has(.hero-stage) { padding-top: 0; }
-body:has(.hero-stage) .site-nav:not(.is-scrolled) {
-  top: 0;
-  left: 0;
-  right: 0;
-  border-radius: 0;
-}
 
 .hero-bg-media {
   position: absolute;
@@ -436,13 +432,15 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 
 /* Navigation — transparent over the hero, solid once the page scrolls */
 .site-nav {
+  /* Always flush against the viewport, on every page — consistent with the
+     homepage, which previously was the only page treated this way. */
   position: fixed;
-  top: 16px;
-  left: 16px;
-  right: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 200;
-  border-radius: var(--radius-hero) var(--radius-hero) 0 0;
-  transition: background-color var(--transition-base), box-shadow var(--transition-base), top var(--transition-base), left var(--transition-base), right var(--transition-base), border-radius var(--transition-base);
+  border-radius: 0;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
 }
 .nav-inner {
   max-width: var(--max-width);
@@ -480,7 +478,6 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 .site-nav.is-scrolled .nav-inner::after { opacity: 0; }
 
 @media (max-width: 768px) {
-  .site-nav { top: 0; left: 0; right: 0; border-radius: 0; }
   .site-nav:not(.is-scrolled) { background-color: transparent; }
 }
 
@@ -1179,8 +1176,16 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   opacity: 1;
 }
 
-.area-index-row.dimmed {
-  opacity: 0.62;
+.area-index-row.dimmed .area-row-title,
+.area-index-row.dimmed .area-row-desc {
+  color: var(--color-grey-muted);
+}
+.area-index-row.dimmed .area-row-arrow {
+  opacity: 0.45;
+}
+.area-index-row .area-row-title,
+.area-index-row .area-row-desc {
+  transition: color var(--transition-base);
 }
 
 .area-row-num {
@@ -1240,7 +1245,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .sectors-top {
-  padding: 0 var(--outer-padding) 40px var(--outer-padding);
+  padding: 0 0 40px 24px;
   border-bottom: 1px solid var(--color-grey-soft);
   display: flex;
   justify-content: space-between;
@@ -1253,7 +1258,9 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .sector-editorial-item {
-  padding: 28px var(--outer-padding);
+  /* Left inset clears the row's own 6px colour bar (::before, absolute
+     left:0) — without it the numeral sits on top of the bar. */
+  padding: 28px 0 28px 24px;
   border-bottom: 1px solid var(--color-grey-soft);
   cursor: pointer;
   position: relative;
@@ -1469,7 +1476,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   background-color: var(--color-mist);
   border-radius: var(--radius-stage);
   border: 1px solid var(--color-grey-soft);
-  padding: 48px var(--outer-padding);
+  padding: 48px 32px;
 }
 
 .newsroom-header {
@@ -1752,7 +1759,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .events-top-row {
-  padding: 0 var(--outer-padding) 36px var(--outer-padding);
+  padding: 0 0 36px 0;
   border-bottom: 1px solid var(--color-grey-soft);
   display: flex;
   justify-content: space-between;
@@ -1765,7 +1772,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .event-chronology-row {
-  padding: 36px var(--outer-padding);
+  padding: 36px 0;
   border-bottom: 1px solid var(--color-grey-soft);
   display: grid;
   grid-template-columns: 190px 1fr auto;
@@ -1895,7 +1902,7 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   border-radius: var(--radius-stage);
   color: var(--color-white);
   text-align: center;
-  margin-bottom: var(--s10);
+  margin-bottom: var(--s4);
   position: relative;
   overflow: hidden;
 }
@@ -1942,10 +1949,12 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 
 .signature-footer {
+  /* Full-bleed: cancels the 16px page frame so the footer runs edge to edge
+     and reads as the floor of the page rather than another stage card. */
+  margin: 0 -16px -16px;
   background: linear-gradient(180deg, var(--color-navy-deep) 0%, var(--color-navy-deepest) 100%);
-  border-radius: var(--radius-stage);
   color: var(--color-white);
-  padding: 80px var(--outer-padding) 40px var(--outer-padding);
+  padding: 56px 0 24px;
   position: relative;
   overflow: hidden;
 }
@@ -1953,106 +1962,134 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   content: '';
   position: absolute;
   top: 0;
-  left: 8%;
-  right: 8%;
+  left: 0;
+  right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
-
-.footer-top-layout {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  margin-bottom: 50px;
-}
-
-@media (max-width: 860px) {
-  .footer-top-layout {
-    flex-direction: column;
-    gap: 32px;
-  }
+@media (max-width: 768px) {
+  .signature-footer { margin: 0; padding: 44px 0 20px; }
 }
 
 .footer-brand-wrap {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 10px;
+  padding-right: var(--s5);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-brand-wrap img {
-  height: 50px;
+  height: 34px;
   width: auto;
 }
 
 .footer-institution-name {
   font-family: var(--font-serif);
-  font-size: 21px;
+  font-size: 17px;
   font-weight: 600;
+  line-height: 1.32;
   color: var(--color-white);
+  max-width: 24ch;
 }
 
 .footer-motto-phrase {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 15px;
+  font-size: 13.5px;
+  line-height: 1.4;
   color: var(--color-gold);
 }
 
+.footer-brand-cta {
+  margin-top: 6px;
+  padding: 11px 22px;
+  font-size: 11px;
+}
+
+/* The brand block is the first column of the directory rather than a
+   separate row above it, so the footer fills its full width. */
 .footer-directory-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  margin-bottom: 60px;
+  grid-template-columns: minmax(220px, 1.1fr) repeat(4, minmax(0, 1fr));
+  gap: 28px var(--s5);
+  padding-bottom: 36px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1200px) {
+  .footer-directory-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .footer-brand-wrap {
+    grid-column: 1 / -1;
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: var(--s5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .footer-brand-cta { margin-top: 6px; }
 }
 
 @media (max-width: 980px) {
   .footer-directory-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px;
   }
 }
 
+/* Stay two-up on phones: one column made the footer roughly three
+   screens tall. The labels wrap rather than truncate. */
 @media (max-width: 540px) {
-  .footer-directory-grid {
-    grid-template-columns: 1fr;
-  }
+  .footer-directory-grid { gap: 26px var(--s3); }
+  .footer-dir-link { font-size: 12px; }
 }
 
 .footer-col-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
 }
 
 .footer-header-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   color: var(--color-gold);
-  margin-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-dir-link {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.72);
   transition: color var(--transition-fast);
 }
 .footer-dir-link:hover {
   color: var(--color-gold-light);
 }
+.footer-dir-all {
+  margin-top: 3px;
+  color: var(--color-gold-light);
+}
 
 .footer-closing-bar {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--s3);
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
 }
+.footer-closing-legal {
+  display: flex;
+  gap: var(--s3);
+}
+.footer-closing-legal .footer-dir-link { font-size: 12px; }
 
 @media (max-width: 640px) {
   .footer-closing-bar {
@@ -2066,11 +2103,27 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
    INNER-PAGE SYSTEM — shared across every non-homepage route
    ============================================================ */
 
+.page-hero,
+.article-hero {
+  /* Full-bleed, exactly like the homepage's .hero-stage: cancels the 16px
+     page frame so this band sits flush under the (also now-flush) nav
+     instead of floating as a card with a visible gap above it. */
+  margin: -16px -16px 0;
+  border-radius: 0;
+}
+@media (max-width: 768px) {
+  /* body has no padding to cancel below this breakpoint (see the body
+     reset above), so the desktop bleed margin would otherwise pull these
+     bands 16px off-screen and cause horizontal overflow. */
+  .page-hero,
+  .article-hero {
+    margin: 0;
+  }
+}
 .page-hero {
   position: relative;
   padding: 152px 0 56px 0;
   background-color: var(--color-navy);
-  border-radius: var(--radius-stage);
   overflow: hidden;
 }
 
@@ -2144,11 +2197,11 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 }
 .page-section-dark + .page-section-dark { margin-top: var(--s4); }
 /* Closing CTA banner (always the last block before the Footer) gets the
-   same depth treatment as the homepage CTA, plus real breathing room so
-   it never touches the footer below it. */
+   same depth treatment as the homepage CTA, and the same tight gutter above
+   the full-bleed footer. */
 .page-section-dark:last-child {
   background: linear-gradient(135deg, var(--color-slate) 0%, var(--color-navy) 45%, var(--color-navy-deep) 100%);
-  margin-bottom: var(--s10);
+  margin-bottom: var(--s4);
 }
 
 .section-head-row {
@@ -2585,6 +2638,134 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
   -webkit-backdrop-filter: blur(16px);
 }
 
+/* ---------- CORRIDOR EXPLORER (one map, one selected route) ----------
+   Replaces a thumbnail map per row: the reader moves down the corridor
+   list and the same globe redraws, which reads as one connected system
+   and loads a single map instead of four. */
+.corridor-explorer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: var(--s8);
+  align-items: start;
+}
+.corridor-explorer-map {
+  /* The list is taller than the map; sticking the map keeps the route you
+     are reading about on screen instead of leaving a void beside it. */
+  position: sticky;
+  top: calc(var(--nav-offset) + 16px);
+  padding: var(--s4);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.corridor-explorer-map .corridor-diagram-compact { max-width: none; }
+/* Labels are suppressed on the thumbnail variant; at this size they fit. */
+.corridor-explorer-map .corridor-diagram-node-label {
+  display: block;
+  fill: rgba(255, 255, 255, 0.62);
+  stroke: none;
+  font-size: 20px;
+  font-weight: 500;
+}
+.corridor-explorer-map g.is-relevant .corridor-diagram-node-label { fill: var(--color-white); }
+.corridor-explorer-map g.is-dimmed .corridor-diagram-node-label { display: none; }
+
+.corridor-explorer-list { display: flex; flex-direction: column; }
+
+.corridor-pick {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background-color var(--transition-fast);
+}
+.corridor-pick:first-child { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.corridor-pick:hover { background-color: rgba(255, 255, 255, 0.03); }
+.corridor-pick.is-active { border-bottom-color: var(--color-gold); }
+
+.corridor-pick-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--s2);
+  padding: var(--s3) 0;
+  text-align: left;
+}
+.corridor-pick-num {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  /* Full-strength gold, not a faded one: at 0.75 opacity this fell below
+     AA on the navy. The selected state is carried by colour instead. */
+  color: var(--color-gold);
+  transition: color var(--transition-fast);
+}
+.corridor-pick.is-active .corridor-pick-num,
+.corridor-pick-head:hover .corridor-pick-num { color: var(--color-gold-light); }
+.corridor-pick .corridor-name { transition: color var(--transition-fast); }
+.corridor-pick.is-active .corridor-name { color: var(--color-gold-light); }
+
+.corridor-pick-body {
+  padding: 0 0 var(--s3) 50px;
+  animation: panel-fade-in 360ms var(--ease-settle) both;
+}
+.corridor-pick-body .corridor-desc { max-width: none; }
+.corridor-pick-geos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 12px;
+}
+.corridor-pick-geos li {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+.corridor-explorer-link { margin-top: var(--s4); align-self: flex-start; }
+
+/* A quiet geographic grid behind the land, and a direction of travel along
+   the selected route. */
+.corridor-diagram-graticule {
+  fill: none;
+  stroke: rgba(10, 31, 68, 0.1);
+  stroke-width: 1;
+}
+.corridor-diagram-compact .corridor-diagram-graticule {
+  stroke: rgba(255, 255, 255, 0.07);
+}
+.corridor-diagram-flow {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 4 34;
+  animation: corridor-flow 3.4s linear infinite;
+}
+@keyframes corridor-flow { to { stroke-dashoffset: -76; } }
+.corridor-diagram g.is-relevant .corridor-diagram-node { fill: var(--color-gold-light); }
+.corridor-diagram-compact g.is-relevant .corridor-diagram-node-halo { opacity: 0.32; }
+
+@media (max-width: 1100px) {
+  .corridor-explorer { grid-template-columns: 1fr; gap: var(--s5); }
+  .corridor-explorer-map { order: 2; position: static; }
+}
+@media (max-width: 700px) {
+  .corridor-explorer-map { display: none; }
+  .corridor-pick-body { padding-left: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .corridor-diagram-flow { animation: none; stroke-dasharray: none; opacity: 0.5; }
+  .corridor-pick-body { animation: none; }
+}
+
+@keyframes panel-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* ---------- RESEARCH PORTAL (left index / right detail) ---------- */
 .research-portal-grid {
   display: grid;
@@ -2831,7 +3012,6 @@ body:has(.hero-stage) .site-nav:not(.is-scrolled) {
 .article-hero {
   padding: 152px 0 64px 0;
   background-color: var(--color-navy);
-  border-radius: var(--radius-stage);
 }
 .article-category {
   font-family: var(--font-sans);
