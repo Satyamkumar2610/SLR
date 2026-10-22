@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { centre, areasOfFocus, pillars, stakeholders, whatWeDoIntro, stakeholdersIntro } from "@/lib/content";
@@ -61,6 +62,13 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <figure className="stage-container photo-figure">
+        <div className="photo-figure-frame">
+          <Image src={photos.humayunTomb.src} alt={photos.humayunTomb.alt} fill sizes="(max-width: 1200px) 100vw, 1200px" />
+        </div>
+        <figcaption>{photos.humayunTomb.subject}. Photo: {photos.humayunTomb.photographer}, Unsplash.</figcaption>
+      </figure>
 
       <blockquote className="stage-container">
         <p className="pull-quote">

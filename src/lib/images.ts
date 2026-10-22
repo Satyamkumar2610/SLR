@@ -147,6 +147,71 @@ export const photos = {
     sourceUrl: "https://unsplash.com/photos/bandra-worli-sea-link-in-mumbai-vr6nMSlyTJs",
     licence: "Unsplash License",
   },
+  warship: {
+    src: unsplash("photo-1508530786855-dfea35260b8d"),
+    alt: "A grey naval vessel at sea",
+    subject: "Naval vessel, San Diego",
+    photographer: "Michael Afonso",
+    photographerUrl: "https://unsplash.com/@mafonso",
+    sourceUrl: "https://unsplash.com/photos/gray-warship-on-body-of-water-BQgAYwERXhs",
+    licence: "Unsplash License",
+  },
+  labShelves: {
+    src: unsplash("photo-1766297247072-93fd815afef3"),
+    alt: "Laboratory shelves filled with glassware and equipment",
+    subject: "Laboratory glassware",
+    photographer: "Chidera Faustina Okeke",
+    photographerUrl: "https://unsplash.com/@thefourthwxll",
+    sourceUrl: "https://unsplash.com/photos/laboratory-shelves-filled-with-glassware-and-equipment-v41sgDGz4ik",
+    licence: "Unsplash License",
+  },
+  dataCentre: {
+    src: unsplash("photo-1784652852605-6945598f2af3"),
+    alt: "Rows of white server cabinets in a data centre",
+    subject: "Data centre, London",
+    photographer: "Tony Marinescu",
+    photographerUrl: "https://unsplash.com/@tonymarinescu",
+    sourceUrl: "https://unsplash.com/photos/modern-data-center-with-rows-of-white-server-cabinets-fImCPTZ026U",
+    licence: "Unsplash License",
+  },
+  fountainPen: {
+    src: unsplash("photo-1471107340929-a87cd0f5b5f3"),
+    alt: "A fountain pen resting on a notebook",
+    subject: "Fountain pen",
+    photographer: "Aaron Burden",
+    photographerUrl: "https://unsplash.com/@aaronburden",
+    sourceUrl: "https://unsplash.com/photos/fountain-pen-on-spiral-book-xG8IQMqMITM",
+    licence: "Unsplash License",
+  },
+  glassBuilding: {
+    src: unsplash("photo-1523477593243-78bbf626fd3b"),
+    alt: "The glass facade of an office building",
+    subject: "Glass facade, Berlin",
+    photographer: "Christian Ladewig",
+    photographerUrl: "https://unsplash.com/@dozy_de",
+    sourceUrl: "https://unsplash.com/photos/architectural-photography-of-glass-building-T0iFfJw-rB0",
+    licence: "Unsplash License",
+  },
+  humayunTomb: {
+    src: unsplash("photo-1597040663342-45b6af3d91a5"),
+    alt: "Humayun's Tomb in New Delhi, framed by palm trees",
+    subject: "Humayun's Tomb, New Delhi",
+    photographer: "Junaid Ahmad Ansari",
+    photographerUrl: "https://unsplash.com/@junaidahmadansari",
+    sourceUrl: "https://unsplash.com/photos/white-dome-building-near-palm-trees-during-daytime-9WP-NVh2d6U",
+    licence: "Unsplash License",
+  },
 } satisfies Record<string, Photo>;
 
 export type PhotoKey = keyof typeof photos;
+
+/** Photograph for each sector, keyed by sector slug. */
+export const sectorPhotos: Record<string, Photo> = {
+  defence: photos.warship,
+  pharma: photos.labShelves,
+  "technology-ai": photos.dataCentre,
+  "energy-climate": photos.solarFarm,
+  "financial-services": photos.financialDistrict,
+  infrastructure: photos.portBarcelona,
+  semiconductors: photos.wafer,
+};

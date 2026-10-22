@@ -1,31 +1,29 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { sectors } from "@/lib/content";
+import { sectorPhotos } from "@/lib/images";
 
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
+// Sector list with a search box. On wide screens a photo panel beside the
+// list follows the row under the pointer or keyboard focus.
 export default function SectorDirectory() {
   const [query, setQuery] = useState("");
-  const [letter, setLetter] = useState<string | null>(null);
-
-  const activeLetters = useMemo(
-    () => new Set(sectors.map((s) => s.title[0].toUpperCase())),
-    []
-  );
+  const [active, setActive] = useState(sectors[0].slug);
 
   const filtered = useMemo(() => {
-    return sectors.filter((s) => {
-      const matchesQuery =
-        query.trim().length === 0 ||
-        s.title.toLowerCase().includes(query.toLowerCase()) ||
-        s.summary.toLowerCase().includes(query.toLowerCase()) ||
-        s.keyIssues.some((k) => k.toLowerCase().includes(query.toLowerCase()));
-      const matchesLetter = !letter || s.title[0].toUpperCase() === letter;
-      return matchesQuery && matchesLetter;
-    });
-  }, [query, letter]);
+    const q = query.trim().toLowerCase();
+    if (!q) return sectors;
+    return sectors.filter(
+      (s) =>
+        s.title.toLowerCase().includes(q) ||
+        s.summary.toLowerCase().includes(q) ||
+        s.keyIssues.some((k) => k.toLowerCase().includes(q))
+    );
+  }, [query]);
+
+  const shown = filtered.some((s) => s.slug === active) ? active : filtered[0]?.slug;
 
   return (
     <div>
@@ -37,59 +35,52 @@ export default function SectorDirectory() {
           </svg>
           <input
             className="directory-search-input"
-            type="text"
+            type="search"
             placeholder="Search sectors by name or issue tracked…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label="Search sectors"
           />
         </div>
-
-        <div className="az-rail" role="group" aria-label="Filter sectors by letter">
-          {ALPHABET.map((l) => {
-            const active = activeLetters.has(l);
-            return (
-              <button
-                key={l}
-                className={`az-letter ${!active ? "disabled" : ""} ${letter === l ? "active" : ""}`}
-                disabled={!active}
-                onClick={() => setLetter(letter === l ? null : l)}
-                aria-pressed={letter === l}
-              >
-                {l}
-              </button>
-            );
-          })}
-        </div>
-
-        <span className="directory-count">
+        <span className="directory-count" role="status">
           {filtered.length} of {sectors.length} sectors
         </span>
       </div>
 
-      <div className="directory-list panel-fade-in" key={letter ?? "all"}>
-        {filtered.length === 0 && (
-          <div className="directory-empty">No sectors match your search.</div>
-        )}
-        {filtered.map((sector) => (
-          <div className="directory-row" key={sector.slug}>
-            <span className="directory-num">{sector.num}</span>
-            <div>
-              <Link href={`/sectors/${sector.slug}`} className="directory-title-link">
-                {sector.title}
-              </Link>
-              <p className="directory-summary">{sector.summary}</p>
-              <div className="directory-issues">
-                {sector.keyIssues.slice(0, 4).map((issue) => (
-                  <span className="issue-tag" key={issue}>{issue}</span>
-                ))}
-              </div>
-            </div>
-            <Link href={`/sectors/${sector.slug}`} className="directory-row-arrow" aria-label={`Open ${sector.title} profile`}>
-              →
+      <div className="sector-browser">
+        <div className="directory-list">
+          {filtered.length === 0 && <div className="directory-empty">No sectors match your search.</div>}
+          {filtered.map((sector) => (
+            <Link
+              href={`/sectors/${sector.slug}`}
+              className={`directory-row sector-row ${shown === sector.slug ? "is-current" : ""}`}
+              key={sector.slug}
+              onMouseEnter={() => setActive(sector.slug)}
+              onFocus={() => setActive(sector.slug)}
+            >
+              <span className="directory-num">{sector.num}</span>
+              <span className="sector-row-body">
+                <span className="directory-title-link">{sector.title}</span>
+                <span className="directory-summary">{sector.summary}</span>
+                <span className="sector-row-issues">{sector.keyIssues.slice(0, 4).join(" · ")}</span>
+              </span>
+              <span className="directory-row-arrow" aria-hidden="true">→</span>
             </Link>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div className="sector-preview" aria-hidden="true">
+          {sectors.map((s) => {
+            const photo = sectorPhotos[s.slug];
+            if (!photo) return null;
+            return (
+              <figure className={`sector-preview-frame ${shown === s.slug ? "is-shown" : ""}`} key={s.slug}>
+                <Image src={photo.src} alt="" fill sizes="380px" />
+                <figcaption>{photo.subject}</figcaption>
+              </figure>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

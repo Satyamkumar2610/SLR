@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { sectors } from "@/lib/content";
+import { sectorPhotos } from "@/lib/images";
 
 export default function InteractiveSectors() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -42,8 +44,15 @@ export default function InteractiveSectors() {
               </h3>
               <div className="sector-item-drawer" id={`sector-drawer-${sector.slug}`} inert={activeIndex !== idx}>
                 <div className="sector-item-drawer-inner">
-                  <p className="sector-item-desc">{sector.summary}</p>
-                  <Link href={`/sectors/${sector.slug}`} className="btn-ghost-gold">Explore Sector →</Link>
+                  <div className="sector-item-text">
+                    <p className="sector-item-desc">{sector.summary}</p>
+                    <Link href={`/sectors/${sector.slug}`} className="btn-ghost-gold">Explore Sector →</Link>
+                  </div>
+                  {sectorPhotos[sector.slug] && (
+                    <div className="sector-item-photo" aria-hidden="true">
+                      <Image src={sectorPhotos[sector.slug].src} alt="" fill sizes="240px" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 import { pillars, offerings, offeringsForPillar, whatWeDoIntro } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
 export default function CapabilitiesPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.glassBuilding} />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>
