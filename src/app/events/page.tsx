@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ConveningCalendar from "@/components/ConveningCalendar";
-import { upcomingEvents } from "@/lib/content";
+import { centre, upcomingEvents } from "@/lib/content";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Events & Dialogues — SLR Centre",
-  description: "Invitation-only roundtables, strategic dialogues, and convenings that bring together senior leaders from business, government, and academia.",
+  description: centre.convening,
 };
 
 // Re-render daily so events drop off the list once their date has passed.
@@ -16,19 +18,17 @@ export default function EventsPage() {
 
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.boardroom} />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>
             <span className="breadcrumb-sep">/</span>
             <span>Events</span>
           </div>
-          <span className="eyebrow eyebrow-light">Events &amp; Dialogues</span>
-          <h1 className="page-hero-title">Dialogues that drive decisions</h1>
-          <p className="page-hero-lead">
-            Invitation-only roundtables, strategic dialogues, and convenings that bring together senior
-            leaders from business, government, and academia.
-          </p>
+          <span className="eyebrow eyebrow-light">Convening</span>
+          <h1 className="page-hero-title">Events &amp; Dialogues</h1>
+          <p className="page-hero-lead">{centre.convening}</p>
         </div>
       </section>
 
@@ -36,7 +36,7 @@ export default function EventsPage() {
         <div className="stage-container">
           <div className="section-head-row">
             <div>
-              <span className="eyebrow">Convening Authority</span>
+              <span className="eyebrow">Convening</span>
               <h2 className="text-section-title" style={{ marginTop: "8px" }}>{hasUpcoming ? "Upcoming Events" : "How the Centre convenes"}</h2>
             </div>
           </div>
@@ -47,16 +47,12 @@ export default function EventsPage() {
 
       <section className="page-section-dark">
         <div className="stage-container" style={{ textAlign: "left" }}>
-          <span className="eyebrow eyebrow-light">Host a Convening</span>
+          <span className="eyebrow eyebrow-light">Engage</span>
           <h2 className="text-section-title" style={{ marginTop: "8px", color: "var(--color-white)" }}>
-            Host a private roundtable or commission a convening
+            Request an invitation or discuss a convening with the Centre.
           </h2>
-          <p className="text-lead" style={{ marginTop: "14px", color: "rgba(255,255,255,0.72)" }}>
-            The Centre designs and hosts bespoke dialogues for organisations navigating complex geoeconomic
-            challenges.
-          </p>
           <div style={{ marginTop: "24px" }}>
-            <Link href="/engage" className="btn btn-primary">Enquire</Link>
+            <Link href="/engage?enquiry=Roundtables%20%26%20Events" className="btn btn-primary">Engage the Centre</Link>
           </div>
         </div>
       </section>

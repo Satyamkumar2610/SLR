@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { centre, areasOfFocus, pillars, stakeholders } from "@/lib/content";
+import { centre, areasOfFocus, pillars, stakeholders, whatWeDoIntro, stakeholdersIntro } from "@/lib/content";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About the Centre — SLR Centre",
@@ -10,15 +12,16 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.indiaGate} position="center 60%" />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>
             <span className="breadcrumb-sep">/</span>
             <span>About</span>
           </div>
-          <span className="eyebrow eyebrow-light">About the Centre</span>
-          <h1 className="page-hero-title">Rigorous analysis. Actionable intelligence.</h1>
+          <span className="eyebrow eyebrow-light">Centre Profile</span>
+          <h1 className="page-hero-title">About the Centre</h1>
           <p className="page-hero-lead">
             The {centre.name} is a high-level research, intelligence, and strategic advisory centre
             anchored in India with a global mandate.
@@ -71,10 +74,7 @@ export default function AboutPage() {
           <div className="narrative-columns">
             <span className="narrative-side-label">How It Works</span>
             <div className="narrative-block">
-              <p>
-                The Centre operates through three integrated modes of engagement — research, intelligence,
-                and strategic advisory — each reinforcing the others.
-              </p>
+              <p>{whatWeDoIntro}</p>
               {pillars.map((pillar) => (
                 <p key={pillar.slug}>
                   <strong style={{ color: "var(--color-navy)", fontStyle: "normal" }}>{pillar.title}.</strong>{" "}
@@ -93,8 +93,9 @@ export default function AboutPage() {
         <div className="stage-container">
           <div className="section-head-row">
             <div>
-              <span className="eyebrow">Who We Engage With</span>
-              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Serving leaders who shape the global agenda</h2>
+              <span className="eyebrow">Stakeholders</span>
+              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Who We Engage With</h2>
+              <p className="text-lead" style={{ marginTop: "14px", marginBottom: 0 }}>{stakeholdersIntro}</p>
             </div>
           </div>
           <div className="stakeholder-editorial-roster">
@@ -109,29 +110,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="page-section">
-        <div className="stage-container">
-          <div className="narrative-columns">
-            <span className="narrative-side-label">Why the Centre Exists</span>
-            <div className="narrative-block">
-              <p>
-                The Centre exists to equip senior decision-makers — in business, government, and international
-                organisations — with the depth of analysis and clarity of intelligence required to navigate an
-                era of accelerating geopolitical complexity.
-              </p>
-              <p>
-                It operates at the intersection of law, economics, and emerging technology, producing research
-                and advisory services that are substantive, not reactive — designed to anticipate, not merely
-                respond.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="page-section-dark">
         <div className="stage-container" style={{ textAlign: "left" }}>
-          <span className="eyebrow eyebrow-light">Executive Engagement</span>
+          <span className="eyebrow eyebrow-light">Engage</span>
           <h2 className="text-section-title" style={{ marginTop: "8px", color: "var(--color-white)" }}>
             Commission Research. Attend a Dialogue. Request a Briefing.
           </h2>

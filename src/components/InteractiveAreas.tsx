@@ -13,7 +13,7 @@ export default function InteractiveAreas() {
         <div className="areas-header-row">
           <div>
             <span className="eyebrow">Strategic Research Agenda</span>
-            <h2 className="text-section-title" style={{ marginTop: "8px" }}>Five domains. One mandate.</h2>
+            <h2 className="text-section-title" style={{ marginTop: "8px" }}>Areas of Focus</h2>
           </div>
           <p className="text-lead" style={{ marginBottom: 0 }}>{centre.positioning.split(". By integrating")[0]}.</p>
         </div>

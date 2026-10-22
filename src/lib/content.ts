@@ -143,12 +143,16 @@ export const areasOfFocus: AreaOfFocus[] = [
 // PRIORITY SECTORS (7)
 // ----------------------------------------------------------------
 
+// Priority-sector framing and summaries are transcribed from the Centre
+// Profile; key issues are the summary's own items, listed individually.
+export const sectorsIntro =
+  "The Centre applies its research to priority sectors in which geopolitical, regulatory, technological and economic forces increasingly converge and interact.";
+
 export interface Sector {
   num: string;
   slug: string;
   title: string;
   summary: string;
-  description: string;
   keyIssues: string[];
   color: string; // css variable name, no var()
   relatedAreas: string[]; // area slugs
@@ -161,14 +165,11 @@ export const sectors: Sector[] = [
     title: "Defence & Homeland Security",
     summary:
       "Strategic technologies, defence regulation, security frameworks and the foundations of economic resilience.",
-    description:
-      "Defence procurement, military-industrial policy, cross-border security cooperation, dual-use technology controls, and the evolving relationship between defence strategy and geoeconomic competition.",
     keyIssues: [
-      "Defence procurement",
-      "Military-industrial policy",
-      "Cross-border security cooperation",
-      "Dual-use technology controls",
-      "Defence strategy & geoeconomic competition",
+      "Strategic technologies",
+      "Defence regulation",
+      "Security frameworks",
+      "Economic resilience",
     ],
     color: "color-navy",
     relatedAreas: ["geoeconomics", "global-law"],
@@ -179,14 +180,12 @@ export const sectors: Sector[] = [
     title: "Pharmaceuticals & Healthcare",
     summary:
       "Global health security, pharmaceutical regulation, supply-chain integrity, innovation pathways and market access.",
-    description:
-      "Global pharmaceutical regulation, healthcare supply chains, vaccine diplomacy, intellectual property regimes, and the intersection of public health policy and geopolitical strategy.",
     keyIssues: [
+      "Global health security",
       "Pharmaceutical regulation",
-      "Healthcare supply chains",
-      "Vaccine diplomacy",
-      "Intellectual property regimes",
-      "Public health policy & geopolitical strategy",
+      "Supply-chain integrity",
+      "Innovation pathways",
+      "Market access",
     ],
     color: "color-burgundy",
     relatedAreas: ["global-law", "global-finance"],
@@ -197,14 +196,12 @@ export const sectors: Sector[] = [
     title: "Energy & Climate",
     summary:
       "Energy security, transition pathways, critical minerals, infrastructure development and climate-related investment.",
-    description:
-      "Energy security, transition finance, critical mineral supply chains, carbon markets, and the reconfiguration of global energy systems driven by decarbonisation and geopolitical competition.",
     keyIssues: [
       "Energy security",
-      "Transition finance",
-      "Critical mineral supply chains",
-      "Carbon markets",
-      "Decarbonisation & geopolitical competition",
+      "Transition pathways",
+      "Critical minerals",
+      "Infrastructure development",
+      "Climate-related investment",
     ],
     color: "color-forest",
     relatedAreas: ["energy", "geoeconomics"],
@@ -215,14 +212,12 @@ export const sectors: Sector[] = [
     title: "Technology & AI",
     summary:
       "AI governance, digital regulation, semiconductors, cyber policy and the broader landscape of emerging technologies.",
-    description:
-      "AI governance, digital sovereignty, cross-border data flows, technology export controls, and the strategic competition shaping the global technology order.",
     keyIssues: [
       "AI governance",
-      "Digital sovereignty",
-      "Cross-border data flows",
-      "Technology export controls",
-      "Strategic competition & the global technology order",
+      "Digital regulation",
+      "Semiconductors",
+      "Cyber policy",
+      "Emerging technologies",
     ],
     color: "color-gold",
     relatedAreas: ["emerging-technologies", "global-law"],
@@ -233,14 +228,12 @@ export const sectors: Sector[] = [
     title: "Financial Services",
     summary:
       "Global financial architecture, investment flows, fintech innovation, regulatory evolution and the geopolitics of finance.",
-    description:
-      "Cross-border financial regulation, sanctions compliance, digital currencies, sovereign investment patterns, and the deepening nexus between financial markets and geopolitical risk.",
     keyIssues: [
-      "Cross-border financial regulation",
-      "Sanctions compliance",
-      "Digital currencies",
-      "Sovereign investment patterns",
-      "Financial markets & geopolitical risk",
+      "Global financial architecture",
+      "Investment flows",
+      "Fintech innovation",
+      "Regulatory evolution",
+      "Geopolitics of finance",
     ],
     color: "color-slate",
     relatedAreas: ["global-finance", "geoeconomics"],
@@ -251,14 +244,12 @@ export const sectors: Sector[] = [
     title: "Infrastructure & Connectivity",
     summary:
       "Trade corridors, logistics networks, digital infrastructure, investment frameworks and regional connectivity.",
-    description:
-      "Strategic infrastructure corridors, connectivity initiatives, port and logistics networks, digital infrastructure, and the geopolitics of physical and digital connectivity.",
     keyIssues: [
-      "Strategic infrastructure corridors",
-      "Connectivity initiatives",
-      "Port & logistics networks",
+      "Trade corridors",
+      "Logistics networks",
       "Digital infrastructure",
-      "Geopolitics of connectivity",
+      "Investment frameworks",
+      "Regional connectivity",
     ],
     color: "color-charcoal",
     relatedAreas: ["geoeconomics", "global-finance"],
@@ -269,13 +260,11 @@ export const sectors: Sector[] = [
     title: "Electronics & Semiconductors",
     summary:
       "Technology supply chains, industrial policy, investment dynamics and strategic dependencies.",
-    description:
-      "Semiconductor supply chain dependencies, chip manufacturing geopolitics, industrial policy responses, and the strategic competition for technological self-sufficiency.",
     keyIssues: [
-      "Semiconductor supply chain dependencies",
-      "Chip manufacturing geopolitics",
-      "Industrial policy responses",
-      "Strategic competition for technological self-sufficiency",
+      "Technology supply chains",
+      "Industrial policy",
+      "Investment dynamics",
+      "Strategic dependencies",
     ],
     color: "color-navy",
     relatedAreas: ["emerging-technologies", "geoeconomics"],
@@ -353,6 +342,18 @@ export const geographies: Geography[] = [
       "SLR Global monitors Latin America and the Caribbean as emerging strategic partners in critical minerals, energy, agriculture, infrastructure, manufacturing and global trade. Research considers the region's evolving relationships with India, China, the United States, Europe and other major economic centres.",
   },
 ];
+
+export const whatWeDoIntro =
+  "The Centre develops research, intelligence and strategic engagement offerings designed to help organisations understand and respond to a rapidly changing global environment.";
+
+export const geographiesIntro =
+  "SLR Global adopts a global, cross-border perspective, with particular emphasis on the regions and economic corridors that are reshaping trade, investment, technology, energy security and the evolving international order.";
+
+export const corridorsIntro =
+  "The Centre also examines the strategic importance of major trade, investment, energy and connectivity corridors.";
+
+export const stakeholdersIntro =
+  "SLR Global works across the public and private sectors, engaging a diverse range of stakeholders whose decisions shape, and are shaped by, the evolving global environment.";
 
 export const supplyChainsIntro =
   "Geographic research is complemented by a supply-chain and strategic-corridor perspective. The Centre examines how geopolitical competition, regulation, investment patterns, infrastructure and technological change are reorganising the movement of goods, capital, energy, data and critical technologies across borders.";
@@ -436,7 +437,6 @@ export interface Pillar {
   num: string;
   slug: string;
   title: string;
-  tagline: string;
   description: string;
   /** Structured breakdown of `description`, used for the scannable home-page layout. */
   intro: string;
@@ -450,7 +450,6 @@ export const pillars: Pillar[] = [
     num: "01",
     slug: "research",
     title: "Research",
-    tagline: "Evidence. Depth. Clarity.",
     description:
       "The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications. Its research portfolio encompasses flagship reports, global outlooks, policy papers, working papers, country studies, sector studies, comparative regulatory analysis, thematic inquiries and strategic briefs.",
     intro: "The Centre produces rigorous, evidence-based research that illuminates emerging global trends and their strategic implications.",
@@ -461,7 +460,6 @@ export const pillars: Pillar[] = [
     num: "02",
     slug: "intelligence",
     title: "Intelligence",
-    tagline: "Monitor. Interpret. Anticipate.",
     description:
       "The Centre translates complex global developments into focused, decision-relevant intelligence. This work spans geopolitical intelligence, geoeconomic monitoring, regulatory intelligence, country risk assessment, market and sector intelligence, investment intelligence, emerging technology intelligence and strategic risk monitoring. The objective is to enable organisations to identify what is changing, understand why it matters, and anticipate where the consequences are most likely to materialise.",
     intro: "The Centre translates complex global developments into focused, decision-relevant intelligence.",
@@ -473,7 +471,6 @@ export const pillars: Pillar[] = [
     num: "03",
     slug: "advisory",
     title: "Strategic Advisory",
-    tagline: "Navigate. Strategise. Act.",
     description:
       "The Centre supports organisations navigating complex and rapidly evolving international environments. Its advisory services include market-entry intelligence, geopolitical risk assessment, international expansion strategy, regulatory strategy, scenario planning, investment risk evaluation, policy strategy, stakeholder mapping, strategic foresight and cross-border intelligence. By integrating deep research with applied strategic analysis, the Centre equips decision-makers with the clarity required for better-informed choices.",
     intro: "The Centre supports organisations navigating complex and rapidly evolving international environments.",

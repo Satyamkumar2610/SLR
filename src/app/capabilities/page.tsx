@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { pillars, offerings, offeringsForPillar } from "@/lib/content";
+import { pillars, offerings, offeringsForPillar, whatWeDoIntro } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Capabilities — SLR Centre",
-  description: "Research. Intelligence. Strategic Advisory. Three modes of engagement, integrated to equip decision-makers with clarity.",
+  description: whatWeDoIntro,
 };
 
 export default function CapabilitiesPage() {
@@ -18,10 +18,9 @@ export default function CapabilitiesPage() {
             <span>Capabilities</span>
           </div>
           <span className="eyebrow eyebrow-light">Capabilities</span>
-          <h1 className="page-hero-title">Research. Intelligence. Strategic Advisory.</h1>
+          <h1 className="page-hero-title">What We Do</h1>
           <p className="page-hero-lead">
-            Three modes of engagement — integrated to equip decision-makers with the clarity that
-            consequential decisions demand.
+            {whatWeDoIntro}
           </p>
         </div>
       </section>
@@ -33,7 +32,6 @@ export default function CapabilitiesPage() {
               <div className="pillar-strip-item" key={pillar.slug}>
                 <span className="pillar-strip-num">Pillar {pillar.num}</span>
                 <h3 className="pillar-strip-title">{pillar.title}</h3>
-                <span className="pillar-strip-tagline">{pillar.tagline}</span>
                 <p className="pillar-strip-desc">{pillar.description}</p>
               </div>
             ))}
@@ -68,7 +66,7 @@ export default function CapabilitiesPage() {
 
       <section className="page-section-dark">
         <div className="stage-container" style={{ textAlign: "left" }}>
-          <span className="eyebrow eyebrow-light">Ready to Engage?</span>
+          <span className="eyebrow eyebrow-light">Engage</span>
           <h2 className="text-section-title" style={{ marginTop: "8px", color: "var(--color-white)" }}>
             Commission research, attend a dialogue, or request a briefing.
           </h2>

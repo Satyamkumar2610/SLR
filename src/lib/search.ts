@@ -12,8 +12,8 @@ export interface SearchEntry {
 
 const pages: SearchEntry[] = [
   { kind: "Page", title: "Home", href: "/", description: "The SLR Centre for Global Law, Geoeconomics & Emerging Technologies." },
-  { kind: "Page", title: "Research Portal", href: "/research", description: "Five research domains forming the Centre's analytical foundation." },
-  { kind: "Page", title: "Sector Observatory", href: "/sectors", description: "Priority sectors where geopolitics meets industry." },
+  { kind: "Page", title: "Research Portal", href: "/research", description: "The Centre's five areas of focus." },
+  { kind: "Page", title: "Sector Observatory", href: "/sectors", description: "Seven priority sectors where the Centre applies its research." },
   { kind: "Page", title: "Geographies", href: "/geographies", description: "Regions the Centre monitors and advises on." },
   { kind: "Page", title: "Strategic Corridors", href: "/corridors", description: "Trade and connectivity corridors reshaping the world economy." },
   { kind: "Page", title: "Insights & Publications", href: "/insights", description: "Research reports, intelligence briefs and policy notes." },

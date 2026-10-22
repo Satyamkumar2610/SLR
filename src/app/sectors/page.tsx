@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SectorDirectory from "@/components/SectorDirectory";
-import { sectors } from "@/lib/content";
+import { sectorsIntro } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Sector Observatory — SLR Centre",
-  description: "Applied research across the sectors where geopolitical, regulatory, and technological forces increasingly converge.",
+  description: sectorsIntro,
 };
 
 export default function SectorsPage() {
@@ -19,10 +19,9 @@ export default function SectorsPage() {
             <span>Sectors</span>
           </div>
           <span className="eyebrow eyebrow-light">Sector Observatory</span>
-          <h1 className="page-hero-title">Where geopolitics meets industry</h1>
+          <h1 className="page-hero-title">Priority Sectors</h1>
           <p className="page-hero-lead">
-            Applied research across the {sectors.length} priority sectors where geopolitical, regulatory, and
-            technological forces increasingly converge and interact.
+            {sectorsIntro}
           </p>
         </div>
       </section>

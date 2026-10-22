@@ -139,7 +139,6 @@ function EnquirySuccess({ onReset }: { onReset: () => void }) {
         <path d="M15 27l7 7 15-16" />
       </svg>
       <h2 className="enquiry-success-title">Thank you — your enquiry is with the Centre.</h2>
-      <p className="enquiry-success-body">A member of the team will respond within two working days.</p>
       <button type="button" className="btn btn-outline-navy" onClick={onReset}>
         Send another enquiry
       </button>

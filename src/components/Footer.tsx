@@ -70,6 +70,7 @@ export default function Footer() {
           <span className="footer-closing-legal">
             <Link href="/privacy" className="footer-dir-link">Privacy Policy</Link>
             <Link href="/terms" className="footer-dir-link">Terms of Use</Link>
+            <Link href="/image-credits" className="footer-dir-link">Image Credits</Link>
           </span>
         </div>
       </div>

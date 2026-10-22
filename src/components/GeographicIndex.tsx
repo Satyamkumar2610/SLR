@@ -13,8 +13,8 @@ export default function GeographicIndex() {
         <div>
           <div className="geo-top-bar">
             <div>
-              <span className="eyebrow eyebrow-light">Global Footprint</span>
-              <h2 className="text-section-title" style={{ color: "var(--color-white)", marginTop: "8px" }}>Where the world moves, we follow</h2>
+              <span className="eyebrow eyebrow-light">Geographies &amp; Strategic Corridors</span>
+              <h2 className="text-section-title" style={{ color: "var(--color-white)", marginTop: "8px" }}>Geographies</h2>
             </div>
             <Link href="/geographies" className="btn-ghost-gold" style={{ color: "var(--color-gold-light)" }}>Explore All Geographies →</Link>
           </div>
@@ -28,7 +28,7 @@ export default function GeographicIndex() {
                   onClick={() => setActiveGeo(geo)}
                   aria-pressed={activeGeo.slug === geo.slug}
                 >
-                  {geo.name}{geo.isAnchor ? " ★" : ""}
+                  {geo.name}{geo.isAnchor && <span className="anchor-tag">Anchor</span>}
                 </button>
               ))}
               <Link href="/corridors" className="geo-item-btn" style={{ color: "var(--color-gold-light)", marginTop: "10px" }}>

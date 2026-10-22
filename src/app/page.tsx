@@ -9,10 +9,11 @@ import InsightMedia from "@/components/InsightMedia";
 import SectionIndex from "@/components/SectionIndex";
 import CountUp from "@/components/CountUp";
 import WhatWeDo from "@/components/WhatWeDo";
+import { photos } from "@/lib/images";
 import ScrollStatement from "@/components/ScrollStatement";
 import PublicationsForthcoming from "@/components/PublicationsForthcoming";
 import ConveningCalendar from "@/components/ConveningCalendar";
-import { corridors, insights, stakeholders, centre, areasOfFocus, sectors, geographies } from "@/lib/content";
+import { corridors, insights, stakeholders, stakeholdersIntro, centre, areasOfFocus, sectors, geographies } from "@/lib/content";
 
 const featured = insights.find((i) => i.featured) ?? insights[0];
 const latest = featured ? insights.filter((i) => i.slug !== featured.slug).slice(0, 2) : [];
@@ -46,14 +47,14 @@ export default function Home() {
            ============================================================ */}
       <section className="hero-stage" id="hero">
         <div className="hero-bg-media">
-          <Image src="/assets/insight-energy.jpg" alt="" fill preload sizes="100vw" />
+          <Image src={photos.containerPort.src} alt="" fill preload sizes="100vw" />
         </div>
         <div className="hero-bg-overlay"></div>
 
         <div className="hero-body">
           <span className="eyebrow eyebrow-light hero-reveal hero-reveal-eyebrow">Centre for Global Law, Geoeconomics & Emerging Technologies</span>
           <AnimatedHeading text="Navigating the Forces Reshaping the World" className="text-hero-display" />
-          <p className="hero-lead-text hero-reveal hero-reveal-lead">Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology.</p>
+          <p className="hero-lead-text hero-reveal hero-reveal-lead">Research, intelligence and strategic advisory at the nexus of law, geoeconomics and emerging technologies.</p>
           <div className="hero-buttons hero-reveal hero-reveal-buttons">
             <Link href="/research" className="btn btn-primary">Explore Our Research</Link>
             <Link href="/engage" className="btn btn-secondary">Engage the Centre</Link>
@@ -122,7 +123,7 @@ export default function Home() {
             <div className="newsroom-header">
               <div>
                 <span className="eyebrow">Research & Intelligence</span>
-                <h2 className="text-section-title" style={{ marginTop: "8px" }}>Research that anticipates what&apos;s next</h2>
+                <h2 className="text-section-title" style={{ marginTop: "8px" }}>Insights &amp; Publications</h2>
               </div>
               <Link href="/insights" className="btn-ghost-gold">Insights &amp; Publications →</Link>
             </div>
@@ -169,8 +170,8 @@ export default function Home() {
         <section className="section-chapter-reset" id="corridors" style={{ padding: "72px 0", textAlign: "left" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "40px" }}>
             <div>
-              <span className="eyebrow eyebrow-light">Where Trade Meets Strategy</span>
-              <h2 className="chapter-reset-heading" style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginTop: "10px", textAlign: "left" }}>Seven corridors. One connected world.</h2>
+              <span className="eyebrow eyebrow-light">Geographies &amp; Strategic Corridors</span>
+              <h2 className="chapter-reset-heading" style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginTop: "10px", textAlign: "left" }}>Strategic Corridors We Track</h2>
             </div>
             <Link href="/corridors" className="btn-ghost-gold" style={{ color: "var(--color-gold-light)" }}>Explore Strategic Corridors →</Link>
           </div>
@@ -185,10 +186,10 @@ export default function Home() {
         <div className="stage-container">
           <div className="stakeholders-list-header">
             <div>
-              <span className="eyebrow">Institutional Network</span>
+              <span className="eyebrow">Stakeholders</span>
               <h2 className="text-section-title" style={{ marginTop: "8px" }}>Who We Engage With</h2>
             </div>
-            <p className="text-lead" style={{ marginBottom: 0 }}>Serving leaders who shape the global agenda across seven strategic constituencies.</p>
+            <p className="text-lead" style={{ marginBottom: 0 }}>{stakeholdersIntro}</p>
           </div>
 
           <div className="stakeholder-editorial-roster">
@@ -210,8 +211,8 @@ export default function Home() {
         <section className="section-events-stage" id="events">
           <div className="events-top-row">
             <div>
-              <span className="eyebrow">Convening Authority</span>
-              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Dialogues that drive decisions</h2>
+              <span className="eyebrow">Convening</span>
+              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Events &amp; Dialogues</h2>
             </div>
             <Link href="/events" className="btn-ghost-gold">Events &amp; Dialogues →</Link>
           </div>
@@ -227,9 +228,9 @@ export default function Home() {
         <div className="stage-container">
           <div className="about-editorial-grid">
             <div className="about-text-column">
-              <span className="eyebrow">Institutional Mandate</span>
-              <h2 className="text-section-title">Rigorous analysis. Actionable intelligence.</h2>
-              <p className="text-lead">The SLR Centre for Global Law, Geoeconomics and Emerging Technologies provides senior decision-makers with the analytical depth and strategic foresight needed to navigate an increasingly fragmented international order.</p>
+              <span className="eyebrow">Centre Profile</span>
+              <h2 className="text-section-title">About the Centre</h2>
+              <p className="text-lead">{centre.positioning.split(". ")[1]}</p>
               <div>
                 <Link href="/about" className="btn btn-outline-navy">Learn About the Centre →</Link>
               </div>
@@ -250,9 +251,9 @@ export default function Home() {
         <section className="section-cta-stage" id="engage">
           <div className="cta-stage-lattice"></div>
           <div className="cta-stage-content">
-            <span className="eyebrow eyebrow-light">Executive Engagement</span>
+            <span className="eyebrow eyebrow-light">Engage</span>
             <h2 className="text-hero-display" style={{ fontSize: "clamp(32px, 4vw, 52px)" }}>Commission Research. Attend a Dialogue. Request a Briefing.</h2>
-            <p className="hero-lead-text">Engage the Centre to navigate what&apos;s changing in your world.</p>
+            <p className="hero-lead-text">The Centre converts complex developments into precise, actionable intelligence for businesses, governments and institutional stakeholders.</p>
             <div style={{ marginTop: "8px" }}>
               <Link href="/engage" className="btn btn-primary">Engage the Centre</Link>
             </div>

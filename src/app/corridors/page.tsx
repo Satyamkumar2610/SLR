@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { corridors, supplyChainsIntro } from "@/lib/content";
+import { corridors, supplyChainsIntro, corridorsIntro } from "@/lib/content";
 import CorridorDiagram from "@/components/CorridorDiagram";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Strategic Corridors — SLR Centre",
-  description: "The routes reshaping global commerce — trade, investment, energy and connectivity corridors tracked by the Centre.",
+  description: corridorsIntro,
 };
 
 export default function CorridorsPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.portBarcelona} />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>
             <span className="breadcrumb-sep">/</span>
             <span>Corridors</span>
           </div>
-          <span className="eyebrow eyebrow-light">Corridor Intelligence</span>
-          <h1 className="page-hero-title">The routes reshaping global commerce</h1>
+          <span className="eyebrow eyebrow-light">Geographies &amp; Strategic Corridors</span>
+          <h1 className="page-hero-title">Strategic Corridors</h1>
           <p className="page-hero-lead">{supplyChainsIntro}</p>
         </div>
       </section>

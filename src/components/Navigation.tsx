@@ -108,7 +108,7 @@ export default function Navigation() {
               <div>
                 <span className="nav-dropdown-col-title">The Research Portal</span>
                 <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.55 }}>
-                  Five interconnected domains — the analytical foundation for everything the Centre publishes.
+                  The Centre&apos;s five areas of focus.
                 </p>
               </div>
               <div className="nav-dropdown-footer">
@@ -160,7 +160,7 @@ export default function Navigation() {
                 <div className="nav-dropdown-links">
                   {geographies.slice(0, 4).map((g) => (
                     <Link key={g.slug} href={`/geographies/${g.slug}`} className="nav-dropdown-link" onClick={closeAll}>
-                      {g.name}{g.isAnchor ? " ★" : ""}
+                      {g.name}
                     </Link>
                   ))}
                 </div>
