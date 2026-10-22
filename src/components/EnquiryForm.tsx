@@ -56,6 +56,8 @@ function EnquiryFormInner({ regions, onReset }: { regions: RegionOption[]; onRes
         </div>
       )}
 
+      <p className="form-note">Fields marked * are required.</p>
+
       <div className="form-honeypot" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />

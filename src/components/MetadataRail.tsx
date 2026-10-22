@@ -15,7 +15,7 @@ export default function MetadataRail({ blocks }: { blocks: RailBlockData[] }) {
   if (populated.length === 0) return null;
 
   return (
-    <aside>
+    <div className="metadata-rail">
       {populated.map((block) => (
         <div className="rail-block" key={block.label}>
           <span className="rail-label">{block.label}</span>
@@ -28,6 +28,6 @@ export default function MetadataRail({ blocks }: { blocks: RailBlockData[] }) {
           </div>
         </div>
       ))}
-    </aside>
+    </div>
   );
 }

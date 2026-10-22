@@ -21,10 +21,6 @@ export default function WhatWeDo() {
         <div className="wwd-pillars">
           {pillars.map((pillar) => (
             <article className="wwd-pillar" key={pillar.slug} id={pillar.slug} aria-labelledby={`wwd-${pillar.slug}-title`}>
-              <div className="wwd-pillar-top">
-                <span className="wwd-pillar-num">{pillar.num}</span>
-              </div>
-
               <div className="wwd-pillar-heading">
                 <h3 className="wwd-pillar-title" id={`wwd-${pillar.slug}-title`}>{pillar.title}</h3>
               </div>

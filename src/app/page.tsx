@@ -28,10 +28,10 @@ const homeSections = [
 
 export default function Home() {
   const heroFacts = [
-    { num: areasOfFocus.length, label: "Research domains" },
-    { num: sectors.length, label: "Priority sectors" },
-    { num: geographies.length, label: "Geographies" },
-    { num: corridors.length, label: "Strategic corridors" },
+    { num: areasOfFocus.length, label: "Research domains", href: "/research" },
+    { num: sectors.length, label: "Priority sectors", href: "/sectors" },
+    { num: geographies.length, label: "Geographies", href: "/geographies" },
+    { num: corridors.length, label: "Strategic corridors", href: "/corridors" },
   ];
 
   return (
@@ -55,16 +55,16 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-facts hero-reveal hero-reveal-facts">
+        <nav className="hero-facts hero-reveal hero-reveal-facts" aria-label="The Centre's coverage">
           <div className="hero-facts-inner">
             {heroFacts.map((fact) => (
-              <div className="hero-fact" key={fact.label}>
-                <span className="hero-fact-num">{String(fact.num).padStart(2, "0")}</span>
+              <Link href={fact.href} className="hero-fact" key={fact.label}>
+                <span className="hero-fact-num">{fact.num}</span>
                 <span className="hero-fact-label">{fact.label}</span>
-              </div>
+              </Link>
             ))}
           </div>
-        </div>
+        </nav>
       </section>
 
       {/* ============================================================
@@ -119,7 +119,7 @@ export default function Home() {
                 <span className="eyebrow">Research & Intelligence</span>
                 <h2 className="text-section-title" style={{ marginTop: "8px" }}>Insights &amp; Publications</h2>
               </div>
-              <Link href="/insights" className="btn-ghost-gold">Insights &amp; Publications →</Link>
+              <Link href="/insights" className="btn-ghost-gold">All publications →</Link>
             </div>
 
             {!featured && <PublicationsForthcoming compact />}
@@ -169,7 +169,7 @@ export default function Home() {
               <span className="eyebrow">Convening</span>
               <h2 className="text-section-title" style={{ marginTop: "8px" }}>Events &amp; Dialogues</h2>
             </div>
-            <Link href="/events" className="btn-ghost-gold">Events &amp; Dialogues →</Link>
+            <Link href="/events" className="btn-ghost-gold">All events →</Link>
           </div>
 
           <ConveningCalendar />
