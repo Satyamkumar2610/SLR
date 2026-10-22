@@ -4738,3 +4738,139 @@ html.js-ready .reveal-item:not(.is-revealed) {
 @media (prefers-reduced-motion: reduce) {
   .globe-item-detail { animation: none; }
 }
+
+/* ============================================================
+   RESTRAINT — same palette, used sparingly
+   Gold is reserved for hairlines, links and the active item; surfaces
+   are flat; photographs keep their own colour under a plain shade; and
+   nothing glows, blurs or lifts. Kept last so it settles earlier layers.
+   ============================================================ */
+
+/* Labels: quiet grey instead of gold */
+.eyebrow:not(.eyebrow-light) { color: var(--color-grey-muted); }
+.eyebrow-light { color: rgba(250, 251, 252, 0.62); }
+
+/* Buttons: solid navy or outline, no gold fills, sweeps, lifts or shadows */
+.btn,
+.btn:hover,
+.btn:active,
+.nav-btn-cta,
+.nav-btn-cta:hover { transform: none; box-shadow: none; }
+.btn-primary::before,
+.btn-secondary::before,
+.nav-btn-cta::before { display: none; }
+.btn-primary,
+.hero-buttons .btn-primary,
+.section-cta-stage .btn-primary {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border: 1px solid var(--color-navy);
+  font-weight: 600;
+}
+.btn-primary:hover,
+.hero-buttons .btn-primary:hover,
+.section-cta-stage .btn-primary:hover {
+  background-color: var(--color-slate);
+  border-color: var(--color-slate);
+  color: var(--color-white);
+}
+/* On dark surfaces the primary button inverts to white */
+.hero-buttons .btn-primary,
+.section-cta-stage .btn-primary,
+.forthcoming-card .btn-primary,
+.page-hero-photo .btn-primary {
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  border-color: var(--color-white);
+}
+.hero-buttons .btn-primary:hover,
+.section-cta-stage .btn-primary:hover,
+.forthcoming-card .btn-primary:hover,
+.page-hero-photo .btn-primary:hover {
+  background-color: var(--color-ivory);
+  border-color: var(--color-ivory);
+  color: var(--color-navy);
+}
+.btn-secondary,
+.hero-buttons .btn-secondary { border-color: rgba(255, 255, 255, 0.45); color: var(--color-white); }
+.btn-secondary:hover,
+.hero-buttons .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+.nav-btn-cta:hover { background-color: rgba(255, 255, 255, 0.08); color: inherit; }
+.btn-ghost-gold:hover { background-color: transparent; transform: none; }
+
+/* Flat surfaces in place of tinted gradients */
+.section-cta-stage { background: var(--color-navy); }
+.cta-stage-lattice,
+.forthcoming-lattice { display: none; }
+.signature-footer { background: var(--color-navy-deepest); }
+.signature-footer::before { background: rgba(212, 188, 142, 0.35); height: 1px; }
+.scroll-progress { height: 2px; }
+.scroll-progress-bar { background: var(--color-slate); }
+.section-globe { background: var(--color-navy-deep); }
+
+/* Photographs: natural colour, a plain shade only where text sits */
+.hero-bg-media { animation: hero-fade-in 900ms ease-out both; filter: grayscale(0.15); }
+.hero-bg-overlay {
+  background: linear-gradient(180deg, rgba(5, 14, 33, 0.55) 0%, rgba(5, 14, 33, 0.7) 100%);
+}
+.hero-photo img,
+.statement-photo img,
+.area-panel-img,
+.area-panel.is-active .area-panel-img { filter: grayscale(0.15); }
+.hero-photo::after {
+  background: linear-gradient(90deg, rgba(5, 14, 33, 0.82) 0%, rgba(5, 14, 33, 0.6) 55%, rgba(5, 14, 33, 0.35) 100%);
+}
+.section-cta-photo .hero-photo::after,
+.statement-photo::after { background: rgba(5, 14, 33, 0.72); }
+.area-panel-shade,
+.area-panel.is-active .area-panel-shade {
+  background: linear-gradient(180deg, rgba(5, 14, 33, 0) 35%, rgba(5, 14, 33, 0.82) 100%);
+}
+.featured-media-side::after { background: none; }
+@media (max-width: 768px) {
+  .hero-photo::after { background: rgba(5, 14, 33, 0.72); }
+}
+
+/* One accent: sector bars and event tags become a single navy line */
+.sector-editorial-item::before { width: 2px; background-color: var(--color-navy); }
+.pill-burgundy,
+.pill-slate {
+  background-color: transparent;
+  color: var(--color-grey-muted);
+  border: 1px solid var(--color-grey-soft);
+}
+
+/* No glows, frosted glass or gold card bars */
+.hero-facts { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(5, 14, 33, 0.7); }
+.corridor-row-map,
+.corridor-explorer-map { backdrop-filter: none; -webkit-backdrop-filter: none; }
+.wwd-pillar::before,
+.convening-format::before,
+.area-index-row::before { display: none; }
+.forthcoming-dot { animation: none; box-shadow: none; }
+.site-nav.is-scrolled { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06); }
+.wwd-pillar:hover .wwd-pillar-icon { transform: none; }
+
+/* Motion: short fades, no cascades, no zooms */
+html.js-ready .reveal-target { transform: translateY(12px); transition-duration: 500ms; }
+html.js-ready .reveal-item:not(.reveal-done) { transition-delay: 0ms; transition-duration: 450ms; }
+html.js-ready .reveal-item:not(.is-revealed) { transform: translateY(8px); }
+.reveal-media.is-armed:not(.is-revealed) { clip-path: inset(0 0 0 0); }
+.reveal-media.is-armed:not(.is-revealed) img,
+.reveal-media.is-armed:not(.is-revealed) .insight-art { scale: 1; }
+.hero-stage .text-hero-display { animation: hero-fade-in-full 700ms ease-out both; }
+@keyframes hero-fade-in-full { from { opacity: 0; } to { opacity: 1; } }
+.hero-reveal { transform: none; animation-duration: 600ms; }
+.hero-reveal-lead,
+.hero-reveal-buttons,
+.hero-reveal-facts { animation-delay: 150ms; }
+.statement-photo { transform: none; inset: 0; }
+.area-panel.is-active .area-panel-img { transform: scale(1.02); }
+::view-transition-image-pair(.morph) { animation-name: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage .text-hero-display { animation: none; }
+}

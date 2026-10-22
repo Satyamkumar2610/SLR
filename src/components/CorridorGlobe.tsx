@@ -9,10 +9,10 @@ import { GLOBE_LAND_DOTS } from "@/lib/globeDots";
 
 /**
  * The Centre's signature visual: a dot-matrix globe that turns to each
- * strategic corridor in turn and traces its route with moving light.
+ * strategic corridor in turn and traces its route.
  * Routes join the same geography nodes as the flat corridor map
  * (GEO_MAP_POSITIONS), drawn as great-circle arcs. Nothing quantitative is
- * implied: the pulses show direction of travel along a corridor, not volume.
+ * implied: the moving marker shows direction of travel, not volume.
  *
  * Drawn on a canvas for performance; the corridor list beside it carries
  * all the content for keyboard and screen-reader users. Rendering stops
@@ -23,7 +23,7 @@ import { GLOBE_LAND_DOTS } from "@/lib/globeDots";
 type Vec = [number, number, number];
 
 const RAD = Math.PI / 180;
-const AUTOPLAY_MS = 6500;
+const AUTOPLAY_MS = 9000;
 
 function lonLatOf(slug: string): [number, number] {
   const p = GEO_MAP_POSITIONS[slug];
@@ -66,7 +66,7 @@ const nodeSlugs = Array.from(new Set(corridors.flatMap((c) => c.geographies))).f
 const nodes = nodeSlugs.map((slug) => {
   const [lon, lat] = lonLatOf(slug);
   const geo = geographies.find((g) => g.slug === slug);
-  return { slug, name: geo?.name ?? slug, isAnchor: !!geo?.isAnchor, vec: toVec(lon, lat) };
+  return { slug, name: geo?.name ?? slug, vec: toVec(lon, lat) };
 });
 
 const routes = corridors.map((c) => {
@@ -187,21 +187,12 @@ export default function CorridorGlobe() {
 
       ctx.clearRect(0, 0, W, W);
 
-      // Atmosphere and sphere
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.25);
-      halo.addColorStop(0, "rgba(212, 188, 142, 0.16)");
-      halo.addColorStop(1, "rgba(212, 188, 142, 0)");
-      ctx.fillStyle = halo;
-      ctx.fillRect(0, 0, W, W);
-
-      const body = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
-      body.addColorStop(0, "#1b3a6b");
-      body.addColorStop(1, "#071530");
+      // Sphere: flat navy with a hairline edge
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.fillStyle = body;
+      ctx.fillStyle = "#0A1F44";
       ctx.fill();
-      ctx.strokeStyle = "rgba(212, 188, 142, 0.35)";
+      ctx.strokeStyle = "rgba(233, 237, 243, 0.18)";
       ctx.lineWidth = 1 * dpr;
       ctx.stroke();
 
@@ -216,11 +207,11 @@ export default function CorridorGlobe() {
       }
       ctx.globalAlpha = 1;
 
-      // Routes: every corridor faintly, the active one in gold with pulses.
+      // Routes: every corridor faintly, the active one in gold.
       routes.forEach((route, ri) => {
         const isActive = ri === activeRef.current;
-        ctx.strokeStyle = isActive ? "rgba(212, 188, 142, 0.95)" : "rgba(233, 237, 243, 0.16)";
-        ctx.lineWidth = (isActive ? 2 : 1) * dpr;
+        ctx.strokeStyle = isActive ? "rgba(212, 188, 142, 0.9)" : "rgba(233, 237, 243, 0.12)";
+        ctx.lineWidth = (isActive ? 1.5 : 1) * dpr;
         for (const arc of route.arcs) {
           ctx.beginPath();
           let pen = false;
@@ -239,17 +230,14 @@ export default function CorridorGlobe() {
           ctx.stroke();
 
           if (isActive && !reduced) {
-            for (let k = 0; k < 3; k++) {
-              const t = ((now / 2600 + k / 3) % 1) * (arc.length - 1);
-              const p = rot(arc[Math.floor(t)]);
-              if (!shown(p)) continue;
-              const x = cx + p[0] * R;
-              const y = cy - p[1] * R;
-              const glow = ctx.createRadialGradient(x, y, 0, x, y, 9 * dpr);
-              glow.addColorStop(0, "rgba(236, 222, 190, 0.95)");
-              glow.addColorStop(1, "rgba(236, 222, 190, 0)");
-              ctx.fillStyle = glow;
-              ctx.fillRect(x - 9 * dpr, y - 9 * dpr, 18 * dpr, 18 * dpr);
+            // One small marker per leg shows the direction of travel.
+            const t = ((now / 4200) % 1) * (arc.length - 1);
+            const p = rot(arc[Math.floor(t)]);
+            if (shown(p)) {
+              ctx.beginPath();
+              ctx.arc(cx + p[0] * R, cy - p[1] * R, 2.5 * dpr, 0, Math.PI * 2);
+              ctx.fillStyle = "#F8F7F3";
+              ctx.fill();
             }
           }
         }
@@ -265,14 +253,6 @@ export default function CorridorGlobe() {
         const x = cx + p[0] * R;
         const y = cy - p[1] * R;
         const on = activeGeos.has(n.slug);
-        if (n.isAnchor && !reduced) {
-          const ring = (now / 1800) % 1;
-          ctx.beginPath();
-          ctx.arc(x, y, (4 + ring * 14) * dpr, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(212, 188, 142, ${0.6 * (1 - ring)})`;
-          ctx.lineWidth = 1 * dpr;
-          ctx.stroke();
-        }
         ctx.beginPath();
         ctx.arc(x, y, (on ? 4 : 2.5) * dpr, 0, Math.PI * 2);
         ctx.fillStyle = on ? "#D4BC8E" : "rgba(233, 237, 243, 0.6)";
