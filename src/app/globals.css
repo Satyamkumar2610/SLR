@@ -174,7 +174,6 @@ html.js-ready .reveal-target {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 720ms var(--ease-settle), transform 720ms var(--ease-settle);
-  will-change: opacity, transform;
 }
 html.js-ready .reveal-target.is-revealed {
   opacity: 1;
@@ -1602,7 +1601,7 @@ body:has(.hero-stage) { padding-top: 0; }
   font-weight: 500;
   color: rgba(255, 255, 255, 0.65);
   border-left: 2px solid transparent;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
   cursor: pointer;
 }
 
@@ -1705,7 +1704,7 @@ body:has(.hero-stage) { padding-top: 0; }
   grid-template-columns: 80px 1.4fr 1.6fr;
   gap: 32px;
   align-items: baseline;
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast);
 }
 
 .roster-num {
@@ -2903,7 +2902,7 @@ body:has(.hero-stage) { padding-top: 0; }
   border: 1px solid var(--color-grey-soft);
   border-radius: var(--radius-btn);
   color: var(--color-slate);
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 .filter-pill.active {
   background-color: var(--color-navy);
@@ -4857,7 +4856,6 @@ html.js-ready .reveal-item:not(.is-revealed) {
 
 /* Motion: short fades, no cascades, no zooms */
 html.js-ready .reveal-target { transform: translateY(12px); transition-duration: 500ms; }
-html.js-ready .reveal-item:not(.reveal-done) { transition-delay: 0ms; transition-duration: 450ms; }
 html.js-ready .reveal-item:not(.is-revealed) { transform: translateY(8px); }
 .reveal-media.is-armed:not(.is-revealed) { clip-path: inset(0 0 0 0); }
 .reveal-media.is-armed:not(.is-revealed) img,
@@ -5023,4 +5021,113 @@ html.js-ready .reveal-item:not(.is-revealed) { transform: translateY(8px); }
 @media (max-width: 768px) {
   .sector-item-drawer-inner { flex-direction: column; gap: 0; padding-left: 0; }
   .sector-item-photo { flex-basis: auto; width: 100%; }
+}
+
+/* ============================================================
+   MOTION SYSTEM — refined, calm, interruptible
+   From emilkowalski/skills, iart-ai/web-animation-skills and
+   LottieFiles motion-design (all MIT). Rules kept here:
+   - only transform and opacity move; never `transition: all`
+   - enter/exit decelerate (--ease-out); on-screen moves use --ease-in-out
+   - UI responses stay 150–300ms; large surfaces 400–500ms; exits faster than entrances
+   - hover motion only on devices that really hover
+   - reduced motion keeps fades and colour, removes movement
+   ============================================================ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 160ms;
+  --dur-ui: 220ms;
+  --dur-surface: 420ms;
+}
+
+/* Press feedback: a slight give on buttons */
+.btn, .nav-btn-cta, .globe-toggle, .globe-item, .form-submit {
+  transition: transform var(--dur-press) var(--ease-out), background-color var(--dur-ui) ease, border-color var(--dur-ui) ease, color var(--dur-ui) ease;
+}
+.btn:active, .nav-btn-cta:active, .globe-toggle:active, .form-submit:active:not(:disabled) { transform: scale(0.97); }
+
+/* Underlines draw with transform instead of width */
+.btn-ghost-gold::after {
+  width: calc(100% - 8px);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+.btn-ghost-gold:hover::after,
+.btn-ghost-gold:focus-visible::after { transform: scaleX(1); }
+.nav-link::after { transition: transform var(--dur-ui) var(--ease-out); }
+
+/* Section and row reveals: short rise, decelerating, lightly staggered */
+html.js-ready .reveal-target {
+  transform: translateY(16px);
+  transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+}
+html.js-ready .reveal-item:not(.reveal-done) {
+  transition:
+    opacity 480ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 480ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+html.js-ready .reveal-item:not(.is-revealed) { transform: translateY(10px); }
+
+/* Hero: eyebrow, title, lead and actions settle in sequence (under 600ms in all) */
+.hero-reveal,
+.hero-stage .text-hero-display {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-settle 640ms var(--ease-out) forwards;
+}
+.hero-reveal-eyebrow { animation-delay: 40ms; }
+.hero-stage .text-hero-display { animation-delay: 110ms; }
+.hero-reveal-lead { animation-delay: 200ms; }
+.hero-reveal-buttons { animation-delay: 280ms; }
+.hero-reveal-facts { animation-delay: 360ms; }
+@keyframes hero-settle { to { opacity: 1; transform: none; } }
+.hero-bg-media { animation: hero-photo-in 1200ms var(--ease-out) both; }
+@keyframes hero-photo-in { from { opacity: 0; } to { opacity: 0.55; } }
+
+/* Dropdowns and dialogs: quick, from their origin, exits quicker */
+.nav-dropdown { transition: opacity 160ms ease, transform 160ms var(--ease-out), visibility 160ms; }
+.nav-dropdown.is-open { transition-duration: var(--dur-ui); }
+.search-panel { transition: transform 280ms var(--ease-out); }
+
+/* Mobile drawer: native-feeling slide */
+.mobile-drawer-panel { transition: transform 460ms var(--ease-drawer); }
+.mobile-drawer-scrim { transition: opacity 320ms ease, visibility 320ms; }
+
+/* Header tuck: on-screen movement */
+.site-nav { transition: background-color var(--dur-ui) ease, box-shadow var(--dur-ui) ease, transform 360ms var(--ease-out); }
+
+/* Photo panels and accordions move on screen, so ease in and out */
+.area-panel { transition: flex-grow 560ms var(--ease-in-out); }
+.area-panel-img { transition: transform 900ms var(--ease-out), filter 560ms ease; }
+.sector-item-drawer { transition: grid-template-rows var(--dur-surface) var(--ease-out), opacity 300ms ease; }
+
+/* Sector preview: crossfade with a slight settle */
+.sector-preview-frame { transform: scale(1.03); transition: opacity 420ms ease, transform 700ms var(--ease-out); }
+.sector-preview-frame.is-shown { transform: none; }
+
+/* Page-to-page: old page leaves fast, new one settles */
+::view-transition-old(.page-out) { animation: vt-page-out 160ms ease-in both; }
+::view-transition-new(.page-in) { animation: vt-page-in 360ms var(--ease-out) 60ms both; }
+
+/* Hover-only motion on real hover devices */
+@media (hover: none) {
+  .sector-row.is-current .directory-row-arrow { transform: none; }
+  .area-panel.is-active .area-panel-img { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-ready .reveal-target,
+  html.js-ready .reveal-item:not(.is-revealed) { transform: none; }
+  html.js-ready .reveal-target { transition: opacity 200ms ease; }
+  html.js-ready .reveal-item:not(.reveal-done) { transition: opacity 200ms ease; }
+  .hero-reveal,
+  .hero-stage .text-hero-display { transform: none; animation: hero-fade-only 200ms ease forwards; }
+  @keyframes hero-fade-only { to { opacity: 1; } }
+  .btn:active, .nav-btn-cta:active, .globe-toggle:active, .form-submit:active:not(:disabled) { transform: none; }
+  .mobile-drawer-panel, .area-panel, .area-panel-img, .site-nav, .sector-preview-frame { transition-duration: 0.01ms; }
+  .sector-preview-frame { transform: none; transition: opacity 200ms ease; }
+  ::view-transition-old(.page-out), ::view-transition-new(.page-in) { animation: none; }
 }

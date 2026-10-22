@@ -96,10 +96,11 @@ export default function MotionRoot({ children }: { children: React.ReactNode }) 
         entering.forEach(({ target }) => {
           const el = target as HTMLElement;
           if (el.classList.contains("reveal-item")) {
-            const delay = Math.min(step++, 6) * 70;
+            // A short stagger (50ms, capped at 250ms) so rows arrive in reading order without making anyone wait.
+            const delay = Math.min(step++, 5) * 50;
             el.style.setProperty("--reveal-delay", `${delay}ms`);
             // Hand transitions back to the row's own hover styles once it has settled.
-            window.setTimeout(() => el.classList.add("reveal-done"), delay + 820);
+            window.setTimeout(() => el.classList.add("reveal-done"), delay + 600);
           }
           el.classList.add("is-revealed");
           observer.unobserve(el);
