@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const SECTION_SELECTORS = [
@@ -49,32 +49,10 @@ const MEDIA_SELECTORS = ".reveal-media";
 
 export default function MotionRoot({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const barRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     document.documentElement.classList.add("js-ready");
   }, []);
-
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - doc.clientHeight;
-      if (barRef.current) barRef.current.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [pathname]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -134,12 +112,5 @@ export default function MotionRoot({ children }: { children: React.ReactNode }) 
     };
   }, [pathname]);
 
-  return (
-    <>
-      <div className="scroll-progress" aria-hidden="true">
-        <div className="scroll-progress-bar" ref={barRef} />
-      </div>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

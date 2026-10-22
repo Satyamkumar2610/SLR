@@ -62,7 +62,7 @@ export default async function GeographyDetailPage({ params }: { params: Promise<
                 },
                 {
                   label: "Other Geographies",
-                  links: otherGeographies.slice(0, 5).map((g) => ({ href: `/geographies/${g.slug}`, label: g.name })),
+                  links: otherGeographies.map((g) => ({ href: `/geographies/${g.slug}`, label: g.name })),
                 },
               ]}
             />

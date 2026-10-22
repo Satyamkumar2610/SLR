@@ -39,9 +39,8 @@ export default function ConveningCalendar() {
   return (
     <div className="convening-empty">
       <div className="convening-format-grid">
-        {formats.map((o, i) => (
+        {formats.map((o) => (
           <Link href={`/capabilities#${o.slug}`} className="convening-format" key={o.slug}>
-            <span className="convening-format-num">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="convening-format-title">{o.title}</h3>
             <p className="convening-format-desc">{firstSentence(o.description)}</p>
             <span className="convening-format-link">Learn more <span aria-hidden="true">→</span></span>

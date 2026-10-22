@@ -53,7 +53,7 @@ export default function AboutPage() {
                 <div className="rail-link-list">
                   {areasOfFocus.map((a) => (
                     <Link key={a.slug} href={`/research?area=${a.slug}`} className="rail-link">
-                      {a.num} {a.title}
+                      {a.title}
                     </Link>
                   ))}
                 </div>

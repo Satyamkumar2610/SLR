@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { sectors, getSector, areasForSector, sectorsIntro } from "@/lib/content";
+import { sectors, getSector, areasForSector } from "@/lib/content";
 import HeroPhoto from "@/components/HeroPhoto";
 import { sectorPhotos } from "@/lib/images";
 import MetadataRail from "@/components/MetadataRail";
@@ -41,10 +41,7 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
             <span className="breadcrumb-sep">/</span>
             <span>{sector.title}</span>
           </div>
-          <span className="profile-tag" style={{ marginTop: "18px" }}>
-            <span className="profile-tag-dot" style={{ backgroundColor: `var(--${sector.color})` }} />
-            Sector {sector.num} of {sectors.length}
-          </span>
+          <span className="eyebrow eyebrow-light" style={{ marginTop: "18px" }}>Priority Sector</span>
           <h1 className="page-hero-title">{sector.title}</h1>
           <p className="page-hero-lead">{sector.summary}</p>
         </div>
@@ -54,11 +51,7 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
         <div className="stage-container">
           <div className="profile-grid">
             <div>
-              <div className="profile-body">
-                <p>{sectorsIntro}</p>
-              </div>
-
-              <div className="rail-block" style={{ marginTop: "var(--s8)" }}>
+              <div className="rail-block">
                 <span className="rail-label">Key Issues Tracked</span>
                 <div className="directory-issues">
                   {sector.keyIssues.map((issue) => (
@@ -66,17 +59,27 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
                   ))}
                 </div>
               </div>
+
+              {relatedAreas.length > 0 && (
+                <div className="rail-block sector-areas">
+                  <span className="rail-label">Related Research</span>
+                  <ul className="sector-area-list">
+                    {relatedAreas.map((a) => (
+                      <li key={a.slug}>
+                        <Link href={`/research?area=${a.slug}`} className="sector-area-title">{a.title}</Link>
+                        <p>{a.summary}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <MetadataRail
               blocks={[
                 {
-                  label: "Related Research",
-                  links: relatedAreas.map((a) => ({ href: `/research?area=${a.slug}`, label: `${a.num} ${a.title}` })),
-                },
-                {
                   label: "Other Sectors",
-                  links: otherSectors.slice(0, 5).map((s) => ({ href: `/sectors/${s.slug}`, label: s.title })),
+                  links: otherSectors.map((s) => ({ href: `/sectors/${s.slug}`, label: s.title })),
                 },
               ]}
             />

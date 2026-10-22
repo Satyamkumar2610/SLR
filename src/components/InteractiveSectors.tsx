@@ -46,7 +46,7 @@ export default function InteractiveSectors() {
                 <div className="sector-item-drawer-inner">
                   <div className="sector-item-text">
                     <p className="sector-item-desc">{sector.summary}</p>
-                    <Link href={`/sectors/${sector.slug}`} className="btn-ghost-gold">Explore Sector →</Link>
+                    <Link href={`/sectors/${sector.slug}`} className="btn-ghost-gold">Explore sector →</Link>
                   </div>
                   {sectorPhotos[sector.slug] && (
                     <div className="sector-item-photo" aria-hidden="true">

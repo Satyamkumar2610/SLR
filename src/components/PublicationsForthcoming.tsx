@@ -34,11 +34,8 @@ export default function PublicationsForthcoming({ compact = false }: { compact?:
         <div className="forthcoming-formats">
           <span className="forthcoming-formats-label">The research portfolio</span>
           <ul className="forthcoming-format-list">
-            {formats.map((f, i) => (
-              <li key={f} style={{ "--i": i } as React.CSSProperties}>
-                <span className="forthcoming-format-num">{String(i + 1).padStart(2, "0")}</span>
-                {f}
-              </li>
+            {formats.map((f) => (
+              <li key={f}>{f}</li>
             ))}
           </ul>
         </div>
