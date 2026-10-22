@@ -27,8 +27,19 @@ export default function Navigation() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
+  // The bar tucks away while reading down the page and returns on any
+  // upward scroll, so it never sits over the text being read.
+  const [tucked, setTucked] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      if (Math.abs(y - lastY) > 6) {
+        setTucked(y > lastY && y > 320);
+        lastY = y;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -72,7 +83,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`site-nav ${scrolled ? "is-scrolled" : ""}`}
+        className={`site-nav ${scrolled ? "is-scrolled" : ""} ${tucked && !mobileOpen ? "is-tucked" : ""}`}
         aria-label="Main Navigation"
         onMouseLeave={closeAll}
         style={{ viewTransitionName: "site-header" }}

@@ -3,15 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sectors, getSector, areasForSector, sectorsIntro } from "@/lib/content";
 import HeroPhoto from "@/components/HeroPhoto";
-import { photos, type Photo } from "@/lib/images";
+import { sectorPhotos } from "@/lib/images";
 import MetadataRail from "@/components/MetadataRail";
 
-const SECTOR_PHOTOS: Record<string, Photo> = {
-  semiconductors: photos.wafer,
-  infrastructure: photos.portBarcelona,
-  "energy-climate": photos.solarFarm,
-  "financial-services": photos.financialDistrict,
-};
 
 export function generateStaticParams() {
   return sectors.map((s) => ({ slug: s.slug }));
@@ -37,8 +31,8 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
 
   return (
     <main>
-      <section className={`page-hero ${SECTOR_PHOTOS[sector.slug] ? "page-hero-photo" : ""}`}>
-        {SECTOR_PHOTOS[sector.slug] && <HeroPhoto photo={SECTOR_PHOTOS[sector.slug]} />}
+      <section className={`page-hero ${sectorPhotos[sector.slug] ? "page-hero-photo" : ""}`}>
+        {sectorPhotos[sector.slug] && <HeroPhoto photo={sectorPhotos[sector.slug]} />}
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 import { pillars, offerings, offeringsForPillar, whatWeDoIntro } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
 export default function CapabilitiesPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.glassBuilding} />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>
@@ -31,7 +34,7 @@ export default function CapabilitiesPage() {
             {pillars.map((pillar) => (
               <div className="pillar-strip-item" key={pillar.slug}>
                 <span className="pillar-strip-num">Pillar {pillar.num}</span>
-                <h3 className="pillar-strip-title">{pillar.title}</h3>
+                <h2 className="pillar-strip-title">{pillar.title}</h2>
                 <p className="pillar-strip-desc">{pillar.description}</p>
               </div>
             ))}

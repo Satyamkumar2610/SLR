@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeroPhoto from "@/components/HeroPhoto";
+import { photos } from "@/lib/images";
 import { Suspense } from "react";
 import { geographies } from "@/lib/content";
 import EnquiryForm from "@/components/EnquiryForm";
@@ -23,7 +25,8 @@ const engagementFormats = [
 export default function EngagePage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero-photo">
+        <HeroPhoto photo={photos.fountainPen} />
         <div className="stage-container">
           <div className="breadcrumb">
             <Link href="/">Home</Link>

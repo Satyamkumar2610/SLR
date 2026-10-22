@@ -44,7 +44,7 @@ export default function ResearchPortal() {
 
       <div className="research-detail-panel panel-fade-in" key={active.slug}>
         <span className="research-detail-eyebrow">Research Wing {active.num}</span>
-        <h1 className="research-detail-title">{active.title}</h1>
+        <h2 className="research-detail-title">{active.title}</h2>
         <p className="research-detail-summary">{active.summary}</p>
         <div className="research-detail-body">
           <p>{active.description}</p>
