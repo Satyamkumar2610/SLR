@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
-import GeographicIndex from "@/components/GeographicIndex";
 import InteractiveAreas from "@/components/InteractiveAreas";
 import CorridorExplorer from "@/components/CorridorExplorer";
 import InsightMedia from "@/components/InsightMedia";
@@ -13,7 +12,7 @@ import { photos } from "@/lib/images";
 import ScrollStatement from "@/components/ScrollStatement";
 import PublicationsForthcoming from "@/components/PublicationsForthcoming";
 import ConveningCalendar from "@/components/ConveningCalendar";
-import { corridors, insights, stakeholders, stakeholdersIntro, centre, areasOfFocus, sectors, geographies } from "@/lib/content";
+import { corridors, insights, centre, areasOfFocus, sectors, geographies } from "@/lib/content";
 
 const featured = insights.find((i) => i.featured) ?? insights[0];
 const latest = featured ? insights.filter((i) => i.slug !== featured.slug).slice(0, 2) : [];
@@ -24,11 +23,8 @@ const homeSections = [
   { id: "sectors", label: "Priority Sectors" },
   ...(featured ? [{ id: "featured", label: "Featured" }] : []),
   { id: "insights", label: featured ? "Latest Insights" : "Publications" },
-  { id: "geographies", label: "Geographies" },
   { id: "corridors", label: "Corridors" },
-  { id: "stakeholders", label: "Network" },
   { id: "events", label: "Events" },
-  { id: "about", label: "About" },
   { id: "engage", label: "Engage" },
 ];
 
@@ -81,20 +77,20 @@ export default function Home() {
       {/* ============================================================
            SCENE 03 — STATEMENT
            ============================================================ */}
-      <ScrollStatement eyebrow="The Centre" text={centre.statement.split(". ")[0] + "."} />
+      <ScrollStatement eyebrow="The Centre" text={centre.statement.split(". ")[0] + "."} photo={photos.seaLink} />
 
       {/* ============================================================
-           SCENE 05 — AREAS OF FOCUS
+           SCENE 04 — AREAS OF FOCUS
            ============================================================ */}
       <InteractiveAreas />
 
       {/* ============================================================
-           SCENE 06 — PRIORITY SECTORS
+           SCENE 05 — PRIORITY SECTORS
            ============================================================ */}
       <InteractiveSectors />
 
       {/* ============================================================
-           SCENE 07 — EDITORIAL FEATURE
+           SCENE 06 — EDITORIAL FEATURE
            ============================================================ */}
       {featured && (
         <div className="stage-container section-featured-feature" id="featured">
@@ -115,7 +111,7 @@ export default function Home() {
       )}
 
       {/* ============================================================
-           SCENE 08 — NEWSROOM
+           SCENE 07 — NEWSROOM
            ============================================================ */}
       <section className="section-newsroom" id="insights">
         <div className="stage-container">
@@ -159,12 +155,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-           SCENE 09 — GEOGRAPHIC INDEX
-           ============================================================ */}
-      <GeographicIndex />
-
-      {/* ============================================================
-           SCENE 10 — STRATEGIC CORRIDORS
+           SCENE 08 — STRATEGIC CORRIDORS
            ============================================================ */}
       <div className="stage-container">
         <section className="section-chapter-reset" id="corridors" style={{ padding: "72px 0", textAlign: "left" }}>
@@ -180,32 +171,7 @@ export default function Home() {
       </div>
 
       {/* ============================================================
-           SCENE 11 — WHO WE ENGAGE WITH
-           ============================================================ */}
-      <section className="section-stakeholders-list" id="stakeholders">
-        <div className="stage-container">
-          <div className="stakeholders-list-header">
-            <div>
-              <span className="eyebrow">Stakeholders</span>
-              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Who We Engage With</h2>
-            </div>
-            <p className="text-lead" style={{ marginBottom: 0 }}>{stakeholdersIntro}</p>
-          </div>
-
-          <div className="stakeholder-editorial-roster">
-            {stakeholders.map((s) => (
-              <div className="roster-row" key={s.num}>
-                <span className="roster-num">{s.num}</span>
-                <h3 className="roster-title">{s.title}</h3>
-                <p className="roster-desc">{s.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-           SCENE 12 — EVENTS CHRONOLOGY
+           SCENE 09 — EVENTS CHRONOLOGY
            ============================================================ */}
       <div className="stage-container">
         <section className="section-events-stage" id="events">
@@ -222,34 +188,13 @@ export default function Home() {
       </div>
 
       {/* ============================================================
-           SCENE 13 — ABOUT / QUIET CLOSING
-           ============================================================ */}
-      <section className="section-about-stage" id="about">
-        <div className="stage-container">
-          <div className="about-editorial-grid">
-            <div className="about-text-column">
-              <span className="eyebrow">Centre Profile</span>
-              <h2 className="text-section-title">About the Centre</h2>
-              <p className="text-lead">{centre.positioning.split(". ")[1]}</p>
-              <div>
-                <Link href="/about" className="btn btn-outline-navy">Learn About the Centre →</Link>
-              </div>
-            </div>
-
-            <div className="about-quote-box">
-              <blockquote className="about-quote-text">&ldquo;{centre.convening}&rdquo;</blockquote>
-              <span className="about-quote-author">— {centre.name}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-           SCENE 14 — CTA BANNER
+           SCENE 10 — CTA BANNER
            ============================================================ */}
       <div className="stage-container">
-        <section className="section-cta-stage" id="engage">
-          <div className="cta-stage-lattice"></div>
+        <section className="section-cta-stage section-cta-photo" id="engage">
+          <div className="hero-photo" aria-hidden="true">
+            <Image src={photos.boardroom.src} alt="" fill sizes="100vw" />
+          </div>
           <div className="cta-stage-content">
             <span className="eyebrow eyebrow-light">Engage</span>
             <h2 className="text-hero-display" style={{ fontSize: "clamp(32px, 4vw, 52px)" }}>Commission Research. Attend a Dialogue. Request a Briefing.</h2>

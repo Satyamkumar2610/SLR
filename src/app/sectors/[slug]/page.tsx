@@ -9,6 +9,8 @@ import MetadataRail from "@/components/MetadataRail";
 const SECTOR_PHOTOS: Record<string, Photo> = {
   semiconductors: photos.wafer,
   infrastructure: photos.portBarcelona,
+  "energy-climate": photos.solarFarm,
+  "financial-services": photos.financialDistrict,
 };
 
 export function generateStaticParams() {

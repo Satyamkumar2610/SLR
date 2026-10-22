@@ -2,8 +2,8 @@ import Link from "next/link";
 import { pillars, whatWeDoIntro } from "@/lib/content";
 
 // Copy is taken from the Centre Profile ("What We Do" and "Our Offerings")
-// and the design brief's three-pillar strip; the scope lists are the
-// profile's own enumerations for each pillar.
+// and the design brief's three-pillar strip. The full scope lists for each
+// pillar live on /capabilities, so the home page keeps to one line each.
 export default function WhatWeDo() {
   return (
     <section className="section-wwd" id="what-we-do">
@@ -31,15 +31,6 @@ export default function WhatWeDo() {
               </div>
 
               <p className="wwd-pillar-intro">{pillar.intro}</p>
-
-              <div className="wwd-pillar-scope">
-                <span className="wwd-pillar-scope-label">{pillar.itemsLabel}</span>
-                <ul className="wwd-pillar-tags">
-                  {pillar.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
 
               <Link href={`/capabilities#${pillar.slug}`} className="wwd-pillar-link" aria-label={`Learn more about ${pillar.title}`}>
                 Learn more <span aria-hidden="true">→</span>
