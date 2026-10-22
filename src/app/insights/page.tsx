@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import InsightsExplorer from "@/components/InsightsExplorer";
+import PublicationsForthcoming from "@/components/PublicationsForthcoming";
+import { insights } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Insights & Publications — SLR Centre",
@@ -29,9 +31,13 @@ export default function InsightsPage() {
 
       <section className="page-section">
         <div className="stage-container">
-          <Suspense fallback={null}>
-            <InsightsExplorer />
-          </Suspense>
+          {insights.length === 0 ? (
+            <PublicationsForthcoming />
+          ) : (
+            <Suspense fallback={null}>
+              <InsightsExplorer />
+            </Suspense>
+          )}
         </div>
       </section>
     </main>

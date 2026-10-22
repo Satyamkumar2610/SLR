@@ -11,15 +11,11 @@
  * transcribed or lightly restructured (e.g. into "key issues tracked"
  * lists) from those source documents.
  *
- * The INSIGHTS and EVENTS arrays are the one exception: the source
- * documents contain no actual published articles or scheduled events.
- * The entries below are the same illustrative/sample entries that
- * existed in the previous build of this site, consolidated into one
- * consistent set (the previous site had two different, contradictory
- * versions of the same "sample" items on the homepage vs. the Insights
- * and Events pages). They are clearly placeholders for a future
- * publications/events feed and should be replaced with real
- * publications and events as they are produced.
+ * The INSIGHTS and EVENTS arrays start empty: the source documents
+ * contain no published articles or scheduled events, and the site no
+ * longer ships invented samples. Every page that lists them renders a
+ * "forthcoming" state while they are empty, and switches to the full
+ * listing as soon as real entries are added below.
  */
 
 // ----------------------------------------------------------------
@@ -646,12 +642,22 @@ export const stakeholders: Stakeholder[] = [
 ];
 
 // ----------------------------------------------------------------
-// INSIGHTS / INTELLIGENCE — SAMPLE CONTENT
+// INSIGHTS / PUBLICATIONS
 // ----------------------------------------------------------------
-// NOTE: Placeholder entries carried over (and reconciled into one
-// consistent set) from the previous build. Replace with the Centre's
-// actual publications feed when available. Category filters below
-// are limited to the categories these sample items actually use.
+// Add the Centre's published work here, newest first. Pages fall back
+// to a "forthcoming" state while the list is empty. Example entry:
+//
+//   {
+//     slug: "india-technology-order",
+//     title: "India's Strategic Position in the Global Technology Order",
+//     category: "Research Report",
+//     area: "emerging-technologies",   // an areasOfFocus slug
+//     date: "12 September 2026",
+//     isoDate: "2026-09-12",
+//     excerpt: "One- or two-sentence summary shown in listings.",
+//     featured: true,                  // optional: lead item on Home/Insights
+//     image: { src: "/assets/….jpg", alt: "…" }, // optional
+//   },
 
 export type InsightCategory =
   | "Research Report"
@@ -672,82 +678,7 @@ export interface Insight {
   image?: { src: string; alt: string };
 }
 
-export const insights: Insight[] = [
-  {
-    slug: "india-technology-order",
-    title: "India's Strategic Position in the Global Technology Order",
-    category: "Research Report",
-    area: "emerging-technologies",
-    date: "12 September 2026",
-    isoDate: "2026-09-12",
-    excerpt:
-      "An examination of India's evolving role within global technology value chains, semiconductor ecosystems, and digital governance frameworks — and what this means for businesses, investors, and policymakers navigating the new technology order.",
-    featured: true,
-    image: { src: "/assets/insight-india-tech.jpg", alt: "A technician in a cleanroom suit on a semiconductor fabrication line, a silicon wafer held in the foreground" },
-  },
-  {
-    slug: "india-emerging-tech-order",
-    title: "India's Emerging Technology Order: Strategic Autonomy in a Fragmented World",
-    category: "Intelligence Brief",
-    area: "geoeconomics",
-    date: "11 September 2026",
-    isoDate: "2026-09-11",
-    excerpt:
-      "How India is positioning itself as a sovereign technology power through industrial policy, strategic partnerships, and selective alignment.",
-  },
-  {
-    slug: "sanctions-architecture",
-    title: "Navigating the New Sanctions Architecture: Compliance in a Multipolar World",
-    category: "Strategic Analysis",
-    area: "global-law",
-    date: "4 September 2026",
-    isoDate: "2026-09-04",
-    excerpt:
-      "The evolving sanctions landscape demands a fundamental rethinking of compliance strategy as regulatory fragmentation accelerates.",
-    image: { src: "/assets/insight-sanctions.jpg", alt: "A neoclassical courtroom with marble columns and rows of empty seats facing the bench" },
-  },
-  {
-    slug: "critical-minerals",
-    title: "Critical Minerals & the New Energy Geopolitics: Supply Chain Vulnerabilities",
-    category: "Research Paper",
-    area: "energy",
-    date: "28 August 2026",
-    isoDate: "2026-08-28",
-    excerpt:
-      "As the energy transition accelerates, control of critical mineral supply chains is becoming a primary axis of geopolitical competition.",
-    image: { src: "/assets/insight-energy.jpg", alt: "Aerial view at dusk of lithium brine evaporation ponds beside a mineral processing site" },
-  },
-  {
-    slug: "semiconductor-supply-chains",
-    title: "Semiconductor Supply Chains: Strategic Dependencies & Industrial Policy",
-    category: "Intelligence Brief",
-    area: "emerging-technologies",
-    date: "20 August 2026",
-    isoDate: "2026-08-20",
-    excerpt:
-      "Mapping the critical chokepoints in global semiconductor manufacturing and the policy responses reshaping the industry.",
-  },
-  {
-    slug: "derisking-vs-decoupling",
-    title: "De-risking vs Decoupling: Financial Sector Implications of Geoeconomic Fragmentation",
-    category: "Policy Note",
-    area: "global-finance",
-    date: "15 August 2026",
-    isoDate: "2026-08-15",
-    excerpt:
-      "How financial institutions are navigating the tension between economic integration and geopolitical risk management.",
-  },
-  {
-    slug: "imec-corridor",
-    title: "The IMEC Corridor: Reshaping Trade Routes Between India, the Gulf, and Europe",
-    category: "Strategic Analysis",
-    area: "geoeconomics",
-    date: "8 August 2026",
-    isoDate: "2026-08-08",
-    excerpt:
-      "Assessing the strategic, commercial, and geopolitical implications of the India-Middle East-Europe Economic Corridor.",
-  },
-];
+export const insights: Insight[] = [];
 
 export const insightCategories: InsightCategory[] = [
   "Research Report",
@@ -758,10 +689,19 @@ export const insightCategories: InsightCategory[] = [
 ];
 
 // ----------------------------------------------------------------
-// EVENTS — SAMPLE CONTENT
+// EVENTS
 // ----------------------------------------------------------------
-// NOTE: Placeholder entries, reconciled from the previous build.
-// Replace with the Centre's actual convening calendar when available.
+// Add scheduled convenings here. Events whose isoDate has passed are
+// hidden automatically (see upcomingEvents). Example entry:
+//
+//   {
+//     slug: "india-tech-order-roundtable",
+//     type: "Roundtable",
+//     title: "India's Role in the Global Technology Order",
+//     date: "15 October 2026",
+//     isoDate: "2026-10-15",
+//     venue: "Closed-Door Dialogue // New Delhi, India",
+//   },
 
 export interface EventItem {
   slug: string;
@@ -772,32 +712,12 @@ export interface EventItem {
   venue: string;
 }
 
-export const events: EventItem[] = [
-  {
-    slug: "india-tech-order-roundtable",
-    type: "Roundtable",
-    title: "India's Role in the Global Technology Order: Strategic Autonomy & Digital Sovereignty",
-    date: "15 October 2026",
-    isoDate: "2026-10-15",
-    venue: "Closed-Door Dialogue // New Delhi, India",
-  },
-  {
-    slug: "gulf-india-corridors-conference",
-    type: "Conference",
-    title: "Gulf–India Strategic Corridors: Trade, Investment & Connectivity",
-    date: "28 October 2026",
-    isoDate: "2026-10-28",
-    venue: "Executive Forum // Dubai, UAE",
-  },
-  {
-    slug: "resilient-supply-chains-forum",
-    type: "Forum",
-    title: "Resilient Supply Chains: Semiconductor Strategy & Critical Minerals",
-    date: "12 November 2026",
-    isoDate: "2026-11-12",
-    venue: "International Forum // Singapore",
-  },
-];
+export const events: EventItem[] = [];
+
+export function upcomingEvents(now = new Date()) {
+  const today = now.toISOString().slice(0, 10);
+  return events.filter((e) => e.isoDate >= today).sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+}
 
 // ----------------------------------------------------------------
 // HELPERS

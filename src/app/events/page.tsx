@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { events } from "@/lib/content";
+import ConveningCalendar from "@/components/ConveningCalendar";
+import { upcomingEvents } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Events & Dialogues — SLR Centre",
   description: "Invitation-only roundtables, strategic dialogues, and convenings that bring together senior leaders from business, government, and academia.",
 };
 
+// Re-render daily so events drop off the list once their date has passed.
+export const revalidate = 86400;
+
 export default function EventsPage() {
+  const hasUpcoming = upcomingEvents().length > 0;
+
   return (
     <main>
       <section className="page-hero">
@@ -31,27 +37,11 @@ export default function EventsPage() {
           <div className="section-head-row">
             <div>
               <span className="eyebrow">Convening Authority</span>
-              <h2 className="text-section-title" style={{ marginTop: "8px" }}>Upcoming Events</h2>
+              <h2 className="text-section-title" style={{ marginTop: "8px" }}>{hasUpcoming ? "Upcoming Events" : "How the Centre convenes"}</h2>
             </div>
           </div>
 
-          <div className="events-chronology-list">
-            {events.map((event, idx) => (
-              <div className="event-chronology-row" key={event.slug}>
-                <div>
-                  <span className={`event-badge-pill ${idx % 2 === 0 ? "pill-burgundy" : "pill-slate"}`}>{event.type}</span>
-                  <div className="event-date-display">{event.date}</div>
-                </div>
-                <div>
-                  <h3 className="event-headline-text">{event.title}</h3>
-                  <span className="event-venue-meta">{event.venue}</span>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <Link href="/engage" className="btn btn-outline-navy">Request Invitation</Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ConveningCalendar />
         </div>
       </section>
 

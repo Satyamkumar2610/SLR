@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { submitEnquiry } from "@/app/engage/actions";
 import { enquiryTypes, initialEnquiryState, type EnquiryField } from "@/lib/enquiry";
 
@@ -19,6 +20,9 @@ function EnquiryFormInner({ regions, onReset }: { regions: RegionOption[]; onRes
   const errors = state.fieldErrors ?? {};
   const values = state.values ?? {};
   const formRef = useRef<HTMLFormElement>(null);
+  // Links elsewhere on the site preselect the enquiry type, e.g. /engage?enquiry=Research%20Inquiry
+  const preset = useSearchParams().get("enquiry");
+  const presetEnquiry = preset && (enquiryTypes as readonly string[]).includes(preset) ? preset : "";
 
   useEffect(() => {
     if (state.status !== "error") return;
@@ -32,7 +36,7 @@ function EnquiryFormInner({ regions, onReset }: { regions: RegionOption[]; onRes
   const field = (name: EnquiryField) => ({
     id: name,
     name,
-    defaultValue: values[name] ?? "",
+    defaultValue: values[name] ?? (name === "enquiry" ? presetEnquiry : ""),
     "aria-invalid": errors[name] ? true : undefined,
     "aria-describedby": errors[name] ? `${name}-error` : undefined,
   });

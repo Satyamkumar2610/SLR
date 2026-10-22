@@ -5,6 +5,8 @@ import { insights, getInsight, getArea, sectorsForArea } from "@/lib/content";
 import MetadataRail from "@/components/MetadataRail";
 import InsightMedia from "@/components/InsightMedia";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return insights.map((i) => ({ slug: i.slug }));
 }

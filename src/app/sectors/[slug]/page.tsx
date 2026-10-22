@@ -82,7 +82,7 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
 
       <section className="page-section" style={{ paddingTop: 0 }}>
         <div className="stage-container">
-          <Link href="/sectors" className="btn-outline-navy">← Back to Sector Observatory</Link>
+          <Link href="/sectors" className="btn btn-outline-navy">← Back to Sector Observatory</Link>
         </div>
       </section>
     </main>
