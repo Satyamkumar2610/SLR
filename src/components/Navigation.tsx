@@ -91,12 +91,9 @@ export default function Navigation() {
         <div className="nav-inner">
         <div className="nav-brand">
           <Link href="/" aria-label="SLR Centre home" onClick={closeAll}>
-            <Image src="/assets/logo-slr-white.svg" alt="SLR Advocates & Solicitors" width={120} height={48} unoptimized preload style={{ height: "38px", width: "auto" }} />
+            <Image src="/brand/slr-lockup-ivory.svg" alt="SLR Centre for Global Law, Geoeconomics & Emerging Technologies" width={1078} height={200} unoptimized preload className="nav-logo-full" />
+            <Image src="/brand/slr-mark-ivory.svg" alt="SLR Centre for Global Law, Geoeconomics & Emerging Technologies" width={468} height={200} unoptimized preload className="nav-logo-mark" />
           </Link>
-          <div className="nav-brand-text">
-            <span className="nav-brand-title">SLR Centre</span>
-            <span className="nav-brand-subtitle">Global Law &amp; Geoeconomics</span>
-          </div>
         </div>
 
         <div className="nav-menu" id="nav-menu">

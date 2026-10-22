@@ -485,29 +485,13 @@ body:has(.hero-stage) { padding-top: 0; }
   align-items: center;
   gap: 16px;
 }
-.nav-brand img {
-  height: 38px;
-  width: auto;
-}
-.nav-brand-text {
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  padding-left: 14px;
-  display: flex;
-  flex-direction: column;
-}
-.nav-brand-title {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-white);
-}
-.nav-brand-subtitle {
-  font-size: 10px;
-  color: var(--color-gold);
-  letter-spacing: 0.04em;
-}
+/* The full lockup carries the Centre's name; below the desktop menu the
+   bar keeps just the SLR wordmark. */
+.nav-brand img { width: auto; display: block; }
+.nav-logo-full { height: 50px; }
+.nav-logo-mark { height: 38px; }
+.nav-brand .nav-logo-mark { display: none; }
+.site-nav.is-scrolled .nav-logo-full { height: 44px; }
 
 .nav-menu {
   display: flex;
@@ -570,7 +554,9 @@ body:has(.hero-stage) { padding-top: 0; }
 }
 
 @media (max-width: 980px) {
-  .nav-menu, .nav-brand-text { display: none; }
+  .nav-menu { display: none; }
+  .nav-brand .nav-logo-full { display: none; }
+  .nav-brand .nav-logo-mark { display: block; }
   .nav-mobile-toggle { display: flex; }
 }
 
@@ -1971,7 +1957,7 @@ body:has(.hero-stage) { padding-top: 0; }
 }
 
 .footer-brand-wrap img {
-  height: 34px;
+  height: 44px;
   width: auto;
 }
 
@@ -4060,7 +4046,7 @@ html.js-ready .reveal-item:not(.is-revealed) {
 @media (max-width: 640px) {
   /* The drawer carries the CTA on phones; the bar keeps brand, search & menu. */
   .nav-actions .nav-btn-cta { display: none; }
-  .nav-brand img { height: 34px; }
+  .nav-logo-mark { height: 34px; }
 }
 
 /* Hero: primary action reads as ivory on navy; gold stays an accent. */

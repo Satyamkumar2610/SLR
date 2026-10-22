@@ -15,12 +15,11 @@ export default function Footer() {
         <div className="footer-directory-grid">
           <div className="footer-brand-wrap">
             <Image
-              src="/assets/logo-slr-white.svg"
-              alt="SLR Advocates & Solicitors"
-              width={125}
-              height={50}
+              src="/brand/slr-mark-ivory.svg"
+              alt="SLR"
+              width={468}
+              height={200}
               unoptimized
-              style={{ height: "34px", width: "auto" }}
             />
             <p className="footer-institution-name">
               Centre for Global Law, Geoeconomics &amp; Emerging Technologies
