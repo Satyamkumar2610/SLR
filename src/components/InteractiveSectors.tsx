@@ -12,7 +12,7 @@ export default function InteractiveSectors() {
       <section className="section-sectors-stage" id="sectors">
         <div className="sectors-top">
           <div>
-            <span className="eyebrow">Convergence of Forces</span>
+            <span className="eyebrow">Applied Research</span>
             <h2 className="text-section-title" style={{ marginTop: "8px" }}>Priority Sectors</h2>
           </div>
           <Link href="/sectors" className="btn-ghost-gold">Open the Sector Observatory →</Link>

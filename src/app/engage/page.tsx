@@ -59,12 +59,6 @@ export default function EngagePage() {
                 </div>
               </div>
 
-              <div>
-                <span className="rail-label">Response Time</span>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: "15px", color: "var(--color-charcoal)" }}>
-                  We respond within 2 working days.
-                </p>
-              </div>
             </div>
 
             <Suspense fallback={null}>

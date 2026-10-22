@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { pillars } from "@/lib/content";
+import { pillars, whatWeDoIntro } from "@/lib/content";
 
 // Copy is taken from the Centre Profile ("What We Do" and "Our Offerings")
-// and the design brief's three-pillar strip; the scope lists are the
-// profile's own enumerations for each pillar.
+// and the design brief's three-pillar strip. The full scope lists for each
+// pillar live on /capabilities, so the home page keeps to one line each.
 export default function WhatWeDo() {
   return (
     <section className="section-wwd" id="what-we-do">
@@ -14,8 +14,7 @@ export default function WhatWeDo() {
             <h2 className="text-section-title wwd-title">Three modes of engagement</h2>
           </div>
           <p className="wwd-lead">
-            The Centre develops research, intelligence and strategic engagement offerings designed to help
-            organisations understand and respond to a rapidly changing global environment.
+            {whatWeDoIntro}
           </p>
         </header>
 
@@ -29,19 +28,9 @@ export default function WhatWeDo() {
 
               <div className="wwd-pillar-heading">
                 <h3 className="wwd-pillar-title" id={`wwd-${pillar.slug}-title`}>{pillar.title}</h3>
-                <p className="wwd-pillar-tagline">{pillar.tagline}</p>
               </div>
 
               <p className="wwd-pillar-intro">{pillar.intro}</p>
-
-              <div className="wwd-pillar-scope">
-                <span className="wwd-pillar-scope-label">{pillar.itemsLabel}</span>
-                <ul className="wwd-pillar-tags">
-                  {pillar.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
 
               <Link href={`/capabilities#${pillar.slug}`} className="wwd-pillar-link" aria-label={`Learn more about ${pillar.title}`}>
                 Learn more <span aria-hidden="true">→</span>

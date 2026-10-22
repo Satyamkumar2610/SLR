@@ -32,7 +32,7 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "SLR Centre for Global Law, Geoeconomics & Emerging Technologies",
-  description: "Rigorous research, applied intelligence, and strategic advisory at the intersection of law, economics, and emerging technology. The SLR Centre analyses the forces reshaping the world.",
+  description: "Research, intelligence and strategic advisory at the nexus of law, geoeconomics and emerging technologies.",
 };
 
 export default function RootLayout({

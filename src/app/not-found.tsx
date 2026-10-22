@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const destinations = [
   { href: "/research", label: "Research Portal", note: "Five domains of analysis" },
   { href: "/insights", label: "Insights & Publications", note: "Reports, briefs and policy notes" },
-  { href: "/sectors", label: "Sector Observatory", note: "Where geopolitics meets industry" },
+  { href: "/sectors", label: "Sector Observatory", note: "Seven priority sectors" },
   { href: "/engage", label: "Engage the Centre", note: "Commission research or request a briefing" },
 ];
 
