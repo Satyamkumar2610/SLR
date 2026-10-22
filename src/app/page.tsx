@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import InteractiveAreas from "@/components/InteractiveAreas";
 import CorridorGlobe from "@/components/CorridorGlobe";
 import InsightMedia from "@/components/InsightMedia";
 import SectionIndex from "@/components/SectionIndex";
-import CountUp from "@/components/CountUp";
 import WhatWeDo from "@/components/WhatWeDo";
 import { photos } from "@/lib/images";
 import ScrollStatement from "@/components/ScrollStatement";
@@ -49,7 +47,7 @@ export default function Home() {
 
         <div className="hero-body">
           <span className="eyebrow eyebrow-light hero-reveal hero-reveal-eyebrow">Centre for Global Law, Geoeconomics & Emerging Technologies</span>
-          <AnimatedHeading text="Navigating the Forces Reshaping the World" className="text-hero-display" />
+          <h1 className="text-hero-display">Navigating the Forces Reshaping the World</h1>
           <p className="hero-lead-text hero-reveal hero-reveal-lead">Research, intelligence and strategic advisory at the nexus of law, geoeconomics and emerging technologies.</p>
           <div className="hero-buttons hero-reveal hero-reveal-buttons">
             <Link href="/research" className="btn btn-primary">Explore Our Research</Link>
@@ -59,9 +57,9 @@ export default function Home() {
 
         <div className="hero-facts hero-reveal hero-reveal-facts">
           <div className="hero-facts-inner">
-            {heroFacts.map((fact, i) => (
+            {heroFacts.map((fact) => (
               <div className="hero-fact" key={fact.label}>
-                <CountUp value={fact.num} delay={900 + i * 120} />
+                <span className="hero-fact-num">{String(fact.num).padStart(2, "0")}</span>
                 <span className="hero-fact-label">{fact.label}</span>
               </div>
             ))}
