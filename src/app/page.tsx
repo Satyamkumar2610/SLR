@@ -3,7 +3,7 @@ import Link from "next/link";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import InteractiveSectors from "@/components/InteractiveSectors";
 import InteractiveAreas from "@/components/InteractiveAreas";
-import CorridorExplorer from "@/components/CorridorExplorer";
+import CorridorGlobe from "@/components/CorridorGlobe";
 import InsightMedia from "@/components/InsightMedia";
 import SectionIndex from "@/components/SectionIndex";
 import CountUp from "@/components/CountUp";
@@ -158,16 +158,7 @@ export default function Home() {
            SCENE 08 — STRATEGIC CORRIDORS
            ============================================================ */}
       <div className="stage-container">
-        <section className="section-chapter-reset" id="corridors" style={{ padding: "72px 0", textAlign: "left" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "40px" }}>
-            <div>
-              <span className="eyebrow eyebrow-light">Geographies &amp; Strategic Corridors</span>
-              <h2 className="chapter-reset-heading" style={{ fontSize: "clamp(30px, 3.6vw, 44px)", marginTop: "10px", textAlign: "left" }}>Strategic Corridors We Track</h2>
-            </div>
-            <Link href="/corridors" className="btn-ghost-gold" style={{ color: "var(--color-gold-light)" }}>Explore Strategic Corridors →</Link>
-          </div>
-          <CorridorExplorer showAllLink={false} />
-        </section>
+        <CorridorGlobe />
       </div>
 
       {/* ============================================================

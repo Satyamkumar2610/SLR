@@ -15,6 +15,7 @@ const SECTION_SELECTORS = [
   ".section-newsroom",
   ".section-geographies-stage",
   ".section-chapter-reset",
+  ".section-globe",
   ".section-stakeholders-list",
   ".section-events-stage",
   ".section-about-stage",
