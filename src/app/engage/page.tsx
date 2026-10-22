@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { geographies } from "@/lib/content";
 import EnquiryForm from "@/components/EnquiryForm";
 
@@ -63,19 +64,12 @@ export default function EngagePage() {
                 <p style={{ fontFamily: "var(--font-sans)", fontSize: "15px", color: "var(--color-charcoal)" }}>
                   We respond within 2 working days.
                 </p>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost-gold"
-                  style={{ marginTop: "10px", display: "inline-flex" }}
-                >
-                  Connect on LinkedIn →
-                </a>
               </div>
             </div>
 
-            <EnquiryForm regions={geographies.map(({ slug, name }) => ({ slug, name }))} />
+            <Suspense fallback={null}>
+              <EnquiryForm regions={geographies.map(({ slug, name }) => ({ slug, name }))} />
+            </Suspense>
           </div>
         </div>
       </section>

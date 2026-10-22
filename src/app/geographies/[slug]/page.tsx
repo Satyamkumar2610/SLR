@@ -72,7 +72,7 @@ export default async function GeographyDetailPage({ params }: { params: Promise<
 
       <section className="page-section" style={{ paddingTop: 0 }}>
         <div className="stage-container">
-          <Link href="/geographies" className="btn-outline-navy">← Back to Geographies</Link>
+          <Link href="/geographies" className="btn btn-outline-navy">← Back to Geographies</Link>
         </div>
       </section>
     </main>

@@ -8,7 +8,7 @@ const SECTION_SELECTORS = [
   ".page-section",
   ".page-section-dark",
   ".section-wwd",
-  ".section-interruption",
+  ".section-statement",
   ".section-areas",
   ".section-sectors-stage",
   ".section-featured-feature",
@@ -40,6 +40,8 @@ const ITEM_SELECTORS = [
   ".contact-format-row",
   ".pillar-strip-item",
   ".state-link",
+  ".forthcoming-domain",
+  ".convening-format",
 ].join(", ");
 
 const MEDIA_SELECTORS = ".reveal-media";

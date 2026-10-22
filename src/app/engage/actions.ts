@@ -55,7 +55,7 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
     console.error("[enquiry] ENQUIRY_WEBHOOK_URL is not configured; enquiry could not be delivered.");
     return {
       status: "error",
-      message: "Our enquiry service is temporarily unavailable. Please try again shortly, or reach us on LinkedIn.",
+      message: "Our enquiry service is temporarily unavailable. Please try again shortly.",
       values,
     };
   }

@@ -68,8 +68,8 @@ export function search(query: string, limit = 12): SearchEntry[] {
 }
 
 export const suggested: SearchEntry[] = [
-  searchIndex.find((e) => e.href === "/research")!,
-  searchIndex.find((e) => e.kind === "Insight")!,
-  searchIndex.find((e) => e.href === "/corridors")!,
-  searchIndex.find((e) => e.href === "/engage")!,
-];
+  searchIndex.find((e) => e.href === "/research"),
+  searchIndex.find((e) => e.kind === "Insight") ?? searchIndex.find((e) => e.href === "/sectors"),
+  searchIndex.find((e) => e.href === "/corridors"),
+  searchIndex.find((e) => e.href === "/engage"),
+].filter((e) => e !== undefined);
