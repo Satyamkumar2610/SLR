@@ -23,7 +23,7 @@
   --color-mist:        #F1EFE8; /* Mist: warm tint for alternating panels, cards & hover states */
 
   /* Supporting Colours */
-  --color-charcoal:    #222222; /* Charcoal: Body copy and paragraphs */
+  --color-charcoal:    #1F2430; /* Charcoal: Body copy and paragraphs */
   --color-grey-soft:   #DEDAD0; /* Warm hairline: borders, dividers */
   --color-grey-muted:  #646A74; /* Muted metadata grey (5.4:1 on white, WCAG AA) */
   --color-white:       #FFFFFF; /* White: Clean contrast, card surfaces */
@@ -4874,3 +4874,42 @@ html.js-ready .reveal-item:not(.is-revealed) { transform: translateY(8px); }
 @media (prefers-reduced-motion: reduce) {
   .hero-stage .text-hero-display { animation: none; }
 }
+
+/* ============================================================
+   UI QUALITY PASS — from the frontend-ui-engineering, impeccable
+   frontend-design and web-quality accessibility checklists
+   ============================================================ */
+
+/* Fewer boxes: home sections sit on the page instead of in tinted cards */
+.section-sectors-stage,
+.section-events-stage {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 72px 0 24px;
+}
+.sector-editorial-item:hover,
+.sector-editorial-item.active { background-color: var(--color-white); }
+.event-chronology-row:hover { background-color: var(--color-white); }
+
+/* Full-strength small text so it clears 4.5:1 */
+.anchor-tag { opacity: 1; }
+
+/* Targets at least 24px tall (WCAG 2.5.8); the column gap is trimmed to match */
+.footer-col-group { gap: 2px; }
+.footer-dir-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+}
+
+/* Form fields: a visible focus ring, not just a gold border change */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+.directory-search-input:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 1px;
+  border-color: var(--color-navy);
+}
+.mobile-nav-sublist a { display: flex; align-items: center; min-height: 28px; }

@@ -8,6 +8,9 @@ import { areasOfFocus, pillars } from "@/lib/content";
  */
 export default function PublicationsForthcoming({ compact = false }: { compact?: boolean }) {
   const formats = pillars.find((p) => p.slug === "research")?.items ?? [];
+  // Sits under the home page's section heading when compact, and directly
+  // under the page title on /insights.
+  const Title = compact ? "h3" : "h2";
 
   return (
     <div className={`forthcoming ${compact ? "forthcoming-compact" : ""}`}>
@@ -18,7 +21,7 @@ export default function PublicationsForthcoming({ compact = false }: { compact?:
             <span className="forthcoming-dot" aria-hidden="true" />
             In preparation
           </span>
-          <h3 className="forthcoming-title">The Centre&apos;s first publications are in preparation.</h3>
+          <Title className="forthcoming-title">The Centre&apos;s first publications are in preparation.</Title>
           <p className="forthcoming-lead">
             Research reports, intelligence briefs and policy papers will be published here as they are released.
             Register your interest to receive them on publication.

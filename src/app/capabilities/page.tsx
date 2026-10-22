@@ -31,7 +31,7 @@ export default function CapabilitiesPage() {
             {pillars.map((pillar) => (
               <div className="pillar-strip-item" key={pillar.slug}>
                 <span className="pillar-strip-num">Pillar {pillar.num}</span>
-                <h3 className="pillar-strip-title">{pillar.title}</h3>
+                <h2 className="pillar-strip-title">{pillar.title}</h2>
                 <p className="pillar-strip-desc">{pillar.description}</p>
               </div>
             ))}

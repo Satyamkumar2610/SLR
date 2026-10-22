@@ -22,9 +22,9 @@ export default function Footer() {
               unoptimized
               style={{ height: "34px", width: "auto" }}
             />
-            <h3 className="footer-institution-name">
+            <p className="footer-institution-name">
               Centre for Global Law, Geoeconomics &amp; Emerging Technologies
-            </h3>
+            </p>
             <p className="footer-motto-phrase">Let justice be done though the heavens fall</p>
             <Link href="/engage" className="btn btn-secondary footer-brand-cta">Engage the Centre</Link>
           </div>
